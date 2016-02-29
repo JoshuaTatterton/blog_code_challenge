@@ -1,3 +1,7 @@
+<% if blogger_signed_in? %>
+  Would you like to post a blog article?
+<% end %>
+
 <% if @articles != [] %>
   <ul>
     <%= @articles.each do |article| %>

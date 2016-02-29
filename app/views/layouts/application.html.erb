@@ -8,7 +8,18 @@
 </head>
 <body>
 
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
 <%= yield %>
 
+<div class="sign_in">
+  <%= form_for(:blogger, :url => session_path(:blogger)) do |f| %>
+  <%= f.text_field :email %>
+  <%= f.password_field :password %>
+  <%= f.submit 'Sign in' %>
+<% end %>
+
+</div>
 </body>
 </html>

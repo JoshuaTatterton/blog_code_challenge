@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
-  root to: "blog_posts#index"
-  resources :blog_posts
+  
+  devise_for :bloggers
+  root to: "articles#index"
+  resources :articles
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
