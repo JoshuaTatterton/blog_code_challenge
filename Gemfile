@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'devise'
 gem 'redcarpet'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
@@ -50,5 +49,6 @@ group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'selenium-webdriver'
 end
 

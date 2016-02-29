@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   
-  devise_for :bloggers
   root to: "articles#index"
   resources :articles
-
+  namespace :blogger do 
+    post "/session", to: "/session#create", as: :login
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

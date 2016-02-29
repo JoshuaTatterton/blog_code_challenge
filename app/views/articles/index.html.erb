@@ -1,9 +1,14 @@
-<% if blogger_signed_in? %>
+<% if session[:user_signed_in] %>
   Would you like to post a blog article?
-  <%= form_for @article do |f| %>
-    <%= f.text_field :content %>
-    <%= f.submit "Post Article" %>
-  <% end %>
+  <button id="new_article">
+    New Article
+  </button>
+  <div class="article_writer">
+    <%= form_for @article do |f| %>
+      <%= f.text_field :content %>
+      <%= f.submit "Post Article" %>
+    <% end %>
+  </div>
 <% end %>
 
 <% if @articles != [] %>

@@ -1,7 +1,5 @@
 class ArticlesController < ApplicationController
 
-  before_action :authenticate_user!, :except => [:index]
-  
   def index
     @article = Article.new
     @articles = Article.all.reverse
