@@ -18,11 +18,11 @@ feature "blog" do
   context "while signed in as a blogger" do
     before(:each) do
       visit "/"
-      fill_in "blogger_email", with: "example@email.co.uk"
-      fill_in "blogger_password", with: "randomletters"
+      fill_in "email", with: "example@email.co.uk"
+      fill_in "password", with: "randomletters"
       click_button "Sign in"
     end
-    xscenario "articles can be written", js: true do
+    scenario "articles can be written", js: true do
       click_button "new_article"
       fill_in "article_content", with: "Hello World!!"
       click_button "Post Article"
@@ -30,9 +30,7 @@ feature "blog" do
     end
     context "articles can be" do
       before(:each) do
-        click_button "New Article"
-        fill_in "article_content", with: "Hello World!!"
-        click_button "Post Article"
+        Article.create(content: "Hello World!!")
       end
       xscenario "articles can be edited" do
         click_button "Edit Article 1"
