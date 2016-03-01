@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
   root to: "articles#index"
-  resources :articles
+  resources :articles do
+    resources :comments
+  end
   namespace :blogger do 
     post "/session", to: "/session#create", as: :login
   end

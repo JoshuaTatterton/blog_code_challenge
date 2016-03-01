@@ -16,6 +16,15 @@
   <%= link_to "Delete Article", article_path(@article), method: :delete %>
 </div>
 
+<button>Comment</button>
+<div class="commenter">
+  <%= form_for [@article, @comment] do |f| %>
+    <%= f.text_field :name %>
+    <%= f.text_area(:content, size: "24x6") %>
+    <%= f.submit "Post Comment" %>
+  <% end %>
+</div>
+
 <div>
   <% @comments.each do |comment| %>
     <%= comment.name %>: <%= comment.content %>
