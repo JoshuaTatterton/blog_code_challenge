@@ -6,7 +6,7 @@
   <div class="article_writer">
     <%= form_for @article do |f| %>
       <%= f.text_field :title %>
-      <%= f.text_field :content %>
+      <%= f.text_area(:content, size: "24x6") %>
       <%= f.submit "Post Article" %>
     <% end %>
   </div>
@@ -26,7 +26,7 @@
       </li>
       <li class="article_editor" id="article_editor_<%= a.id %>">
         <%= form_for a do |f| %>
-          <%= f.text_field :content %>
+          <%= f.text_area(:content, size: "24x6") %>
           <%= f.submit "Edit Article" %>
         <% end %>
         <%= link_to "Delete Article", article_path(a), method: :delete %>
