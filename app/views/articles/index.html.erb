@@ -13,9 +13,20 @@
 
 <% if @articles != [] %>
   <ul>
-    <%= @articles.each do |article| %>
-      <li>
-        <%= markdown article.content %>
+    <% @articles.each do |a| %>
+      <li id="article_display_<%= a.id %>">
+        <%= markdown a.content %>
+        <% if session[:user_signed_in] %>
+        <button class="edit_button" id="<%= a.id %>">
+          Edit Article <%= a.id %>
+        </button>
+        <% end %>
+      </li>
+      <li class="article_editor" id="article_editor_<%= a.id %>">
+        <%= form_for a do |f| %>
+          <%= f.text_field :content %>
+          <%= f.submit "Edit Article" %>
+        <% end %>
       </li>
     <% end %>
   </ul>

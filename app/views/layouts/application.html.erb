@@ -10,6 +10,7 @@
 
 <%= yield %>
 
+<% if !session[:user_signed_in] %>
 <div class="sign_in">
   <%= form_tag("/blogger/session", method: "post") do %>
     <%= text_field_tag :email %>
@@ -17,6 +18,6 @@
     <%= submit_tag 'Sign in' %>
   <% end %>
 </div>
-
+<% end %>
 </body>
 </html>

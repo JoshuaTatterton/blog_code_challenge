@@ -7,5 +7,6 @@ feature "blogger" do
     fill_in "password", with: "randomletters"
     click_button "Sign in"
     expect(page).to have_content "Would you like to post a blog article?"
+    expect(page).not_to have_button "Sign in"
   end
 end

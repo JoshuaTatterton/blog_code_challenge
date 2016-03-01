@@ -30,11 +30,15 @@ feature "blog" do
     end
     context "articles can be" do
       before(:each) do
-        Article.create(content: "Hello World!!")
+        click_button "new_article"
+        fill_in "article_content", with: "Hi World!!"
+        click_button "Post Article"
       end
-      xscenario "articles can be edited" do
-        click_button "Edit Article 1"
-        fill_in "article_content"
+      scenario "articles can be edited", js: true do
+        click_button "3"
+        expect(page).not_to have_content "Hi World!!"
+        fill_in "article_content", with: "Hello New World!!"
+        click_button "Edit Article"
         expect(page).to have_content "Hello New World!!"
       end
     end
