@@ -16,7 +16,7 @@
   <ul>
     <% @articles.each do |a| %>
       <li id="article_display_<%= a.id %>">
-        <%= a.title %>
+        <%= link_to "#{a.title}", article_path(a) %>
         <%= markdown a.content %>
         <% if session[:user_signed_in] %>
         <button class="edit_button" id="<%= a.id %>">

@@ -5,6 +5,10 @@ class ArticlesController < ApplicationController
     @articles = Article.all.reverse
   end
 
+  def show
+
+  end
+  
   def create
     article = Article.create(article_params)
     redirect_to articles_path

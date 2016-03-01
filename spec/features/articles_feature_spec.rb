@@ -7,7 +7,7 @@ feature "blog" do
   end
   context "when a blog post has been created" do
     before(:each) do
-      Article.create(title: "eg title", content: "Hello World!!")
+      Article.create(title: "Example Title", content: "Hello World!!")
     end
     scenario "the article is displayed" do
       visit "/"
@@ -34,12 +34,12 @@ feature "blog" do
       before(:each) do
         click_button "new_article"
         fill_in "article_title", with: "Example Title"
-        fill_in "article_content", with: "Hi World!!"
+        fill_in "article_content", with: "Hello World!!"
         click_button "Post Article"
       end
       scenario "edited", js: true do
         click_button "Edit Article - Example Title"
-        expect(page).not_to have_content "Hi World!!"
+        expect(page).not_to have_content "Hello World!!"
         fill_in "article_content", with: "Hello New World!!"
         click_button "Edit Article"
         expect(page).to have_content "Hello New World!!"
@@ -47,8 +47,14 @@ feature "blog" do
       scenario "deleted", js: true do
         click_button "Edit Article - Example Title"
         click_link "Delete Article"
-        expect(page).not_to have_content "Hi World!!"
+        expect(page).not_to have_content "Hello World!!"
       end
     end
+  end
+  scenario "articles have their own page", js: true do
+    Article.create(title: "Example Title", content: "Hello World!!")
+    visit "/"
+    click_link "Example Title"
+    expect(current_path).to eq "/articles/example-title"     
   end
 end
