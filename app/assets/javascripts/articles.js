@@ -9,8 +9,8 @@ $(document).ready(function() {
   $(".edit_button").click(function() {
     var id = $(this).attr("id");
 
-    $("#article_editor_"+id).show();
-    $("#article_display_"+id).hide();
+    $("#article_editor_" + id).show();
+    $("#article_display_" + id).hide();
   });
 
 });
