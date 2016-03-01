@@ -34,12 +34,17 @@ feature "blog" do
         fill_in "article_content", with: "Hi World!!"
         click_button "Post Article"
       end
-      scenario "articles can be edited", js: true do
+      scenario "edited", js: true do
         click_button "3"
         expect(page).not_to have_content "Hi World!!"
         fill_in "article_content", with: "Hello New World!!"
         click_button "Edit Article"
         expect(page).to have_content "Hello New World!!"
+      end
+      scenario "deleted", js: true do
+        click_button "4"
+        click_link "Delete Article"
+        expect(page).not_to have_content "Hi World!!"
       end
     end
   end

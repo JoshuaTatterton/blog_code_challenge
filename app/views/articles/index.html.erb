@@ -27,6 +27,7 @@
           <%= f.text_field :content %>
           <%= f.submit "Edit Article" %>
         <% end %>
+        <%= link_to "Delete Article", article_path(a), method: :delete %>
       </li>
     <% end %>
   </ul>
