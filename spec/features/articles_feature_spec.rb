@@ -15,12 +15,10 @@ feature "blog" do
       expect(page).not_to have_content "No blog posts have been made."
     end
   end
-  context "while signed in as a blogger" do
+  context "on the main page while signed in as a blogger" do
     before(:each) do
       visit "/"
-      fill_in "email", with: "example@email.co.uk"
-      fill_in "password", with: "randomletters"
-      click_button "Sign in"
+      sign_in
     end
     scenario "articles can be written", js: true do
       click_button "new_article"
@@ -51,10 +49,35 @@ feature "blog" do
       end
     end
   end
-  scenario "articles have their own page", js: true do
-    Article.create(title: "Example Title", content: "Hello World!!")
-    visit "/"
-    click_link "Example Title"
-    expect(current_path).to eq "/articles/example-title"     
+  context "articles" do
+    before(:each) do
+      visit "/"
+      sign_in
+      write_article
+    end
+    scenario "have their own page", js: true do
+      visit "/"
+      click_link "Example Title"
+      wait(2.seconds).for { current_path }.not_to eq "/"
+      expect(current_path).to eq "/articles/example-title"     
+    end
+    scenario "are displayed on their own page", js: true do
+      visit "/articles/example-title"
+      expect(page).to have_content "Example Title"
+      expect(page).to have_content "Hello World!!"
+    end
+    context "on their own page while signed in" do
+      scenario "can be edited by the blogger", js: true do
+        visit "/articles/example-title"
+        edit_article
+        expect(page).to have_content "Hello New World!!"
+      end
+      scenario "can be deleted by the blogger", js: true do
+        visit "/articles/example-title"
+        delete_article
+        expect(page).not_to have_content "Example Title"
+        expect(page).not_to have_content "Hello World!!"
+      end
+    end
   end
 end

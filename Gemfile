@@ -48,6 +48,7 @@ end
 
 group :test do
   gem 'rspec-rails'
+  gem 'rspec-wait'
   gem 'capybara'
   gem 'database_cleaner'
   gem 'selenium-webdriver'

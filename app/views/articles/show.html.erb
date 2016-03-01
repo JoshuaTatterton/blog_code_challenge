@@ -1,0 +1,17 @@
+<div id="article_display_<%= @article.id %>">
+  <%= @article.title %>
+  <%= markdown @article.content %>
+  <% if session[:user_signed_in] %>
+    <button class="edit_button" id="<%= @article.id %>">
+      Edit Article - <%= @article.title %>
+    </button>
+  <% end %>
+</div>
+
+<div class="article_editor" id="article_editor_<%= @article.id %>">
+  <%= form_for @article do |f| %>
+    <%= f.text_field :content %>
+    <%= f.submit "Edit Article" %>
+  <% end %>
+  <%= link_to "Delete Article", article_path(@article), method: :delete %>
+</div>
