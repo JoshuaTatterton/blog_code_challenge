@@ -23,4 +23,11 @@ module Helpers
     click_button "Edit Article - Example Title"
     click_link "Delete Article"
   end
+
+  def write_comment
+    click_button "Comment"
+    fill_in "comment_name", with: "MyName"
+    fill_in "comment_content", with: "I like this"
+    click_button "Post Comment"
+  end
 end

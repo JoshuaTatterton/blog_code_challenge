@@ -16,7 +16,7 @@
   <%= link_to "Delete Article", article_path(@article), method: :delete %>
 </div>
 
-<button>Comment</button>
+<button id="comment">Comment</button>
 <div class="commenter">
   <%= form_for [@article, @comment] do |f| %>
     <%= f.text_field :name %>
@@ -27,6 +27,9 @@
 
 <div>
   <% @comments.each do |comment| %>
-    <%= comment.name %>: <%= comment.content %>
+    <div>
+      <%= comment.name %>: <%= comment.content %>
+      <%= link_to "Delete Comment", article_comment_path(@article, comment), method: :delete %>
+    </div>
   <% end %>
 </div>
