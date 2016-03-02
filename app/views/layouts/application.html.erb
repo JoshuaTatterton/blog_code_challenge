@@ -8,6 +8,14 @@
 </head>
 <body>
 
+<button id="subscribe">Subscribe</button>
+<div id="subscribe_form">
+  <%= form_for Subscriber.new do |f| %>
+    <%= f.text_field :email %>
+    <%= f.submit "Become a Subscriber" %>
+  <% end %>
+</div>
+
 <%= yield %>
 
 <% if !session[:user_signed_in] %>

@@ -6,4 +6,5 @@ class Article < ActiveRecord::Base
   friendly_id :title, use: [:slugged, :finders]
 
   has_many :comments
+  
 end
