@@ -18,9 +18,10 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    session[:return_to] ||= request.referer
     @article = Article.find(params[:id])
     @article.update(article_params)
-    redirect_to articles_path
+    redirect_to session.delete(:return_to)
   end
 
   def destroy

@@ -9,4 +9,17 @@ feature "blogger" do
     expect(page).to have_content "Would you like to post a blog article?"
     expect(page).not_to have_button "Sign in"
   end
+  context "after signing in the blogger returns to the" do
+    scenario "main page if started there", js: true do
+      visit "/"
+      sign_in
+      expect(current_path).to eq "/"
+    end
+    scenario "article page if started there", js: true do
+      Article.create(title: "Example Title", content: "Hello World!!")
+      visit "/articles/example-title"
+      sign_in
+      expect(current_path).to eq "/articles/example-title"
+    end
+  end
 end

@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe Subscriber, type: :model do
   
-  let(:article) { double :article, title: "Example Title", content: "Hello World!!"}
+  let(:article) { double :article, title: "Example Title", content: "Hello World!!", slug: "example-title"}
   
   it "sends email to subscribers" do
     allow(subject).to receive(:email) { "example@email.co.uk" }

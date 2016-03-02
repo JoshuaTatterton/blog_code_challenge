@@ -1,8 +1,9 @@
 class SubscribersController < ApplicationController
 
   def create
+    session[:return_to] ||= request.referer
     Subscriber.create(subscriber_params)
-    redirect_to articles_path
+    redirect_to session.delete(:return_to)
   end
 
   def destroy

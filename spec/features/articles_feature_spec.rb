@@ -38,11 +38,18 @@ feature "blog" do
         click_button "Edit Article"
         expect(page).to have_content "Hello New World!!"
       end
+
       scenario "deleted", js: true do
         click_button "Edit Article - Example Title"
         click_link "Delete Article"
         expect(page).not_to have_content "Hello World!!"
       end
+    end
+    scenario "you go back to the same page as before you edited", js: true do
+      visit "/articles"
+      write_article
+      edit_article
+      expect(current_path).to eq "/articles"
     end
   end
   context "articles" do
@@ -67,6 +74,11 @@ feature "blog" do
         visit "/articles/example-title"
         edit_article
         expect(page).to have_content "Hello New World!!"
+      end
+      scenario "you go back to the same page as before you edited", js: true do
+        visit "/articles/example-title"
+        edit_article
+        expect(current_path).to eq "/articles/example-title"
       end
       scenario "can be deleted by the blogger", js: true do
         visit "/articles/example-title"
