@@ -114,4 +114,21 @@ feature "blog" do
       expect(page).to have_content "Title has already been taken"
     end
   end
+  context "there is a home button" do
+    before(:each) do
+      visit "/"
+      sign_in
+      write_article
+    end
+    scenario "in the nav bar", js: true do
+      expect(page).to have_link "Home"
+      click_link "Example Title"
+      expect(page).to have_link "Home"
+    end
+    scenario "which takes you back to the root", js: true do
+      click_link "Example Title"
+      click_link "Home"
+      expect(current_path).to eq "/"
+    end
+  end
 end
