@@ -7,13 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<button id="subscribe">Subscribe</button>
-<div id="subscribe_form">
-  <%= form_for Subscriber.new do |f| %>
-    <%= f.text_field :email %>
-    <%= f.submit "Become a Subscriber" %>
-  <% end %>
+<div>
+  <button id="subscribe">Subscribe</button>
+  <div id="subscribe_form">
+    <%= form_for Subscriber.new do |f| %>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
+      <%= f.submit "Become a Subscriber" %>
+    <% end %>
+  </div>
 </div>
 
 <%= yield %>

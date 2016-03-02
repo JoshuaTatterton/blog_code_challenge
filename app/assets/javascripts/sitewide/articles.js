@@ -1,7 +1,8 @@
 $(document).ready(function() {
+
   $(".article_writer").hide();
   $(".article_editor").hide();
-
+  
   $("#new_article").click(function() {
     $(".article_writer").show();
   });

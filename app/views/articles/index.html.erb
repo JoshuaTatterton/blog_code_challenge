@@ -1,38 +1,45 @@
 <% if session[:user_signed_in] %>
   Would you like to post a blog article?
-  <button id="new_article">
-    New Article
-  </button>
-  <div class="article_writer">
-    <%= form_for @article do |f| %>
-      <%= f.text_field :title %>
-      <%= f.text_area(:content, size: "24x6") %>
-      <%= f.submit "Post Article" %>
-    <% end %>
+  <div>
+    <button id="new_article">
+      New Article
+    </button>
+    <div class="article_writer">
+      <%= form_for @article do |f| %>
+        <div>
+          <%= f.label :title %>
+          <%= f.text_field :title %>
+        </div>
+        <div>
+          <%= f.text_area(:content, size: "48x12") %>
+        </div>
+        <%= f.submit "Post Article" %>
+      <% end %>
+    </div>
   </div>
 <% end %>
 
 <% if @articles != [] %>
-  <ul>
-    <% @articles.each do |a| %>
-      <li id="article_display_<%= a.id %>">
-        <%= link_to "#{a.title}", article_path(a) %>
-        <%= markdown a.content %>
-        <% if session[:user_signed_in] %>
-        <button class="edit_button" id="<%= a.id %>">
-          Edit Article - <%= a.title %>
-        </button>
-        <% end %>
-      </li>
-      <li class="article_editor" id="article_editor_<%= a.id %>">
-        <%= form_for a do |f| %>
-          <%= f.text_area(:content, size: "24x6") %>
-          <%= f.submit "Edit Article" %>
-        <% end %>
-        <%= link_to "Delete Article", article_path(a), method: :delete %>
-      </li>
-    <% end %>
-  </ul>
+  <% @articles.each do |a| %>
+    <%= link_to "#{a.title}", article_path(a) %>
+    <div id="article_display_<%= a.id %>">
+      <%= markdown a.content %>
+      <% if session[:user_signed_in] %>
+      <button class="edit_button" id="<%= a.id %>">
+        Edit Article - <%= a.title %>
+      </button>
+      <% end %>
+    </div>
+    <div class="article_editor" id="article_editor_<%= a.id %>">
+      <%= form_for a do |f| %>
+        <div>
+          <%= f.text_area(:content, size: "48x12") %>
+        </div>
+        <%= f.submit "Edit Article" %>
+      <% end %>
+      <%= link_to "Delete Article", article_path(a), method: :delete %>
+    </div>
+  <% end %>
 <% else %>
   No blog posts have been made.
 <%end%>
