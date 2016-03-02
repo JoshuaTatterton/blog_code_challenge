@@ -1,4 +1,6 @@
 Rails.application.configure do
+  # the "www.yourhost.com" needs changing to the production url
+  config.action_mailer.default_url_options = { :host => "www.yourhost.com" }
 
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail

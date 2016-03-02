@@ -1,4 +1,6 @@
 class SubscriberMailer < ApplicationMailer
+  
+  
 
   default from: "#{Rails.application.secrets.active_email}"
   
