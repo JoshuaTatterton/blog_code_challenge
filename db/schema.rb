@@ -27,10 +27,10 @@ ActiveRecord::Schema.define(version: 20160302004921) do
   add_index "articles", ["slug"], name: "index_articles_on_slug", unique: true, using: :btree
 
   create_table "comments", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       default: "Anon"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "article_id"
   end
 
