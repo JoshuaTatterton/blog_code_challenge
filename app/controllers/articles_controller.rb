@@ -12,7 +12,8 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    article = Article.create(article_params)
+    @article = Article.create(article_params)
+    Subscriber.all.each { |sub| sub.send_email(@article) }
     redirect_to articles_path
   end
 

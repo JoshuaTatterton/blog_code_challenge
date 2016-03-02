@@ -30,4 +30,11 @@ module Helpers
     fill_in "comment_content", with: "I like this"
     click_button "Post Comment"
   end
+
+  def visiter_subscribe
+    click_button "Subscribe"
+    fill_in "subscriber_email", with: "example@email.co.uk"
+    click_button "Become a Subscriber"
+  end
+
 end

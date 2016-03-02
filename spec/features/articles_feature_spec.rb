@@ -76,4 +76,12 @@ feature "blog" do
       end
     end
   end
+  context "emails are sent to subscribers" do
+    scenario " when a new article is posted", js: true do
+      visit "/"
+      visiter_subscribe
+      sign_in
+      expect { write_article }.to change { ActionMailer::Base.deliveries.count }.by(1)
+    end
+  end
 end
