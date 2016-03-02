@@ -31,4 +31,25 @@ feature "comment" do
       expect(page).not_to have_content "I like this"
     end
   end
+  context "will show error" do
+    before(:each) do
+      @article = Article.create(title: "Example Title", content: "Hello World!!")
+    end
+    scenario "without a name", js: true do
+      visit "/articles/example-title"
+      click_button "Comment"
+      fill_in "comment_name", with: ""
+      fill_in "comment_content", with: "I like this"
+      click_button "Post Comment"
+      expect(page).to have_content "Name can't be blank"
+    end
+    scenario "without content", js: true do
+      visit "/articles/example-title"
+      click_button "Comment"
+      fill_in "comment_name", with: "MyName"
+      fill_in "comment_content", with: ""
+      click_button "Post Comment"
+      expect(page).to have_content "Content can't be blank"
+    end
+  end
 end

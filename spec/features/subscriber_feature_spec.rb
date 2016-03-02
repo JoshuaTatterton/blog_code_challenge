@@ -20,4 +20,10 @@ feature "subscriber" do
       expect(current_path).to eq "/articles/example-title"
     end
   end
+  scenario "raises error when no email is entered", js: true do
+    visit "/"
+    click_button "Subscribe"
+    click_button "Become a Subscriber"
+    expect(page).to have_content "Email can't be blank"
+  end
 end

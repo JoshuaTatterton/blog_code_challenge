@@ -12,8 +12,12 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.create(article_params)
-    Subscriber.all.each { |sub| sub.send_email(@article) }
+    @article = Article.new(article_params)
+    if @article.save
+      Subscriber.all.each { |sub| sub.send_email(@article) }
+    else
+      flash[:error] = @article.errors.full_messages.to_sentence
+    end
     redirect_to articles_path
   end
 

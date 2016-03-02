@@ -96,4 +96,22 @@ feature "blog" do
       expect { write_article }.to change { ActionMailer::Base.deliveries.count }.by(1)
     end
   end
+  context "raises error when" do
+    before(:each) do
+      visit "/"
+      sign_in
+      click_button "new_article"
+    end
+    scenario "title is empty", js: true do
+      fill_in "article_title", with: ""
+      fill_in "article_content", with: "Hello World!!"
+      click_button "Post Article"
+      expect(page).to have_content "Title can't be blank"
+    end
+    scenario "title is already used", js: true do
+      write_article
+      write_article
+      expect(page).to have_content "Title has already been taken"
+    end
+  end
 end

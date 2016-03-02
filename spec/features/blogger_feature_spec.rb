@@ -22,4 +22,11 @@ feature "blogger" do
       expect(current_path).to eq "/articles/example-title"
     end
   end
+  scenario "raises error if details are wrong" do
+    visit "/"
+    fill_in "email", with: "wrong.email@email.co.uk"
+    fill_in "password", with: "wrong_password"
+    click_button "Sign in"
+    expect(page).to have_content "Wrong email or password, only try to sign in if your write the blog."
+  end
 end

@@ -2,7 +2,8 @@ class CommentsController < ApplicationController
 
   def create
     @article = Article.find(params[:article_id])
-    comment = Comment.create(comment_params.merge(article: @article))
+    comment = Comment.new(comment_params.merge(article: @article))
+    flash[:error] = comment.errors.full_messages.to_sentence if !comment.save
     redirect_to article_path(@article)
   end
 
