@@ -100,9 +100,9 @@ feature "blog" do
     before(:each) do
       visit "/"
       sign_in
-      click_button "new_article"
     end
     scenario "title is empty", js: true do
+      click_button "new_article"
       fill_in "article_title", with: ""
       fill_in "article_content", with: "Hello World!!"
       click_button "Post Article"
@@ -128,6 +128,7 @@ feature "blog" do
     scenario "which takes you back to the root", js: true do
       click_link "Example Title"
       click_link "Home"
+      wait(2.seconds).for { current_path }.not_to eq "/articles/example-title"
       expect(current_path).to eq "/"
     end
   end

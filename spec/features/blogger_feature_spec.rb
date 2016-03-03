@@ -6,7 +6,7 @@ feature "blogger" do
     fill_in "email", with: "example@email.co.uk"
     fill_in "password", with: "randomletters"
     click_button "Sign in"
-    expect(page).to have_content "Would you like to post a blog article?"
+    expect(page).to have_button "New Article"
     expect(page).not_to have_button "Sign in"
   end
   context "after signing in the blogger returns to the" do

@@ -1,36 +1,38 @@
-<%= @article.title %>
-<div id="article_display_<%= @article.id %>">
-  
-  <%= markdown @article.content %>
-  <% if session[:user_signed_in] %>
-    <button class="edit_button" id="<%= @article.id %>">
-      Edit Article - <%= @article.title %>
-    </button>
-  <% end %>
-</div>
+<div class="container">
+  <div class="article_title" ><%= @article.title %></div>
+  <div id="article_display_<%= @article.id %>">
+    
+    <%= markdown @article.content %>
+    <% if session[:user_signed_in] %>
+      <button class="edit_button btn" id="<%= @article.id %>">
+        Edit Article - <%= @article.title %>
+      </button>
+    <% end %>
+  </div>
 
-<div class="article_editor" id="article_editor_<%= @article.id %>">
-  <%= form_for @article do |f| %>
-    <div>
-      <%= f.text_area(:content, size: "48x12") %>
-    </div>
-    <%= f.submit "Edit Article" %>
-  <% end %>
-  <%= link_to "Delete Article", article_path(@article), method: :delete %>
+  <div class="article_editor" id="article_editor_<%= @article.id %>">
+    <%= form_for @article do |f| %>
+      <div>
+        <%= f.text_area(:content, size: "48x12") %>
+      </div>
+      <%= f.submit "Edit Article", class: "btn" %>
+      <%= link_to "Delete Article", article_path(@article), method: :delete, class: "btn" %>
+    <% end %>
+    
+  </div>
 </div>
-
-<button id="comment">Comment</button>
-<div class="commenter">
+<button class="btn" id="comment">Comment</button>
+<div class="commenter container">
   <%= form_for [@article, @comment] do |f| %>
     <div>
-      <%= f.label :name %>
+      <%= f.label :name %>:
       <%= f.text_field :name %>
     </div>
-    <div>
-      <%= f.label :content %>
-      <%= f.text_area(:content, size: "48x12") %>
+    <div>  
+      <%= f.label :comment %>:
+      <%= f.text_area(:content, size: "48x6") %>
     </div>
-    <%= f.submit "Post Comment" %>
+    <%= f.submit "Post Comment", class: "btn" %>
   <% end %>
 </div>
 
@@ -39,7 +41,7 @@
     <div>
       <%= comment.name %>: <%= comment.content %>
       commented on: <%= comment.created_at.strftime("%H:%M on %e/%-m/%y") %>
-      <%= link_to "Delete Comment", article_comment_path(@article, comment), method: :delete %>
+      <%= link_to "Delete Comment", article_comment_path(@article, comment), method: :delete, class: "btn" %>
     </div>
   <% end %>
 </div>

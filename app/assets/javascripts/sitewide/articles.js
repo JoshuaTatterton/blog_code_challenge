@@ -1,10 +1,15 @@
-$(document).ready(function() {
+var ready = function() {
 
   $(".article_writer").hide();
   $(".article_editor").hide();
   
   $("#new_article").click(function() {
-    $(".article_writer").show();
+    if ($(".article_writer").css("display") == "none") {
+      $(".article_writer").show();
+    } else {
+      $(".article_writer").hide();
+    }
+    
   });
 
   $(".edit_button").click(function() {
@@ -14,4 +19,7 @@ $(document).ready(function() {
     $("#article_display_" + id).hide();
   });
 
-});
+};
+
+$(document).ready(ready);
+$(document).on("page:load", ready);
