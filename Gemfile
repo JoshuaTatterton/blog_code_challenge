@@ -53,7 +53,7 @@ group :test do
   gem 'rspec-wait'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 2.53.0'
   gem 'shoulda'
 end
 
