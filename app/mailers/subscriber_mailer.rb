@@ -4,7 +4,7 @@ class SubscriberMailer < ApplicationMailer
   
   layout 'mailer'
 
-  def instructions(subscriber, article)
+  def notification_email(subscriber, article)
     @article = article
     @subscriber = subscriber
     
