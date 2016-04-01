@@ -25,14 +25,13 @@ feature "comment" do
       expect(page).to have_content "I like this"
     end
 
-    scenario "signed in blogger can delete comments", js: true do
-      visit "/articles/example-title"
+    scenario "signed in blogger can delete comments" do
+      article.comments.create(name: "MyName", content: "I like this")
 
-      write_comment
+      visit "/articles/example-title"
 
       sign_in
 
-      visit "/articles/example-title"
       click_link "Delete Comment"
 
       expect(page).not_to have_content "MyName:"

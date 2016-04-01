@@ -12,7 +12,7 @@ feature "blogger" do
   end
 
   context "after signing in the blogger returns to the" do
-    scenario "main page if started there", js: true do
+    scenario "main page if started there" do
       visit "/"
 
       sign_in
@@ -20,7 +20,7 @@ feature "blogger" do
       expect(current_path).to eq "/"
     end
 
-    scenario "article page if started there", js: true do
+    scenario "article page if started there" do
       Article.create(title: "Example Title", content: "Hello World!!")
       
       visit "/articles/example-title"

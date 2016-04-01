@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
     article = Article.new(article_params)
 
     if article.save
-      EmailWorker.perform_in(5.minutes, article.id)
+      EmailWorker.perform_async(article.id)
     else
       flash[:error] = article.errors.full_messages.to_sentence
     end
@@ -24,12 +24,10 @@ class ArticlesController < ApplicationController
   end
 
   def update
-    session[:return_to] ||= request.referer
-
     article = Article.find(params[:id])
     article.update(article_params)
 
-    redirect_to session.delete(:return_to)
+    redirect_to :back
   end
 
   def destroy

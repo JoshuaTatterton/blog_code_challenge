@@ -34,7 +34,9 @@ feature "blog" do
 
     context "articles can be" do
       before(:each) do
-        write_article
+        Article.create(title: "Example Title", content: "Hello World!!")
+
+        visit "/"
       end
 
       scenario "edited", js: true do
@@ -66,14 +68,10 @@ feature "blog" do
 
   context "articles" do
     before(:each) do
-      visit "/"
-
-      sign_in
-
-      write_article
+      Article.create(title: "Example Title", content: "Hello World!!")
     end
 
-    scenario "have their own named page", js: true do
+    scenario "have their own named page" do
       visit "/"
       click_link "Example Title"
 
@@ -82,7 +80,7 @@ feature "blog" do
       expect(current_path).to eq "/articles/example-title"     
     end
 
-    scenario "are displayed on their own page", js: true do
+    scenario "are displayed on their own page" do
       visit "/articles/example-title"
 
       expect(page).to have_content "Example Title"
@@ -90,6 +88,12 @@ feature "blog" do
     end
 
     context "on their own page while signed in" do
+      before(:each) do
+        visit "/"
+        
+        sign_in
+      end
+
       scenario "can be edited by the blogger", js: true do
         visit "/articles/example-title"
 
@@ -148,7 +152,7 @@ feature "blog" do
     end
 
     scenario "title is already used", js: true do
-      write_article
+      Article.create(title: "Example Title", content: "Hello World!!")
 
       write_article
 
@@ -157,22 +161,23 @@ feature "blog" do
   end
   context "there is a home button" do
     before(:each) do
+      Article.create(title: "Example Title", content: "Hello World!!")
+
       visit "/"
-
-      sign_in
-
-      write_article
     end
 
-    scenario "in the nav bar", js: true do
-      expect(page).to have_link "Home"
-
+    scenario "in the nav bar" do
+      within(".nav_bar") do
+        expect(page).to have_link "Home"
+      end
       click_link "Example Title"
 
-      expect(page).to have_link "Home"
+      within(".nav_bar") do
+        expect(page).to have_link "Home"
+      end
     end
     
-    scenario "which takes you back to the root", js: true do
+    scenario "which takes you back to the root" do
       click_link "Example Title"
       click_link "Home"
 
