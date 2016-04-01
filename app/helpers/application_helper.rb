@@ -18,5 +18,9 @@ module ApplicationHelper
     }
     Redcarpet::Markdown.new(renderer, extensions).render(text).html_safe
   end
+
+  def new_subscriber
+    Subscriber.new
+  end
   
 end

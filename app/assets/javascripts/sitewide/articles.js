@@ -9,7 +9,6 @@ var ready = function() {
     } else {
       $(".article_writer").hide();
     }
-    
   });
 
   $(".edit_button").click(function() {

@@ -7,39 +7,40 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div class="nav_bar">
-  <button class="btn" id="subscribe">Subscribe</button>
-  <%= link_to "Home", root_path, class: "btn" %>  
-</div>  
-<div id="subscribe_form">
-  <%= form_for Subscriber.new do |f| %>
-    <%= f.label :email %>:
-    <%= f.text_field :email %>
-    <%= f.submit "Become a Subscriber", class: "subscribe" %>
+  <div class="nav_bar">
+    <button class="btn" id="subscribe">Subscribe</button>
+    <%= link_to "Home", root_path, class: "btn" %>  
+  </div>  
+
+  <div id="subscribe_form">
+    <%= form_for new_subscriber do |f| %>
+      <%= f.label :email %>:
+      <%= f.text_field :email %>
+      <%= f.submit "Become a Subscriber", class: "subscribe" %>
+    <% end %>
+  </div>
+
+  <div class="main">
+    <div class="flash_messages">
+      <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: name %>
+      <% end %>
+    </div>
+
+    <%= yield %>
+  </div>
+
+  <% if !session[:user_signed_in] %>
+    <div class="sign_in">
+      <%= form_tag("/blogger/session", method: "post") do %>
+        <%= label_tag :email %>:
+        <%= text_field_tag :email %>
+        <%= label_tag :password %>:
+        <%= password_field_tag :password %>
+        <%= submit_tag "Sign in", id: "sign_in" %>
+      <% end %>
+    </div>
   <% end %>
-</div>
-
-<div class="main">
-  <div class="flash_messages">
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: name %>
-    <% end %>
-  </div>
-
-  <%= yield %>
-</div>
-
-<% if !session[:user_signed_in] %>
-  <div class="sign_in">
-    <%= form_tag("/blogger/session", method: "post") do %>
-      <%= label_tag :email %>:
-      <%= text_field_tag :email %>
-      <%= label_tag :password %>:
-      <%= password_field_tag :password %>
-      <%= submit_tag "Sign in", id: "sign_in" %>
-    <% end %>
-  </div>
-<% end %>
 
 </body>
 </html>

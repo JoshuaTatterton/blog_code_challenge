@@ -1,8 +1,7 @@
 <% if session[:user_signed_in] %>
   <div>
-    <button class="btn" id="new_article">
-      New Article
-    </button>
+    <button class="btn" id="new_article">New Article</button>
+    
     <div class="article_writer container">
       <%= form_for @article do |f| %>
         <div>
@@ -22,24 +21,9 @@
   <% @articles.each do |a| %>
     <div class="container">
       <%= link_to "#{a.title}", article_path(a), class: "btn" %>
-      <div id="article_display_<%= a.id %>">
-        <%= markdown a.content %>
-        <% if session[:user_signed_in] %>
-        <button class="edit_button btn" id="<%= a.id %>">
-          Edit Article - <%= a.title %>
-        </button>
-        <% end %>
-      </div>
-      <div class="article_editor" id="article_editor_<%= a.id %>">
-        <%= form_for a do |f| %>
-          <div>
-            <%= f.text_area(:content, size: "48x12") %>
-          </div>
-          <%= f.submit "Edit Article", class: "btn" %>
-          <%= link_to "Delete Article", article_path(a), class: "btn", method: :delete %>
-        <% end %>
-        
-      </div>
+
+      <%= render partial: "article", locals: { article: a } %>
+
     </div>
   <% end %>
 <% else %>
