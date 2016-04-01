@@ -37,4 +37,8 @@ module Helpers
     click_button "Become a Subscriber"
   end
 
+  def allow_run_sidekiq
+    Sidekiq::Testing.inline!
+  end
+
 end

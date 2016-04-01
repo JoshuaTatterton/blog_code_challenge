@@ -15,7 +15,7 @@ class ArticlesController < ApplicationController
     article = Article.new(article_params)
 
     if article.save
-      Subscriber.all.each { |sub| sub.send_email(article) }
+      EmailWorker.perform_in(5.minutes, article.id)
     else
       flash[:error] = article.errors.full_messages.to_sentence
     end

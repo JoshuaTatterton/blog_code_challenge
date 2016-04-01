@@ -119,6 +119,8 @@ feature "blog" do
 
   context "emails are sent to subscribers" do
     scenario " when a new article is posted", js: true do
+      allow_run_sidekiq
+
       visit "/"
 
       visiter_subscribe
