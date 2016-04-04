@@ -9,11 +9,11 @@
 </div>
 
 <div class="article_editor" id="article_editor_<%= article.id %>">
-  <%= form_for article do |f| %>
+  <%= form_for [@blogger, article] do |f| %>
     <div>
       <%= f.text_area(:content, size: "48x12") %>
     </div>
     <%= f.submit "Edit Article", class: "btn" %>
-    <%= link_to "Delete Article", article_path(article), class: "btn", method: :delete %>
+    <%= link_to "Delete Article", blogger_article_path(@blogger, article), class: "btn", method: :delete %>
   <% end %>
 </div>

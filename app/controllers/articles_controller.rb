@@ -3,6 +3,7 @@ class ArticlesController < ApplicationController
   def index
     @article = Article.new
     @articles = Article.all.reverse
+    @blogger = Blogger.find(params[:blogger_id])
   end
 
   def show

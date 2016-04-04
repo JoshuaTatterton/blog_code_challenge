@@ -1,15 +1,24 @@
 class BloggerSessionsController < ApplicationController
 
   def create
-    if @blogger = login(params[:email], params[:password])
-      flash.now[:alert] = 'Login Successful'
+    blogger = login(params[:email], params[:password])
+    if logged_in?
+      flash[:success] = "You have signed in"
       redirect_to blogger_articles_path(current_user)
     else
-      flash.now[:alert] = 'Login failed'
-      redirect_to 
+      flash[:error] = "Sign in failed"
+      redirect_to :back
     end
   end
 
   def destroy
+    logout
+    if !logged_in?
+      flash[:success] = "You have signed out"
+      redirect_to :root
+    else
+      flash[:error] = "Sign out failed"
+      redirect_to :back
+    end
   end
 end

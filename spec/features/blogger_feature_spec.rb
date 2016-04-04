@@ -8,13 +8,7 @@ feature "blogger" do
 
       expect(page).not_to have_css ".sign_up_form"
 
-      click_button "sign_up"
-      within(".sign_up_form") do
-        fill_in "Email", with: "example@email.co.uk"
-        fill_in "Password", with: "randomletters"
-        fill_in "Password confirmation", with: "randomletters"
-        click_button "Sign Up"
-      end
+      sign_up
 
       expect(page).to have_content("You have signed up")
     end
@@ -24,13 +18,7 @@ feature "blogger" do
 
       expect(page).not_to have_css ".sign_up_form"
 
-      click_button "sign_up"
-      within(".sign_up_form") do
-        fill_in "Email", with: ""
-        fill_in "Password", with: "randomletters"
-        fill_in "Password confirmation", with: "randomletters"
-        click_button "Sign Up"
-      end
+      sign_up(email: "")
 
       expect(page).to have_content("Sign up failed")
     end
@@ -40,13 +28,7 @@ feature "blogger" do
 
       expect(page).not_to have_css ".sign_up_form"
 
-      click_button "sign_up"
-      within(".sign_up_form") do
-        fill_in "Email", with: "example@email.co.uk"
-        fill_in "Password", with: "randomletters"
-        fill_in "Password confirmation", with: "randomlett"
-        click_button "Sign Up"
-      end
+      sign_up(password_confirmation: "randomlett")
 
       expect(page).to have_content("Sign up failed")
     end
@@ -56,56 +38,61 @@ feature "blogger" do
 
       expect(page).not_to have_css ".sign_up_form"
 
-      click_button "sign_up"
-      within(".sign_up_form") do
-        fill_in "Email", with: "example@email.co.uk"
-        fill_in "Password", with: "random"
-        fill_in "Password confirmation", with: "random"
-        click_button "Sign Up"
-      end
+      sign_up(password: "random", password_confirmation: "random")
 
       expect(page).to have_content("Sign up failed")
     end
   end
 
-  xscenario "the blogger can sign in" do
-    Blogger.create( email: "example@email.co.uk", 
-                    crypted_password: Sorcery::CryptoProviders::BCrypt.encrypt("randomletters", "asdasdastr4325234324sdfds") )
-    visit "/"
-    fill_in "email", with: "example@email.co.uk"
-    fill_in "password", with: "randomletters"
-    click_button "Sign in"
-
-    expect(page).to have_button "New Article"
-    expect(page).not_to have_button "Sign in"
-  end
-
-  context "after signing in the blogger returns to the" do
-    xscenario "main page if started there" do
+  context "an existing blogger" do
+    before(:each) do
       visit "/"
 
-      sign_in
+      sign_up
+    end
 
+    scenario "who's signed in can sign out", js: true do
+      expect(page).to have_link("Sign Out")
+
+      click_link "Sign Out"
+
+      expect(page).to have_content("You have signed out")
+      expect(page).not_to have_link("Sign Out")
       expect(current_path).to eq "/"
     end
 
-    xscenario "article page if started there" do
-      Article.create(title: "Example Title", content: "Hello World!!")
-      
-      visit "/articles/example-title"
+    scenario "can sign in", js: true do
+      click_link "Sign Out"
 
-      sign_in
+      expect(page).to have_button("Sign In")
+      expect(page).not_to have_css ".sign_in_form"
 
-      expect(current_path).to eq "/articles/example-title"
+      click_button "Sign In"
+      within(".sign_in_form") do
+        fill_in "Email", with: "example@email.co.uk"
+        fill_in "Password", with: "randomletters"
+        click_button "Sign In"
+      end
+
+      expect(page).to have_content("You have signed in")
+      expect(page).not_to have_button("Sign In")
+      expect(page).to have_button("New Article")
     end
+
+    scenario "can't sign in if details are incorrect", js: true do
+      click_link "Sign Out"
+
+      click_button "Sign In"
+      within(".sign_in_form") do
+        fill_in "Email", with: "example@email.co.uk"
+        fill_in "Password", with: "lettersrandom"
+        click_button "Sign In"
+      end
+
+      expect(page).to have_content("Sign in failed")
+      expect(page).to have_button("Sign In")
+      expect(page).not_to have_button("New Article")
+    end    
   end
 
-  xscenario "raises error if details are wrong" do
-    visit "/"
-    fill_in "email", with: "wrong.email@email.co.uk"
-    fill_in "password", with: "wrong_password"
-    click_button "Sign in"
-
-    expect(page).to have_content "Wrong email or password, only try to sign in if your write the blog."
-  end
 end

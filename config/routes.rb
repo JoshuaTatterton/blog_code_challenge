@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
   
   resources :blogger_sessions
-  
+  post 'sign_in' => 'blogger_sessions#create', :as => :sign_in
+  post 'sign_out' => 'blogger_sessions#destroy', :as => :sign_out
   
 end

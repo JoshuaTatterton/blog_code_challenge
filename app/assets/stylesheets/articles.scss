@@ -105,31 +105,3 @@ body {
   font-weight: bold;
   text-decoration: underline;
 }
-.sign_in {
-  margin: 5px auto;
-  font-size: 1em;
-  background-color: #D0D0D0;
-  border-radius: 5px;
-  height: 35px;
-  line-height: 35px;
-  padding: 0 5px 0 10px;
-  display: inline-block;
-  vertical-align: middle;
-}
-#sign_in {
-  margin-right: 0px;
-  font-size: 1em;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #D0D0D0;
-  border: none;
-  height: 35px;
-  line-height: 35px;
-  padding: 0 10px;
-  cursor:pointer;
-}
-#sign_in:hover {
-  background-color: #E0E0E0;
-}
-#sign_in:active {
-  background-color: #989898;
-}

@@ -11,13 +11,17 @@
     <% if @Blogger %>
       <button class="btn" id="subscribe">Subscribe</button>
     <% end %>
-    <% if !current_user %>
+
+    <% if !logged_in? %>
       <button class="btn" id="sign_up">Sign Up</button>
+      <button class="btn" id="sign_in">Sign In</button>
+    <% else %>
+      <%= link_to "Sign Out", :sign_out, method: :post, class: "btn" %>
     <% end %>
     <%= link_to "Home", root_path, class: "btn" %>  
   </div>
 
-  <% if !current_user %>
+  <% if !logged_in? %>
     <div class="sign_up_form">
       <%= form_for new_blogger do |f| %>
         <div>
@@ -35,6 +39,20 @@
         <%= f.submit "Sign Up", class: "subscribe" %>
       <% end %>
     </div>
+
+    <div class="sign_in_form">
+      <%= form_tag blogger_sessions_path, method: :post do |f| %>
+        <div>
+          <%= label_tag :email %>:
+          <%= text_field_tag :email %>
+        </div>
+        <div>
+          <%= label_tag :password %>:
+          <%= password_field_tag :password %>
+        </div>
+        <%= submit_tag "Sign In", class: "subscribe" %>
+      <% end %>
+    </div>
   <% end %>
 
   <% flash.each do |type, message| %>
@@ -46,18 +64,6 @@
   <div class="main">
     <%= yield %>
   </div>
-
-  <% if !session[:user_signed_in] %>
-    <div class="sign_in">
-      <%= form_tag("/blogger_sessions", method: "post") do %>
-        <%= label_tag :email %>:
-        <%= text_field_tag :email %>
-        <%= label_tag :password %>:
-        <%= password_field_tag :password %>
-        <%= submit_tag "Sign in", id: "sign_in" %>
-      <% end %>
-    </div>
-  <% end %>
 
 </body>
 </html>

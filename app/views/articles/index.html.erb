@@ -1,9 +1,9 @@
-<% if logged_in? %>
+<% if current_user == @blogger %>
   <div>
     <button class="btn" id="new_article">New Article</button>
     
     <div class="article_writer container">
-      <%= form_for @article do |f| %>
+      <%= form_for [@blogger, @article] do |f| %>
         <div>
           <%= f.label :title %>
           <%= f.text_field :title %>
@@ -20,7 +20,7 @@
 <% if @articles != [] %>
   <% @articles.each do |a| %>
     <div class="container">
-      <%= link_to "#{a.title}", article_path(a), class: "btn" %>
+      <%= link_to "#{a.title}", blogger_article_path(@blogger, a), class: "btn" %>
 
       <%= render partial: "article", locals: { article: a } %>
 
