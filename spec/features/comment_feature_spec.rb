@@ -1,10 +1,18 @@
 feature "comment" do
-  let!(:article) { Article.create(title: "Example Title", content: "Hello World!!") }
+
+  before(:each) do
+    visit "/"
+
+    sign_up
+
+    @blogger = Blogger.last
+    @article = @blogger.articles.create(title: "Example Title", content: "Hello World!!")
+  end
   
   scenario "is displayed" do
-    article.comments.create(name: "MyName", content: "I like this")
+    @article.comments.create(name: "MyName", content: "I like this")
     
-    visit "/articles/example-title"
+    visit "/bloggers/#{@blogger.id}/articles/example-title"
 
     expect(page).to have_content "MyName:"
     expect(page).to have_content "I like this"
@@ -12,7 +20,7 @@ feature "comment" do
 
   context "can be written" do
     scenario "from the individual article page", js: true do
-      visit "/articles/example-title"
+      visit "/bloggers/#{@blogger.id}/articles/example-title"
 
       click_button "Comment"
       fill_in "comment_name", with: "MyName"
@@ -24,22 +32,30 @@ feature "comment" do
     end
 
     scenario "signed in blogger can delete comments" do
-      article.comments.create(name: "MyName", content: "I like this")
+      @article.comments.create(name: "MyName", content: "I like this")
 
-      visit "/articles/example-title"
-
-      sign_in
+      visit "/bloggers/#{@blogger.id}/articles/example-title"
 
       click_link "Delete Comment"
 
       expect(page).not_to have_content "MyName:"
       expect(page).not_to have_content "I like this"
     end
+
+    scenario "not signed in blogger can't delete comments" do
+      @article.comments.create(name: "MyName", content: "I like this")
+
+      click_link "Sign Out"
+
+      visit "/bloggers/#{@blogger.id}/articles/example-title"
+
+      expect(page).not_to have_link "Delete Comment"
+    end
   end
   
   context "will show error" do
     scenario "without a name", js: true do
-      visit "/articles/example-title"
+      visit "/bloggers/#{@blogger.id}/articles/example-title"
 
       click_button "Comment"
       fill_in "comment_name", with: ""
@@ -50,7 +66,7 @@ feature "comment" do
     end
 
     scenario "without content", js: true do
-      visit "/articles/example-title"
+      visit "/bloggers/#{@blogger.id}/articles/example-title"
 
       click_button "Comment"
       fill_in "comment_name", with: "MyName"

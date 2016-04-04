@@ -1,5 +1,9 @@
 feature "subscriber" do
-  before(:each) { visit "/" }
+  let!(:blogger) { Blogger.create(email: "example@email.com", password: "randomletters") }
+
+  before(:each) do
+    visit "/bloggers/#{blogger.id}/articles"
+  end
 
   scenario "people can subscribe", js: true do
     click_button "Subscribe"
@@ -12,17 +16,19 @@ feature "subscriber" do
     scenario "main page if started there", js: true do
       visiter_subscribe
 
-      expect(current_path).to eq "/"
+      expect(current_path).to eq "/bloggers/#{blogger.id}/articles"
     end
 
     scenario "article page if started there", js: true do
-      Article.create(title: "Example Title", content: "Hello World!!")
+      blogger.articles.create(title: "Example Title", content: "Hello World!!")
 
-      visit "/articles/example-title"
+      visit current_path
+
+      click_link "Example Title"
 
       visiter_subscribe
 
-      expect(current_path).to eq "/articles/example-title"
+      expect(current_path).to eq "/bloggers/#{blogger.id}/articles/example-title"
     end
   end
   

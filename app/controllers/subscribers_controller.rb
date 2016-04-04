@@ -5,7 +5,8 @@ class SubscribersController < ApplicationController
   end
   
   def create
-    subscriber = Subscriber.new(subscriber_params)
+    blogger = Blogger.find(params[:blogger_id])
+    subscriber = blogger.subscribers.new(subscriber_params)
 
     flash[:error] = subscriber.errors.full_messages.to_sentence if !subscriber.save
     

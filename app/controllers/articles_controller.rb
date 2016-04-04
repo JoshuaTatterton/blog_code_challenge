@@ -1,19 +1,22 @@
 class ArticlesController < ApplicationController
 
   def index
-    @article = Article.new
-    @articles = Article.all.reverse
     @blogger = Blogger.find(params[:blogger_id])
+
+    @article = @blogger.articles.new
+    @articles = @blogger.articles.all.reverse
   end
 
   def show
+    @blogger = Blogger.find(params[:blogger_id])
     @article = Article.find(params[:id])
-    @comments = @article.comments
-    @comment = Comment.new
+    @comments = @article.comments.all
+    @comment = @article.comments.new
   end
 
   def create
-    article = Article.new(article_params)
+    blogger = Blogger.find(params[:blogger_id])
+    article = blogger.articles.new(article_params)
 
     if article.save
       EmailWorker.perform_async(article.id)
@@ -21,7 +24,7 @@ class ArticlesController < ApplicationController
       flash[:error] = article.errors.full_messages.to_sentence
     end
 
-    redirect_to articles_path
+    redirect_to blogger_articles_path(blogger)
   end
 
   def update
@@ -32,11 +35,12 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    blogger = Blogger.find(params[:blogger_id])
     article = Article.find(params[:id])
     
     article.destroy
     
-    redirect_to articles_path
+    redirect_to blogger_articles_path(blogger)
   end
 
   private

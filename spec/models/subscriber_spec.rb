@@ -1,6 +1,6 @@
 describe Subscriber, type: :model do
-
-  let(:subject) { Subscriber.create(email: "example@email.co.uk") }
+  let(:blogger) { Blogger.create(email: "example@email.co.uk", password: "randomletters") }
+  let(:subject) { blogger.subscribers.create(email: "example@email.co.uk") }
 
   it { should validate_presence_of(:email) }
 

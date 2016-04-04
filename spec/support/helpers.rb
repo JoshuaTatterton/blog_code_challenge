@@ -1,9 +1,12 @@
 module Helpers
 
   def sign_in
-    fill_in "email", with: "example@email.co.uk"
-    fill_in "password", with: "randomletters"
-    click_button "Sign in"
+    click_button "Sign In"
+    within(".sign_in_form") do
+      fill_in "email", with: "example@email.co.uk"
+      fill_in "password", with: "randomletters"
+      click_button "Sign In"
+    end
   end
 
   def write_article

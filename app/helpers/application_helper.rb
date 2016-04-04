@@ -26,5 +26,12 @@ module ApplicationHelper
   def new_blogger
     Blogger.new
   end
+
+  def on_blogger_page?
+    @blogger ||= false
+    if @blogger
+      true
+    end
+  end
   
 end

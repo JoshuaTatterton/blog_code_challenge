@@ -6,4 +6,4 @@ A new blog post has been uploaded, click the article title below to view the ful
 
 If you no longer want to receive email updates on this blog you can click the unsubscribe link below.
 
-<%= link_to "Unsubscribe", blogger_subscriber_url(@article.blogger, @subscriber), method: :delete %>
+<%= link_to "Unsubscribe", blogger_subscriber_url(@subscriber.blogger, @subscriber), method: :delete %>

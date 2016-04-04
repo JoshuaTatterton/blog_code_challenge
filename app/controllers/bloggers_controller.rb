@@ -1,5 +1,6 @@
 class BloggersController < ApplicationController
   def index
+    @dont_show = true
   end
 
   def create
@@ -19,5 +20,9 @@ class BloggersController < ApplicationController
 
   def blogger_params
     params.require(:blogger).permit(:email, :password, :password_confirmation)
+  end
+
+  def random_blogger
+    @blogger = false
   end
 end

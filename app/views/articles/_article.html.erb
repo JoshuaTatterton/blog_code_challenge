@@ -1,7 +1,7 @@
 <div id="article_display_<%= article.id %>">
   <%= markdown article.content %>
 
-  <% if session[:user_signed_in] %>
+  <% if current_user == @blogger %>
     <button class="edit_button btn" id="<%= article.id %>">
       Edit Article - <%= article.title %>
     </button>

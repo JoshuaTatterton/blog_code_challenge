@@ -1,14 +1,16 @@
 feature "blog" do
+  let!(:blogger) { Blogger.create(email: "example@email.com", password: "randomletters") }
+
   scenario "message is displayed when there are no blog posts" do
-    visit "/"
+    visit "/bloggers/#{blogger.id}/articles"
 
     expect(page).to have_content "No blog posts have been made."
   end
 
   scenario "when a blog post has been created the article is displayed" do
-    Article.create(title: "Example Title", content: "Hello World!!")
+    blogger.articles.create(title: "Example Title", content: "Hello World!!")
 
-    visit "/"
+    visit "/bloggers/#{blogger.id}/articles"
 
     expect(page).to have_content "Hello World!!"
     expect(page).not_to have_content "No blog posts have been made."
@@ -17,7 +19,8 @@ feature "blog" do
   context "on the main page while signed in as a blogger" do
     before(:each) do
       visit "/"
-      sign_in
+
+      sign_up
     end
 
     scenario "articles can be written", js: true do
@@ -32,9 +35,7 @@ feature "blog" do
 
     context "articles can be" do
       before(:each) do
-        Article.create(title: "Example Title", content: "Hello World!!")
-
-        visit "/"
+        write_article
       end
 
       scenario "edited", js: true do
@@ -54,32 +55,37 @@ feature "blog" do
     end
 
     scenario "you go back to the same page as before you edited", js: true do
-      visit "/articles"
-
       write_article
+
+      current_path_before = current_path
 
       edit_article
 
-      expect(current_path).to eq "/articles"
+      expect(current_path).to eq current_path_before
     end
   end
 
   context "articles" do
     before(:each) do
-      Article.create(title: "Example Title", content: "Hello World!!")
+      visit "/"
+
+      sign_up
+
+      @blogger = Blogger.last
+
+      write_article
     end
 
-    scenario "have their own named page" do
-      visit "/"
+    scenario "have their own named page", js: true do
       click_link "Example Title"
 
-      wait(2.seconds).for { current_path }.not_to eq "/"
+      wait(2.seconds).for { current_path }.not_to eq "/bloggers/#{@blogger.id}/articles"
 
-      expect(current_path).to eq "/articles/example-title"     
+      expect(current_path).to eq "/bloggers/#{@blogger.id}/articles/example-title"     
     end
 
-    scenario "are displayed on their own page" do
-      visit "/articles/example-title"
+    scenario "are displayed on their own page", js: true do
+      click_link "Example Title"
 
       expect(page).to have_content "Example Title"
       expect(page).to have_content "Hello World!!"
@@ -87,30 +93,22 @@ feature "blog" do
 
     context "on their own page while signed in" do
       before(:each) do
-        visit "/"
-        
-        sign_in
+        click_link "Example Title"
       end
 
       scenario "can be edited by the blogger", js: true do
-        visit "/articles/example-title"
-
         edit_article
 
         expect(page).to have_content "Hello New World!!"
       end
 
       scenario "you go back to the same page as before you edited", js: true do
-        visit "/articles/example-title"
-
         edit_article
 
-        expect(current_path).to eq "/articles/example-title"
+        expect(current_path).to eq "/bloggers/#{@blogger.id}/articles/example-title"
       end
 
       scenario "can be deleted by the blogger", js: true do
-        visit "/articles/example-title"
-
         delete_article
 
         expect(page).not_to have_content "Example Title"
@@ -125,6 +123,11 @@ feature "blog" do
 
       visit "/"
 
+      sign_up
+      click_link "Sign Out"
+
+      visit "/bloggers/#{Blogger.last.id}/articles"
+
       visiter_subscribe
 
       sign_in
@@ -137,7 +140,7 @@ feature "blog" do
     before(:each) do
       visit "/"
       
-      sign_in
+      sign_up
     end
 
     scenario "title is empty", js: true do
@@ -159,8 +162,6 @@ feature "blog" do
   end
   context "there is a home button" do
     before(:each) do
-      Article.create(title: "Example Title", content: "Hello World!!")
-
       visit "/"
     end
 
@@ -168,18 +169,12 @@ feature "blog" do
       within(".nav_bar") do
         expect(page).to have_link "Home"
       end
-      click_link "Example Title"
-
-      within(".nav_bar") do
-        expect(page).to have_link "Home"
-      end
     end
     
     scenario "which takes you back to the root" do
-      click_link "Example Title"
-      click_link "Home"
+      visit "/bloggers/#{blogger.id}/articles"
 
-      wait(2.seconds).for { current_path }.not_to eq "/articles/example-title"
+      click_link "Home"
       
       expect(current_path).to eq "/"
     end

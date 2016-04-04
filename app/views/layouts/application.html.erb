@@ -8,7 +8,7 @@
 </head>
 <body>
   <div class="nav_bar">
-    <% if @Blogger %>
+    <% if on_blogger_page? %>
       <button class="btn" id="subscribe">Subscribe</button>
     <% end %>
 
@@ -51,6 +51,16 @@
           <%= password_field_tag :password %>
         </div>
         <%= submit_tag "Sign In", class: "subscribe" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <% if on_blogger_page? %>
+    <div id="subscribe_form">
+      <%= form_for [@blogger, new_subscriber] do |f| %>
+        <%= f.label :email %>:
+        <%= f.text_field :email %>
+        <%= f.submit "Become a Subscriber", class: "subscribe" %>
       <% end %>
     </div>
   <% end %>
