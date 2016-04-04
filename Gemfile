@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'redcarpet'
 gem 'friendly_id', '~> 5.1.0'
 
+gem 'sorcery'
+
 gem 'sidekiq'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'

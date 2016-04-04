@@ -22,5 +22,9 @@ module ApplicationHelper
   def new_subscriber
     Subscriber.new
   end
+
+  def new_blogger
+    Blogger.new
+  end
   
 end
