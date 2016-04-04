@@ -5,4 +5,7 @@ class Blogger < ActiveRecord::Base
   validates :email, presence: true
   validates :password, confirmation: true, presence: true, length: { minimum: 8 }
 
+  has_many :articles
+  has_many :subscribers
+
 end
