@@ -1,5 +1,3 @@
-require "rails_helper"
-
 feature "subscriber" do
   before(:each) { visit "/" }
 

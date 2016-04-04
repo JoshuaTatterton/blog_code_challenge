@@ -1,5 +1,3 @@
-require "rails_helper"
-
 describe Subscriber, type: :model do
 
   it { should validate_presence_of(:email) }

@@ -1,5 +1,3 @@
-require "rails_helper"
-
 feature "comment" do
   let!(:article) { Article.create(title: "Example Title", content: "Hello World!!") }
   

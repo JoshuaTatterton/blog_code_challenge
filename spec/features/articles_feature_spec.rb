@@ -1,5 +1,3 @@
-require "rails_helper"
-
 feature "blog" do
   scenario "message is displayed when there are no blog posts" do
     visit "/"

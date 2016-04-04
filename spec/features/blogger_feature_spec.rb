@@ -1,5 +1,3 @@
-require "rails_helper"
-
 feature "blogger" do
   
   context "a prospective blogger" do
