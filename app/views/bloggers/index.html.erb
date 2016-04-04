@@ -1,0 +1,5 @@
+<% if @bloggers %>
+  <% @bloggers.each do |blogger| %>
+    <%= link_to blogger.username, blogger_articles_path(blogger) %>
+  <% end %>
+<% end %>

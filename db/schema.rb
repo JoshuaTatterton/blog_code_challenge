@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160404114731) do
+ActiveRecord::Schema.define(version: 20160404155131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,9 +34,12 @@ ActiveRecord::Schema.define(version: 20160404114731) do
     t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username"
+    t.string   "slug"
   end
 
   add_index "bloggers", ["email"], name: "index_bloggers_on_email", unique: true, using: :btree
+  add_index "bloggers", ["slug"], name: "index_bloggers_on_slug", unique: true, using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.string   "name",       default: "Anon"

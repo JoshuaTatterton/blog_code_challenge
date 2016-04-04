@@ -1,6 +1,6 @@
 class BloggersController < ApplicationController
   def index
-    @dont_show = true
+    @bloggers = Blogger.all.reverse
   end
 
   def create
@@ -19,7 +19,7 @@ class BloggersController < ApplicationController
   private
 
   def blogger_params
-    params.require(:blogger).permit(:email, :password, :password_confirmation)
+    params.require(:blogger).permit(:email, :password, :password_confirmation, :username)
   end
 
   def random_blogger

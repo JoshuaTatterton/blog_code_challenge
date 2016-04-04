@@ -45,12 +45,14 @@ module Helpers
   end
 
   def sign_up(options={})
+    options[:username] ||= "MyUsername"
     options[:email] ||= "example@email.co.uk"
     options[:password] ||= "randomletters"
     options[:password_confirmation] ||= "randomletters"
 
     click_button "sign_up"
     within(".sign_up_form") do
+      fill_in "Username", with: options[:username]
       fill_in "Email", with: options[:email]
       fill_in "Password", with: options[:password]
       fill_in "Password confirmation", with: options[:password_confirmation]

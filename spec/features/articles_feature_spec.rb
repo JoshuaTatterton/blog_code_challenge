@@ -1,5 +1,5 @@
 feature "blog" do
-  let!(:blogger) { Blogger.create(email: "example@email.com", password: "randomletters") }
+  let!(:blogger) { Blogger.create(username: "Username", email: "example@email.com", password: "randomletters") }
 
   scenario "message is displayed when there are no blog posts" do
     visit "/bloggers/#{blogger.id}/articles"
@@ -79,9 +79,9 @@ feature "blog" do
     scenario "have their own named page", js: true do
       click_link "Example Title"
 
-      wait(2.seconds).for { current_path }.not_to eq "/bloggers/#{@blogger.id}/articles"
+      wait(2.seconds).for { current_path }.not_to eq "/bloggers/#{@blogger.slug}/articles"
 
-      expect(current_path).to eq "/bloggers/#{@blogger.id}/articles/example-title"     
+      expect(current_path).to eq "/bloggers/#{@blogger.slug}/articles/example-title"     
     end
 
     scenario "are displayed on their own page", js: true do
@@ -105,7 +105,7 @@ feature "blog" do
       scenario "you go back to the same page as before you edited", js: true do
         edit_article
 
-        expect(current_path).to eq "/bloggers/#{@blogger.id}/articles/example-title"
+        expect(current_path).to eq "/bloggers/#{@blogger.slug}/articles/example-title"
       end
 
       scenario "can be deleted by the blogger", js: true do

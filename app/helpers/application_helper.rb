@@ -29,9 +29,6 @@ module ApplicationHelper
 
   def on_blogger_page?
     @blogger ||= false
-    if @blogger
-      true
-    end
   end
   
 end

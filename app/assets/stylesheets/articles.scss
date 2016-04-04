@@ -14,7 +14,7 @@ body {
   width: 75%;
   height: 40px;
   display: inline-block;
-  padding-right: 5px;
+  padding: 0 5px 0 5px;
 }
 .btn, .btn:link, .btn:visited {  
   display: inline-block;
@@ -40,6 +40,9 @@ body {
 .btn:active {
   background-color: #989898;
   cursor: pointer;
+}
+.btn.left {
+  float: left;
 }
 .main {
   padding: 10px 0;

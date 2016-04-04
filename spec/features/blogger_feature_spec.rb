@@ -1,5 +1,20 @@
 feature "blogger" do
   
+  context "on the home page" do
+    scenario "there is a list of bloggers" do
+      visit "/"
+
+      expect(page)
+    end
+  end
+  scenario "a bloggers url has their username in it" do
+    Blogger.create(username: "My Username", email: "example@email.com", password: "randomletters")
+    visit "/"
+
+    click_link "My Username"
+
+    expect(current_path).to eq "/bloggers/my-username/articles"
+  end
   context "a prospective blogger" do
     scenario "can sign up", js: true do
       visit "/"
@@ -11,12 +26,40 @@ feature "blogger" do
       expect(page).to have_content("You have signed up")
     end
 
+    scenario "can't sign up without username", js: true do
+      visit "/"
+
+      expect(page).not_to have_css ".sign_up_form"
+
+      sign_up(username: "")
+
+      expect(page).to have_content("Sign up failed")
+    end
+
+    scenario "can't sign up with a already used username", js: true do
+      Blogger.create(username: "MyUsername", email: "example@email.co.uk", password: "randomletters")
+      visit "/"
+
+      sign_up(email: "another@email.com")
+
+      expect(page).to have_content("Sign up failed")
+    end
+
     scenario "can't sign up without email address", js: true do
       visit "/"
 
       expect(page).not_to have_css ".sign_up_form"
 
       sign_up(email: "")
+
+      expect(page).to have_content("Sign up failed")
+    end
+
+    scenario "can't sign up with a already used email address", js: true do
+      Blogger.create(username: "Username", email: "example@email.co.uk", password: "randomletters")
+      visit "/"
+
+      sign_up(username: "another")
 
       expect(page).to have_content("Sign up failed")
     end

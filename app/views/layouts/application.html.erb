@@ -8,8 +8,8 @@
 </head>
 <body>
   <div class="nav_bar">
-    <% if on_blogger_page? %>
-      <button class="btn" id="subscribe">Subscribe</button>
+    <% if on_blogger_page? && on_blogger_page? != current_user %>
+      <button class="btn left" id="subscribe">Subscribe</button>
     <% end %>
 
     <% if !logged_in? %>
@@ -22,8 +22,12 @@
   </div>
 
   <% if !logged_in? %>
-    <div class="sign_up_form">
+    <div class="sign_up_form form">
       <%= form_for new_blogger do |f| %>
+        <div>
+          <%= f.label :username %>:
+          <%= f.text_field :username %>
+        </div>
         <div>
           <%= f.label :email %>:
           <%= f.text_field :email %>
@@ -40,7 +44,7 @@
       <% end %>
     </div>
 
-    <div class="sign_in_form">
+    <div class="sign_in_form form">
       <%= form_tag blogger_sessions_path, method: :post do |f| %>
         <div>
           <%= label_tag :email %>:
@@ -55,8 +59,8 @@
     </div>
   <% end %>
 
-  <% if on_blogger_page? %>
-    <div id="subscribe_form">
+  <% if on_blogger_page? && on_blogger_page? != current_user %>
+    <div id="subscribe_form form">
       <%= form_for [@blogger, new_subscriber] do |f| %>
         <%= f.label :email %>:
         <%= f.text_field :email %>

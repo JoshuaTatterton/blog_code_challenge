@@ -1,5 +1,5 @@
 feature "subscriber" do
-  let!(:blogger) { Blogger.create(email: "example@email.com", password: "randomletters") }
+  let!(:blogger) { Blogger.create(username: "MyUsername", email: "example@email.com", password: "randomletters") }
 
   before(:each) do
     visit "/bloggers/#{blogger.id}/articles"
@@ -28,7 +28,7 @@ feature "subscriber" do
 
       visiter_subscribe
 
-      expect(current_path).to eq "/bloggers/#{blogger.id}/articles/example-title"
+      expect(current_path).to eq "/bloggers/#{blogger.slug}/articles/example-title"
     end
   end
   
