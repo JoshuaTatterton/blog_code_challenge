@@ -1,6 +1,6 @@
 class BloggersController < ApplicationController
   def index
-    @bloggers = Blogger.all.reverse
+    @bloggers = Blogger.all.order('updated_at DESC')
   end
 
   def create

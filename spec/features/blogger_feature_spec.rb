@@ -1,12 +1,46 @@
 feature "blogger" do
-  
+
+  scenario "it displays message if there are no bloggers" do
+    visit "/"
+
+    expect(page).to have_content "Oops no bloggers are here"
+    expect(page).to have_content "Why don't you become the first blogger"
+  end
+
   context "on the home page" do
+
+    let!(:blogger) { Blogger.create(username: "My Username", email: "example@email.com", password: "randomletters") }
+    
     scenario "there is a list of bloggers" do
+      Blogger.create(username: "Username", email: "example@email.co.uk", password: "randomletters")
+      
       visit "/"
 
-      expect(page)
+      expect(page).to have_link "My Username"
+      expect(page).to have_link "Username"
     end
+
+    scenario "it displays the bloggers last article" do
+      article1 = blogger.articles.create(title: "Example Title", content: "Don't show me!!")
+      article2 = blogger.articles.create(title: "Another Title", content: "Show Me!!")
+      
+      visit "/"
+
+      expect(page).not_to have_content article1.title
+      expect(page).to have_content article2.title
+
+      expect(page).not_to have_content article1.content
+      expect(page).to have_content article2.content
+    end
+
+    scenario "it displays message if there are no bloggers" do
+      visit "/"
+
+      expect(page).to have_content "Oops this blogger has not posted anything yet."
+    end
+    
   end
+
   scenario "a bloggers url has their username in it" do
     Blogger.create(username: "My Username", email: "example@email.com", password: "randomletters")
     visit "/"
@@ -15,6 +49,7 @@ feature "blogger" do
 
     expect(current_path).to eq "/bloggers/my-username/articles"
   end
+
   context "a prospective blogger" do
     scenario "can sign up", js: true do
       visit "/"

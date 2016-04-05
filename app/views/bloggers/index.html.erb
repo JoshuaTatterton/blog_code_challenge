@@ -1,5 +1,42 @@
-<% if @bloggers %>
+<div class="t_title">Recent Blogger Activity:</div>
+<% if @bloggers != [] %>
   <% @bloggers.each do |blogger| %>
-    <%= link_to blogger.username, blogger_articles_path(blogger) %>
+
+    <div class="container" id="<%= dom_id(blogger) %>">
+      
+      <div class="head">
+        <div class="t_username">
+          <%= link_to blogger.username, blogger_articles_path(blogger), class: "btn" %>
+        </div>
+
+        <% if blogger.last_article %>
+
+          <div class="t_title">
+            <%= blogger.last_article.title %>
+          </div>
+      </div>
+
+          <div class="t_content">
+            <%= markdown blogger.last_article.content %>
+          </div>
+
+        <% else %>
+
+            <div class="t_title">
+              Oops this blogger has not posted anything yet.
+            </div>
+          </div>
+        <% end %>
+
+    </div>
+
   <% end %>
+<% else %>
+
+  <div class="container">
+    <div>Oops no bloggers are here.</div>
+
+    <div>Why don't you become the first blogger.</div>
+  </div>
+
 <% end %>

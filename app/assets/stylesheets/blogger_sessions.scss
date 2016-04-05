@@ -1,3 +1,35 @@
 // Place all the styles related to the BloggerSessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+::-webkit-scrollbar { 
+    display: none; 
+}
+.blogger_container {
+  
+}
+.head {
+  display: flex;
+  width: 95%;
+  height: auto;
+  margin: 0 auto;
+  padding: 0 3px;
+  text-align: left;
+}
+.t_username {
+  display: inline-block;
+  width: auto;
+}
+.t_title {
+  flex-grow: 2;
+  align-self: center;
+  text-align: center;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.t_content {
+  width: 80%;
+  height: auto;
+  max-height: 150px;
+  margin: 0 auto;
+  overflow: scroll;
+}

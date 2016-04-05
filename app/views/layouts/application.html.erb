@@ -60,7 +60,7 @@
   <% end %>
 
   <% if on_blogger_page? && on_blogger_page? != current_user %>
-    <div id="subscribe_form form">
+    <div class="subscribe_form form form_left">
       <%= form_for [@blogger, new_subscriber] do |f| %>
         <%= f.label :email %>:
         <%= f.text_field :email %>

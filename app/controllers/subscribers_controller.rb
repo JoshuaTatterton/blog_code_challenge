@@ -1,8 +1,4 @@
 class SubscribersController < ApplicationController
-
-  def new
-    Subscriber.new
-  end
   
   def create
     blogger = Blogger.find(params[:blogger_id])
@@ -14,11 +10,9 @@ class SubscribersController < ApplicationController
   end
 
   def destroy
-    sub = Subscriber.find(params[:id])
-    
-    sub.destroy
+    Subscriber.find(params[:id]).destroy
 
-    redirect_to articles_path
+    redirect_to blogger_articles_path(Blogger.find(params[:blogger_id]))
   end
 
   private

@@ -13,4 +13,8 @@ class Blogger < ActiveRecord::Base
   extend FriendlyId
   friendly_id :username, use: [:slugged, :finders]
 
+  def last_article
+    articles.last
+  end
+
 end

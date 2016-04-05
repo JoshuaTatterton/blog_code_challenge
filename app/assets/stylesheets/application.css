@@ -25,3 +25,7 @@
   background-color: #D0D0D0;
   position: absolute;
 }
+
+.form_left {
+  left: 5%;
+}

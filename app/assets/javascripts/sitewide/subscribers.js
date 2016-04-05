@@ -1,12 +1,12 @@
 var ready = function() {
 
-  $("#subscribe_form").hide()
+  $(".subscribe_form").hide()
 
   $("#subscribe").click(function() {
-    if ($("#subscribe_form").css("display") == "none") {
-      $("#subscribe_form").show();
+    if ($(".subscribe_form").css("display") == "none") {
+      $(".subscribe_form").show();
     } else {
-      $("#subscribe_form").hide();
+      $(".subscribe_form").hide();
     }
   });
 
