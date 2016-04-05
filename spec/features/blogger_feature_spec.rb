@@ -1,10 +1,26 @@
 feature "blogger" do
 
-  scenario "it displays message if there are no bloggers" do
+  scenario "displays message if there are no bloggers" do
     visit "/"
 
     expect(page).to have_content "Oops no bloggers are here"
     expect(page).to have_content "Why don't you become the first blogger"
+  end
+
+  scenario "has a button in the nav bar to take a blogger to their page", js: true do
+    visit "/"
+
+    expect(page).not_to have_link "My Blog"
+
+    sign_up
+
+    visit "/"
+
+    expect(page).to have_link "My Blog"
+
+    click_link "My Blog"
+
+    expect(current_path).to eq "/bloggers/#{Blogger.last.slug}/articles"
   end
 
   context "on the home page" do

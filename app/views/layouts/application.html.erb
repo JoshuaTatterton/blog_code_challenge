@@ -17,6 +17,7 @@
       <button class="btn" id="sign_in">Sign In</button>
     <% else %>
       <%= link_to "Sign Out", :sign_out, method: :post, class: "btn" %>
+      <%= link_to "My Blog", blogger_articles_path(current_user), class: "btn" %>
     <% end %>
     <%= link_to "Home", root_path, class: "btn" %>  
   </div>
