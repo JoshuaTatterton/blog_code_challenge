@@ -1,3 +1,7 @@
-# uri = request.original_url
 
-# $redis = Redis.new(:host => uri, :port => 6379)
+if ENV["REDISCLOUD_URL"]
+  uri = URI.parse(ENV["REDISCLOUD_URL"])
+  $redis = Redis.new(:host => uri.host, :port => uri.port, :password => uri.password)
+else
+  $redis = Redis.new(:url => "redis://localhost:6379/")
+end
