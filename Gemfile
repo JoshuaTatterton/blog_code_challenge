@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 gem 'puma'
 
 gem 'redcarpet'
+gem 'ckeditor'
+
 gem 'friendly_id', '~> 5.1.0'
 
 gem 'sorcery'

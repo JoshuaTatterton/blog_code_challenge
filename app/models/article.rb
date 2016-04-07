@@ -8,4 +8,11 @@ class Article < ActiveRecord::Base
   extend FriendlyId
   friendly_id :title, use: [:slugged, :finders]
 
+  def markdown?
+    option == "markdown"
+  end
+
+  def wysiwyg?
+    option == "wysiwyg"
+  end
 end

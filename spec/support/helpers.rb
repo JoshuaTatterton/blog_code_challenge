@@ -11,9 +11,12 @@ module Helpers
 
   def write_article
     click_button "new_article"
-    fill_in "article_title", with: "Example Title"
-    fill_in "article_content", with: "Hello World!!"
-    click_button "Post Article"
+    within(".article_writer") do
+      fill_in "article_title", with: "Example Title"
+      choose "article_option_markdown"
+      fill_in "article_content", with: "Hello World!!"
+      click_button "Post Article"
+    end
   end
 
   def edit_article
@@ -58,6 +61,14 @@ module Helpers
       fill_in "Password confirmation", with: options[:password_confirmation]
       click_button "Sign Up"
     end
+  end
+
+  def fill_in_ckeditor(locator, opts)
+    content = opts.fetch(:with).to_json
+    page.execute_script <<-SCRIPT
+      CKEDITOR.instances['#{locator}'].setData(#{content});
+      $('textarea##{locator}').text(#{content});
+    SCRIPT
   end
 
 end

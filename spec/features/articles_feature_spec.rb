@@ -26,6 +26,7 @@ feature "blog" do
     scenario "articles can be written", js: true do
       click_button "new_article"
       fill_in "article_title", with: "Example Title"
+      choose "article_option_markdown"
       fill_in "article_content", with: "Hello World!!"
       click_button "Post Article"
 
@@ -40,8 +41,10 @@ feature "blog" do
 
       scenario "edited", js: true do
         click_button "Edit Article - Example Title"
-        fill_in "article_content", with: "Hello New World!!"
-        click_button "Edit Article"
+        within(".article_editor") do
+          fill_in "article_content", with: "Hello New World!!"
+          click_button "Edit Article"
+        end
 
         expect(page).to have_content "Hello New World!!"
       end
@@ -116,7 +119,57 @@ feature "blog" do
       end
     end
   end
+  context "articles can be written in" do
+    before(:each) do
+      visit "/"
 
+      sign_up
+
+      click_button "new_article"
+    end
+
+    scenario "markdown", js: true do
+      fill_in "article_title", with: "Example Title"
+
+      expect(page).not_to have_field "article_content", type: "textarea"
+      expect(page).not_to have_css "#cke_wysiwyg_content"
+
+      choose "article_option_markdown"
+
+      expect(page).to have_field "article_content", type: "textarea"
+      expect(page).not_to have_css "#cke_wysiwyg_content"
+
+      fill_in "article_content", with: "Hello World!!"
+      click_button "Post Article"
+
+      expect(page).to have_content "Hello World!!"
+    end
+
+    scenario "WYSIWYG", js: true do
+      fill_in "article_title", with: "Example Title"
+
+      expect(page).not_to have_field "article_content", type: "textarea"
+      expect(page).not_to have_css "#cke_wysiwyg_content"
+      
+      choose "article_option_wysiwyg"
+
+      expect(page).not_to have_field "article_content", type: "textarea"
+      expect(page).to have_css "#cke_wysiwyg_content"
+
+      fill_in_ckeditor "wysiwyg_content", with: "Hello World!!"
+      click_button "Post Article"
+      wait(10.seconds)
+
+      Capybara.ignore_hidden_elements = false
+
+      within("#display") do
+        expect(page).to have_content "Hello World!!"
+      end
+
+      Capybara.ignore_hidden_elements = true
+    end
+  end
+  
   context "emails are sent to subscribers" do
     scenario " when a new article is posted", js: true do
       allow_run_sidekiq
@@ -126,7 +179,7 @@ feature "blog" do
       sign_up
       click_link "Sign Out"
 
-      visit "/bloggers/#{Blogger.last.id}/articles"
+      visit "/bloggers/#{Blogger.last.slug}/articles"
 
       visiter_subscribe
 
@@ -146,6 +199,7 @@ feature "blog" do
     scenario "title is empty", js: true do
       click_button "new_article"
       fill_in "article_title", with: ""
+      choose "article_option_markdown"
       fill_in "article_content", with: "Hello World!!"
       click_button "Post Article"
 

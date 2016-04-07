@@ -1,5 +1,10 @@
-<div id="article_display_<%= article.id %>">
-  <%= markdown article.content %>
+<div class="article_display" id="article_display_<%= article.id %>">
+  
+  <% if article.wysiwyg? %>
+    <textarea id="display" class="<%= article.id %>"><%= article.wysiwyg_content %></textarea>
+  <% else %>
+    <%= markdown article.content %>
+  <% end %>
 
   <% if current_user == @blogger %>
     <button class="edit_button btn" id="<%= article.id %>">
