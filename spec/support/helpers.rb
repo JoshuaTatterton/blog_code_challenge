@@ -9,12 +9,17 @@ module Helpers
     end
   end
 
-  def write_article
+  def write_article(options={})
+    options[:option] ||= "markdown"
     click_button "new_article"
     within(".article_writer") do
       fill_in "article_title", with: "Example Title"
-      choose "article_option_markdown"
-      fill_in "article_content", with: "Hello World!!"
+      choose "article_option_#{options[:option]}"
+      if options[:option] == "markdown"
+        fill_in "article_content", with: "Hello World!!"
+      elsif options[:option] == "wysiwyg"
+        fill_in_ckeditor "wysiwyg_content", with: "Hello World!!"
+      end
       click_button "Post Article"
     end
   end

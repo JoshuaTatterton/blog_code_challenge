@@ -15,8 +15,12 @@
 
 <div class="article_editor" id="article_editor_<%= article.id %>">
   <%= form_for [@blogger, article] do |f| %>
-    <div>
-      <%= f.text_area(:content, size: "48x12") %>
+    <div class="content_container">
+      <% if article.wysiwyg? %>
+        <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content_#{article.id}", ckeditor: { toolbar: "custom" } } %>
+      <% else %>
+        <%= f.text_area(:content, size: "57x12") %>
+      <% end %>
     </div>
     <%= f.submit "Edit Article", class: "btn" %>
     <%= link_to "Delete Article", blogger_article_path(@blogger, article), class: "btn", method: :delete %>

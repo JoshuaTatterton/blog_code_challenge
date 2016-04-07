@@ -34,7 +34,7 @@ feature "blog" do
       expect(page).to have_content "Hello World!!"
     end
 
-    context "articles can be" do
+    context "articles written in markdown can be" do
       before(:each) do
         write_article
       end
@@ -43,6 +43,30 @@ feature "blog" do
         click_button "Edit Article - Example Title"
         within(".article_editor") do
           fill_in "article_content", with: "Hello New World!!"
+          click_button "Edit Article"
+        end
+
+        expect(page).to have_content "Hello New World!!"
+      end
+
+      scenario "deleted", js: true do
+        click_button "Edit Article - Example Title"
+        click_link "Delete Article"
+
+        expect(page).not_to have_content "Hello World!!"
+      end
+    end
+
+    context "articles written in wysiwyg can be" do
+      before(:each) do
+        write_article(option: "wysiwyg")
+      end
+
+      scenario "edited", js: true do
+
+        click_button "Edit Article - Example Title"
+        within(".article_editor") do
+          fill_in_ckeditor "wysiwyg_content_#{Article.last.id}", with: "Hello New World!!"
           click_button "Edit Article"
         end
 

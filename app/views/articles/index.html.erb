@@ -16,7 +16,7 @@
           <%= f.radio_button :option, "wysiwyg" %>
           <%= f.label :option, ":WYSIWYG" %>
         </div>
-        <div class="article_display" id="wysiwig_content_container">
+        <div class="content_container" id="wysiwig_content_container">
           <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content", ckeditor: { toolbar: "custom" } } %>
         </div>
         <div id="markdown_content_container">
