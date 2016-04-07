@@ -17,7 +17,12 @@
       </div>
 
           <div class="t_content">
-            <%= markdown blogger.last_article.content %>
+            <% if blogger.last_article.wysiwyg? %>
+              <%= blogger.last_article.wysiwyg_content.html_safe %>
+            <% else %>
+              <%= markdown blogger.last_article.content %>
+            <% end %>
+            
           </div>
 
         <% else %>
