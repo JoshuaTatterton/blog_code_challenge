@@ -17,7 +17,7 @@
           <%= f.label :option, ":WYSIWYG" %>
         </div>
         <div class="article_display" id="wysiwig_content_container">
-          <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content", ckeditor: { toolbar: "josh" } } %>
+          <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content", ckeditor: { toolbar: "custom" } } %>
         </div>
         <div id="markdown_content_container">
           <%= f.text_area(:content, size: "57x12") %>

@@ -3,7 +3,7 @@ CKEDITOR.editorConfig = function (config) {
   // ... other configuration ...
   config.height = 150;
 
-  config.toolbar_josh = [
+  config.toolbar_custom = [
     { items: ["Bold",  "Italic",  "Underline",  "Strike",  "-",  "Subscript",  "Superscript"] }, 
     { groups: [ 'clipboard', 'undo' ] },
     { items: [ 'Scayt', 'SpecialChar' ] },
@@ -12,9 +12,6 @@ CKEDITOR.editorConfig = function (config) {
     { items: [ 'Format', 'Font', 'FontSize' ] }
   ];
   config.toolbar = "simple";
-
-  config.toolbar_none = [
-  ];
 
   // Define changes to default configuration here. For example:
   // config.language = 'fr';

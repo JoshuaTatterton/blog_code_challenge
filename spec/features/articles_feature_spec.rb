@@ -158,15 +158,10 @@ feature "blog" do
 
       fill_in_ckeditor "wysiwyg_content", with: "Hello World!!"
       click_button "Post Article"
-      wait(10.seconds)
 
-      Capybara.ignore_hidden_elements = false
-
-      within("#display") do
+      within(".article_display") do
         expect(page).to have_content "Hello World!!"
       end
-
-      Capybara.ignore_hidden_elements = true
     end
   end
   

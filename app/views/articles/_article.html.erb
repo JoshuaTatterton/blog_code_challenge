@@ -1,7 +1,7 @@
 <div class="article_display" id="article_display_<%= article.id %>">
   
   <% if article.wysiwyg? %>
-    <textarea id="display" class="<%= article.id %>"><%= article.wysiwyg_content %></textarea>
+    <%= article.wysiwyg_content.html_safe %>
   <% else %>
     <%= markdown article.content %>
   <% end %>
