@@ -23,6 +23,28 @@ feature "blogger" do
     expect(current_path).to eq "/bloggers/#{Blogger.last.slug}/articles"
   end
 
+  context "in the nav bar" do
+    let!(:blogger) { Blogger.create(username: "My Username", email: "example@email.com", password: "randomletters") }
+
+    scenario "there are buttons to do things" do
+      visit "/bloggers/my-username/articles"
+      within(".nav_bar") do
+        expect(page).to have_button "Subscribe"
+        expect(page).to have_link "Home"
+        expect(page).to have_button "Sign In"
+        expect(page).to have_button "Sign Up"
+      end
+      sign_up
+      visit "/bloggers/my-username/articles"
+      within(".nav_bar") do
+        expect(page).to have_button "Subscribe"
+        expect(page).to have_link "Home"
+        expect(page).to have_link "My Blog"
+        expect(page).to have_link "Sign Out"
+      end
+    end
+  end
+
   context "on the home page" do
 
     let!(:blogger) { Blogger.create(username: "My Username", email: "example@email.com", password: "randomletters") }
