@@ -22,15 +22,19 @@
 
     <div class="sub_nav">
       <% if logged_in? %>
+
         <button class="btn" id="subscribe">
           <% if on_blogger_page? && on_blogger_page? != current_user && logged_in? %>
             Subscribe
           <% end %>
         </button>
         <%= link_to "Sign Out", :sign_out, method: :post, class: "btn" %>
+
       <% else %>
+
         <button class="btn" id="sign_up">Sign Up</button>
-        <button class="btn" id="sign_in">Sign In</button> 
+        <button class="btn" id="sign_in">Sign In</button>
+
       <% end %>
     </div>
 
@@ -38,61 +42,73 @@
 
   <% if !logged_in? %>
     <div class="sign_up_form form">
-      <%= form_for new_blogger do |f| %>
-        <div>
-          <%= f.label :username %>:
-          <%= f.text_field :username %>
-        </div>
-        <div>
-          <%= f.label :email %>:
-          <%= f.text_field :email %>
-        </div>
-        <div>
-          <%= f.label :password %>:
-          <%= f.password_field :password %>
-        </div>
-        <div>
-          <%= f.label :password_confirmation %>:
-          <%= f.password_field :password_confirmation %>
-        </div>
-        <%= f.submit "Sign Up", class: "btn" %>
-      <% end %>
+      <div class="form_container">
+        <%= form_for new_blogger do |f| %>
+          <div class="form_item">
+            <%= f.label :username %>:
+            <%= f.text_field :username %>
+          </div>
+          <div class="form_item">
+            <%= f.label :email %>:
+            <%= f.text_field :email %>
+          </div>
+          <div class="form_item">
+            <%= f.label :password %>:
+            <%= f.password_field :password %>
+          </div>
+          <div class="form_item long">
+            <div class="long_item">
+              <%= f.label :password_confirmation %>:
+            </div>
+            <div>
+              <%= f.password_field :password_confirmation %>
+            </div>
+          </div>
+          <%= f.submit "Sign Up", class: "btn" %>
+        <% end %>
+      </div>
     </div>
 
     <div class="sign_in_form form">
-      <%= form_tag blogger_sessions_path, method: :post do |f| %>
-        <div>
-          <%= label_tag :email %>:
-          <%= text_field_tag :email %>
-        </div>
-        <div>
-          <%= label_tag :password %>:
-          <%= password_field_tag :password %>
-        </div>
-        <%= submit_tag "Sign In", class: "btn" %>
-      <% end %>
+      <div class="form_container">
+        <%= form_tag blogger_sessions_path, method: :post do |f| %>
+          <div class="form_item">
+            <%= label_tag :email %>:
+            <%= text_field_tag :email %>
+          </div>
+          <div class="form_item">
+            <%= label_tag :password %>:
+            <%= password_field_tag :password %>
+          </div>
+          <%= submit_tag "Sign In", class: "btn" %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 
   <% if on_blogger_page? && on_blogger_page? != current_user %>
-    <div class="subscribe_form form left">
-      <%= form_for [@blogger, new_subscriber] do |f| %>
-        <div>
-          <%= f.label :email %>:
-          <%= f.text_field :email %>
-        </div>
-        <%= f.submit "Subscribe", class: "btn" %>
-      <% end %>
+    <div class="subscribe_form form">
+      <div class="form_container">
+        <%= form_for [@blogger, new_subscriber] do |f| %>
+          <div class="form_item">
+            <%= f.label :email %>:
+            <%= f.text_field :email %>
+          </div>
+          <%= f.submit "Subscribe", class: "btn" %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 
-  <% flash.each do |type, message| %>
-    <div class="alert flash <%= type %>">
-      <%= message %>
-    </div>
-  <% end %>
+  
 
   <div class="main">
+    <% flash.each do |type, message| %>
+      <div class="alert flash <%= type %>">
+        <%= message %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </div>
 
