@@ -44,8 +44,10 @@ module Helpers
 
   def visiter_subscribe
     click_button "Subscribe"
-    fill_in "subscriber_email", with: "example@email.co.uk"
-    click_button "Become a Subscriber"
+    within(".subscribe_form") do
+      fill_in "subscriber_email", with: "example@email.co.uk"
+      click_button "Subscribe"
+    end
   end
 
   def allow_run_sidekiq

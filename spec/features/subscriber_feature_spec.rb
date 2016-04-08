@@ -9,7 +9,9 @@ feature "subscriber" do
     click_button "Subscribe"
     fill_in "subscriber_email", with: "example@email.co.uk"
 
-    expect { click_button "Become a Subscriber" }.to change(Subscriber, :count).by(1)
+    within(".subscribe_form") do
+      expect { click_button "Subscribe" }.to change(Subscriber, :count).by(1)
+    end
   end
 
   context "after subscribing visiter returns to the" do
@@ -34,7 +36,9 @@ feature "subscriber" do
   
   scenario "raises error when no email is entered", js: true do
     click_button "Subscribe"
-    click_button "Become a Subscriber"
+    within(".subscribe_form") do
+      click_button "Subscribe"
+    end
     
     expect(page).to have_content "Email can't be blank"
   end

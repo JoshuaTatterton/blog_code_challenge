@@ -8,18 +8,32 @@
 </head>
 <body>
   <div class="nav_bar">
-    <% if on_blogger_page? && on_blogger_page? != current_user %>
-      <button class="btn left" id="subscribe">Subscribe</button>
-    <% end %>
 
-    <% if !logged_in? %>
-      <button class="btn" id="sign_up">Sign Up</button>
-      <button class="btn" id="sign_in">Sign In</button>
-    <% else %>
-      <%= link_to "Sign Out", :sign_out, method: :post, class: "btn" %>
-      <%= link_to "My Blog", blogger_articles_path(current_user), class: "btn" %>
-    <% end %>
-    <%= link_to "Home", root_path, class: "btn" %>  
+    <div class="sub_nav">
+      <% if on_blogger_page? && on_blogger_page? != current_user && !logged_in? %>
+        <button class="btn" id="subscribe">Subscribe</button>
+      <% end %>
+      <%= link_to "Home", root_path, class: "btn" %> 
+
+      <% if logged_in? %>
+        <%= link_to "My Blog", blogger_articles_path(current_user), class: "btn" %>
+      <% end %>
+    </div>
+
+    <div class="sub_nav">
+      <% if logged_in? %>
+        <button class="btn" id="subscribe">
+          <% if on_blogger_page? && on_blogger_page? != current_user && logged_in? %>
+            Subscribe
+          <% end %>
+        </button>
+        <%= link_to "Sign Out", :sign_out, method: :post, class: "btn" %>
+      <% else %>
+        <button class="btn" id="sign_up">Sign Up</button>
+        <button class="btn" id="sign_in">Sign In</button> 
+      <% end %>
+    </div>
+
   </div>
 
   <% if !logged_in? %>
@@ -41,7 +55,7 @@
           <%= f.label :password_confirmation %>:
           <%= f.password_field :password_confirmation %>
         </div>
-        <%= f.submit "Sign Up", class: "subscribe" %>
+        <%= f.submit "Sign Up", class: "btn" %>
       <% end %>
     </div>
 
@@ -55,17 +69,19 @@
           <%= label_tag :password %>:
           <%= password_field_tag :password %>
         </div>
-        <%= submit_tag "Sign In", class: "subscribe" %>
+        <%= submit_tag "Sign In", class: "btn" %>
       <% end %>
     </div>
   <% end %>
 
   <% if on_blogger_page? && on_blogger_page? != current_user %>
-    <div class="subscribe_form form form_left">
+    <div class="subscribe_form form left">
       <%= form_for [@blogger, new_subscriber] do |f| %>
-        <%= f.label :email %>:
-        <%= f.text_field :email %>
-        <%= f.submit "Become a Subscriber", class: "subscribe" %>
+        <div>
+          <%= f.label :email %>:
+          <%= f.text_field :email %>
+        </div>
+        <%= f.submit "Subscribe", class: "btn" %>
       <% end %>
     </div>
   <% end %>
