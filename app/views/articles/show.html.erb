@@ -1,6 +1,6 @@
-<div class="container">
+<div class="whole_article">
 
-  <div class="article_title" ><%= @article.title %></div>
+  <div class="title" ><%= @article.title %></div>
 
   <%= render partial: "article", locals: { article: @article } %>
 
@@ -16,21 +16,27 @@
     </div>
     <div>  
       <%= f.label :comment %>:
-      <%= 
-      f.text_area(:content, size: "48x6") %>
+      <%= f.text_area(:content, size: "48x6") %>
     </div>
     <%= f.submit "Post Comment", class: "btn" %>
   <% end %>
 </div>
 
-<div>
+<table class="comments">
   <% @comments.each do |comment| %>
-    <div>
-      <%= comment.name %>: <%= comment.content %>
-      commented on: <%= comment.created_at.strftime("%H:%M on %e/%-m/%y") %>
-      <% if current_user == @blogger %>
-        <%= link_to "Delete Comment", blogger_article_comment_path(@blogger, @article, comment), method: :delete, class: "btn" %>
-      <% end %>
-    </div>
+    <tr>
+      <td class="comment_head">
+        <%= comment.name %>:
+      </td>
+      <td class="comment_main">
+        <%= comment.content %>
+      </td>
+      <td class="comment_sub">
+        <%= comment.created_at.strftime("%e/%-m/%y at %H:%M") %>
+        <% if current_user == @blogger %>
+          <%= link_to "Delete", blogger_article_comment_path(@blogger, @article, comment), method: :delete, class: "btn" %>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
 </div>

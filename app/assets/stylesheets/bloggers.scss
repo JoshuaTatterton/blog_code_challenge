@@ -2,40 +2,35 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-::-webkit-scrollbar { 
-    display: none; 
-}
 .blogger_container {
   width: 100%;
   padding: 1em 0;
   border-bottom: solid 0.1em black;
 }
+
+.blogger_container .btn, 
+.blogger_container .btn:link, 
+.blogger_container .btn:visited {
+  margin: 0.6em auto;
+}
+
 .head {
   display: flex;
+  flex-direction: column;
   width: 95%;
   height: auto;
   margin: 0 auto;
-  padding: 0 3px;
-  text-align: left;
-}
-.t_username {
-  display: inline-block;
-  width: auto;
-}
-.t_title {
-  flex-grow: 2;
-  align-self: center;
   text-align: center;
-  
 }
-.t_content {
-  width: 80%;
+.blogger_container .title {
+  font-size: 1em;
+}
+.content {
+  width: 90%;
+  font-size: 0.75em;
   height: auto;
-  max-height: 150px;
+  max-height: 8em;
   margin: 0 auto;
   overflow: scroll;
 }
-.title {
-  font-weight: bold;
-  text-decoration: underline;
-}
+

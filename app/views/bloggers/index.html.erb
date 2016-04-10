@@ -5,17 +5,17 @@
     <div class="blogger_container" id="<%= dom_id(blogger) %>">
       <% if blogger.last_article %>
         <div class="head">
-          <div class="t_username">
-            <%= link_to blogger.username, blogger_articles_path(blogger), class: "btn" %>
+          <div class="username">
+            Blogger: <%= link_to blogger.username, blogger_articles_path(blogger), class: "btn" %>
           </div>
 
-          <div class="t_title title">
+          <div class="title">
             <%= blogger.last_article.title %>
           </div>
 
         </div>
 
-        <div class="t_content">
+        <div class="content">
           <% if blogger.last_article.wysiwyg? %>
             <%= blogger.last_article.wysiwyg_content.html_safe %>
           <% else %>
@@ -27,14 +27,14 @@
       <% else %>
         <div class="head">
           
-          <div class="t_title">
-            <%= link_to blogger.username, blogger_articles_path(blogger), class: "btn" %>
+          <div>
+            Blogger: <%= link_to blogger.username, blogger_articles_path(blogger), class: "btn" %>
           </div>
 
         </div>
 
-        <div class="t_content title">
-          Oops this blogger has not posted anything yet.
+        <div class="content title">
+          <%= blogger.username %> recently signed up but has not posted anything yet.
         </div>
       <% end %>
 

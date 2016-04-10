@@ -71,10 +71,10 @@ feature "blogger" do
       expect(page).to have_content article2.content
     end
 
-    scenario "it displays message if there are no bloggers" do
+    scenario "it displays message if bloggers blogger has posted no articles" do
       visit "/"
 
-      expect(page).to have_content "Oops this blogger has not posted anything yet."
+      expect(page).to have_content "#{blogger.username} recently signed up but has not posted anything yet."
     end
     
   end

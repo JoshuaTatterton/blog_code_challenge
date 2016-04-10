@@ -19,7 +19,7 @@
       <% if article.wysiwyg? %>
         <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content_#{article.id}", ckeditor: { toolbar: "custom" } } %>
       <% else %>
-        <%= f.text_area(:content, size: "57x12") %>
+        <%= f.text_area(:content, class: "markdown_text_editor") %>
       <% end %>
     </div>
     <%= f.submit "Edit Article", class: "btn" %>

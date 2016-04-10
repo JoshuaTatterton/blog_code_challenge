@@ -17,8 +17,12 @@
 body {
   margin-top: 8em;
   text-align: center;
-  font-size: 1em;
+  font-size: 1.5em;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.flash_messages {
+  color: red;
 }
 
 .nav_bar {
@@ -40,20 +44,41 @@ body {
   display: flex;
 }
 
-.nav_bar .btn, .btn:link, .btn:visited {  
+.btn, .btn:link, .btn:visited {
+  display: inline-block;
+  background-color: white;
+  font-size: 1em;
+  color: black;
+  padding: 0.075em 0.4em;
+  border-style: solid;
+  border-width: 0.1em;
+  border-color: black;
+  vertical-align: middle;
+  text-decoration: none;
+  text-align: center;
+}
+.btn:hover {
+  background-color: black;
+  color: white;
+}
+.btn:active {
+  background-color: white;
+  color: black;
+}
+
+.nav_bar .btn, .nav_bar .btn:link, .nav_bar .btn:visited {  
   flex: 1;
   display: inline-block;
   height: 100%;
-  padding: 0 0.5em;
+  padding: none;
   border: none;
-  float: right;
   background-color: inherit;
   color: inherit;
   font-size: 1.5em;
   text-decoration: none;
   vertical-align: center;
 }
-.nav_bar .btn:link, .btn:visited {  
+.nav_bar .btn:link, .nav_bar .btn:visited {  
   color: inherit;
   line-height: 2.7em;
 }
@@ -128,6 +153,17 @@ body {
   width: 100%;
   display: inline-block;
 }
+
+.title {
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 1.25em;
+}
+
+::-webkit-scrollbar { 
+  display: vertical; 
+}
+
 @media only screen and (min-width: 426px) {
   body {
     background-color: blue;

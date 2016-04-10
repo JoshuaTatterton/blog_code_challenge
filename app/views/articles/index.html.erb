@@ -2,7 +2,7 @@
   <div>
     <button class="btn" id="new_article">New Article</button>
     
-    <div class="article_writer container">
+    <div class="article_writer article_container">
       <%= form_for [@blogger, @article] do |f| %>
         <div>
           <%= f.label :title %>
@@ -20,7 +20,7 @@
           <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content", ckeditor: { toolbar: "custom" } } %>
         </div>
         <div id="markdown_content_container">
-          <%= f.text_area(:content, size: "57x12") %>
+          <%= f.text_area(:content, class: "markdown_text_area") %>
         </div>
         <%= f.submit "Post Article", class: "btn" %>
       <% end %>
@@ -30,7 +30,7 @@
 
 <% if @articles != [] %>
   <% @articles.each do |a| %>
-    <div class="container">
+    <div class="article_container">
       <%= link_to "#{a.title}", blogger_article_path(@blogger, a), class: "btn" %>
 
       <%= render partial: "article", locals: { article: a } %>

@@ -36,7 +36,7 @@ feature "comment" do
 
       visit "/bloggers/#{@blogger.id}/articles/example-title"
 
-      click_link "Delete Comment"
+      click_link "Delete"
 
       expect(page).not_to have_content "MyName:"
       expect(page).not_to have_content "I like this"
@@ -48,8 +48,9 @@ feature "comment" do
       click_link "Sign Out"
 
       visit "/bloggers/#{@blogger.id}/articles/example-title"
-
-      expect(page).not_to have_link "Delete Comment"
+      within(".comments") do
+        expect(page).not_to have_link "Delete"
+      end
     end
   end
   
