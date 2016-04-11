@@ -10,17 +10,23 @@
 
 <div class="comment_new">
   <%= form_for [@blogger, @article, @comment] do |f| %>
-    <div class="label_container">
-      <%= f.label :name, class: "comment_label" %>:
-    </div>
-    <div class="input_container"> 
-      <%= f.text_field :name, class: "comment_input" %>
-    </div>
-    <div class=class="label_container">  
-      <%= f.label :comment, class: "comment_label"%>:
-    </div>
-    <div class="input_container"> 
-      <%= f.text_area :content, class: "comment_input comment_content" %>
+    <div class="comment_info_container">
+      <div class="comment_item">
+        <div class="label_container">
+          <%= f.label :name, class: "comment_label" %>:
+        </div>
+        <div class="input_container"> 
+          <%= f.text_field :name, class: "comment_input" %>
+        </div>
+      </div>
+      <div class="comment_item">
+        <div class="label_container">  
+          <%= f.label :comment, class: "comment_label"%>:
+        </div>
+        <div class="input_container"> 
+          <%= f.text_area :content, class: "comment_input comment_content" %>
+        </div>
+      </div>
     </div>
     <%= f.submit "Post Comment", class: "btn" %>
   <% end %>

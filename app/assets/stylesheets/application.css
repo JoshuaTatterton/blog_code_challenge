@@ -159,8 +159,24 @@ body {
 
 @media only screen and (min-width: 426px) {
   body {
-    background-color: blue;
-    font-size: 1.4em; 
+    margin-top: 3em;
+    font-size: 1.3em; 
+  }
+  .nav_bar {
+    width: 100%;
+    height: 3em;
+    flex-direction: row;
+  }
+  .sub_nav {
+    width: auto;
+    height: 100%;
+    flex: 2;
+  }
+  .take_flex {
+    flex: 1;
+  }
+  .form {
+    top: 3em;
   }
 }
 

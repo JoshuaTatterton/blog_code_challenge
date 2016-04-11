@@ -1,4 +1,10 @@
 var ready = function() {
+  
+  $(".sub_nav").each( function() {    
+    if ( $( this )[0].childElementCount == 1) {
+      $( this ).addClass("take_flex")
+    }
+  })
 
   $(".sign_up_form").hide();
   $(".sign_in_form").hide();

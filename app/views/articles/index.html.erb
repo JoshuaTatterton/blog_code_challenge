@@ -8,19 +8,26 @@
           <%= f.label :title %>
           <%= f.text_field :title %>
         </div>
-        <div>
-          What do you want to write your post in: 
-          <%= f.radio_button :option, "markdown" %>
-          <%= f.label :option, ":Markdown" %>
-          
-          <%= f.radio_button :option, "wysiwyg" %>
-          <%= f.label :option, ":WYSIWYG" %>
+        <div class="type_selector">
+          <div class="type_section">
+            What do you want to write your post in:
+          </div> 
+          <div class="radio_selectors">
+            <div class="type_section">
+              <%= f.radio_button :option, "markdown" %>
+              <%= f.label :option, ":Markdown" %>
+            </div>
+            <div class="type_section">
+              <%= f.radio_button :option, "wysiwyg" %>
+              <%= f.label :option, ":WYSIWYG" %>
+            </div>
+          </div>
         </div>
         <div class="content_container" id="wysiwig_content_container">
           <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content", ckeditor: { toolbar: "custom" } } %>
         </div>
-        <div id="markdown_content_container">
-          <%= f.text_area(:content, class: "markdown_text_area") %>
+        <div class="content_container" id="markdown_content_container">
+          <%= f.text_area(:content, class: "markdown_text_editor") %>
         </div>
         <%= f.submit "Post Article", class: "btn" %>
       <% end %>

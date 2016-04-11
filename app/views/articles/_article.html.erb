@@ -22,7 +22,13 @@
         <%= f.text_area(:content, class: "markdown_text_editor") %>
       <% end %>
     </div>
-    <%= f.submit "Edit Article", class: "btn" %>
-    <%= link_to "Delete Article", blogger_article_path(@blogger, article), class: "btn", method: :delete %>
+    <div class="submit_container">
+      <div class="submit_option">
+        <%= f.submit "Edit Article", class: "btn" %>
+      </div>
+      <div class="submit_option">
+        <%= link_to "Delete Article", blogger_article_path(@blogger, article), class: "btn", method: :delete %>
+      </div>
+    </div>
   <% end %>
 </div>
