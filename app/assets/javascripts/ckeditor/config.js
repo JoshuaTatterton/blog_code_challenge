@@ -9,7 +9,8 @@ CKEDITOR.editorConfig = function (config) {
     { items: [ 'Scayt', 'SpecialChar' ] },
     { items: [ 'TextColor' ] },
     { items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
-    { items: [ 'Format', 'Font', 'FontSize' ] }
+    { items: [ 'FontSize' ] },
+    { items: [ 'Format', 'Font' ] }
   ];
   config.toolbar = "simple";
 
