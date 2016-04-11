@@ -25,12 +25,15 @@
 .blogger_container .title {
   font-size: 1em;
 }
+
+.content::-webkit-scrollbar { 
+  display: none;
+}
 .content {
-  width: 90%;
+  width: 100%;
   font-size: 0.75em;
   height: auto;
   max-height: 8em;
-  margin: 0 auto;
   overflow: scroll;
 }
 

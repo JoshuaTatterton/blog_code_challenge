@@ -1,12 +1,12 @@
 var ready = function() {
 
-  $(".commenter").hide();
+  $(".comment_new").hide();
 
   $("#comment").click(function() {
-    if ($(".commenter").css("display") == "none") {
-      $(".commenter").show();
+    if ($(".comment_new").css("display") == "none") {
+      $(".comment_new").show();
     } else {
-      $(".commenter").hide();
+      $(".comment_new").hide();
     }
   });
 
