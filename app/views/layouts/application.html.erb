@@ -106,6 +106,10 @@
     </div>
   <% end %>
 
+  <%= form_tag search_path do |f| %>
+    <%= image_submit_tag asset_path("search.png"), id: "search_button" %>
+    <%= text_field_tag :search %>
+  <% end %>
   
 
   <div class="main">
