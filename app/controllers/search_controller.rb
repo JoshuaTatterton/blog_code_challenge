@@ -3,7 +3,9 @@ class SearchController < ApplicationController
   include SearchHelper
 
   def index
-    @results = search(params[:search]) if search_term?
+    puts params[:search]
+    @search_term = params[:search]
+    @results = search(@search_term) if search_term?
   end
 
   private

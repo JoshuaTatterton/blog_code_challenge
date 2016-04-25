@@ -18,6 +18,7 @@ feature "search" do
     fill_in "search", with: "content"
     click_button "search_button"
 
+    expect(page).to have_content "Search Results For \"content\":"
     expect(page).to have_content blogger.username
     expect(page).to have_content article.title
     expect(page).to have_content article.content
@@ -33,6 +34,7 @@ feature "search" do
     fill_in "search", with: "article"
     click_button "search_button"
 
+    expect(page).to have_content "Search Results For \"article\":"
     expect(page).to have_content blogger.username
     expect(page).to have_content article.title
     expect(page).to have_content article.content
@@ -48,6 +50,7 @@ feature "search" do
     fill_in "search", with: "this"
     click_button "search_button"
 
+    expect(page).to have_content "Search Results For \"this\":"
     expect(page).to have_content blogger.username
     expect(page).to have_content article.title
     expect(page).to have_content "This is some content"
@@ -56,7 +59,23 @@ feature "search" do
   scenario "displays message if no search term entered" do
     click_button "search_button"
 
+    expect(page).not_to have_content "Search Results For \"\":"
     expect(page).to have_content "Please enter word/phrase to search."
+  end
+
+  scenario "displays message if no results are found" do
+    fill_in "search", with: "this"
+    click_button "search_button"
+
+    expect(page).not_to have_content "Search Results For \"this\":"
+    expect(page).to have_content 'No results found for "this"'
+  end
+
+  scenario "it prefills the search bar with the search term" do
+    fill_in "search", with: "article"
+    click_button "search_button"
+
+    expect(page).to have_selector("input[value='article']")
   end
 
 end

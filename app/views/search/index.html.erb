@@ -1,7 +1,11 @@
-<% if search_term? %>
+<% if no_results? %>
 
+  No results found for "<%= previous_search %>"
+
+<% elsif search_term? %>
+  Search Results For "<%= previous_search %>":
   <% @results.each do |result| %>
-  
+
     <div>
       <%= result.title %>
       <% if result.wysiwyg? %>
