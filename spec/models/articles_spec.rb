@@ -20,4 +20,24 @@ describe Article, type: :model do
     expect(subject.markdown?).to be_falsey
   end
 
+  context "can display the search content" do
+    it "for when it is markdown content" do
+      subject = Article.create(title: "Example Title", content: "Don't show me!!", option: "markdown")
+
+      expect(subject.search_content).to eq subject.content.downcase.gsub(" ", "")
+    end
+
+    it "for when it is wysiwyg content" do
+      subject = Article.create(title: "Example Title", wysiwyg_content: "Don't show me!!", option: "wysiwyg")
+
+      expect(subject.search_content).to eq subject.wysiwyg_content.downcase.gsub(" ", "")
+    end
+  end
+
+  it "can display the search title" do
+    subject = Article.create(title: "Example Title", wysiwyg_content: "Don't show me!!", option: "wysiwyg")
+
+    expect(subject.search_title).to eq subject.title.downcase.gsub(" ", "")
+  end
+
 end

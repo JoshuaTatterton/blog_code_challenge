@@ -1,9 +1,21 @@
-<% @results.each do |result| %>
-  <%= result.title %>
-  <% if result.wysiwyg? %>
-    <%= result.wysiwyg_content.html_safe %>
-  <% else %>
-    <%= markdown result.content %>
+<% if search_term? %>
+
+  <% @results.each do |result| %>
+  
+    <div>
+      <%= result.title %>
+      <% if result.wysiwyg? %>
+        <%= result.wysiwyg_content.html_safe %>
+      <% else %>
+        <%= markdown result.content %>
+      <% end %>
+      <%= result.blogger.username %>
+    </div>
+
   <% end %>
-  <%= result.blogger.username %>
+
+<% else %>
+
+  Please enter word/phrase to search.
+
 <% end %>

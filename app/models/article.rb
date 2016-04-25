@@ -15,4 +15,16 @@ class Article < ActiveRecord::Base
   def wysiwyg?
     option == "wysiwyg"
   end
+
+  def search_content
+    if wysiwyg?
+      wysiwyg_content.downcase.gsub(" ", "") 
+    else
+      content.downcase.gsub(" ", "") 
+    end
+  end
+
+  def search_title
+    title.downcase.gsub(" ", "")
+  end
 end

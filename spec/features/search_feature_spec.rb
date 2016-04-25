@@ -13,7 +13,7 @@ feature "search" do
                               email: "example@email.co.uk", 
                               password: "randomletters", 
                               password_confirmation: "randomletters")
-    article = blogger.articles.create(title: "My Article", content: "This is some content")
+    article = blogger.articles.create(title: "My Article", option: "markdown", content: "This is some content")
 
     fill_in "search", with: "content"
     click_button "search_button"
@@ -28,7 +28,7 @@ feature "search" do
                               email: "example@email.co.uk", 
                               password: "randomletters", 
                               password_confirmation: "randomletters")
-    article = blogger.articles.create(title: "My Article", content: "This is some content")
+    article = blogger.articles.create(title: "My Article", option: "markdown", content: "This is some content")
 
     fill_in "search", with: "article"
     click_button "search_button"
@@ -51,6 +51,12 @@ feature "search" do
     expect(page).to have_content blogger.username
     expect(page).to have_content article.title
     expect(page).to have_content "This is some content"
+  end
+
+  scenario "displays message if no search term entered" do
+    click_button "search_button"
+
+    expect(page).to have_content "Please enter word/phrase to search."
   end
 
 end

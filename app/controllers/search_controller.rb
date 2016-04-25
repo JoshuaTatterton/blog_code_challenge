@@ -1,7 +1,9 @@
 class SearchController < ApplicationController
 
+  include SearchHelper
+
   def index
-    @results = search(params[:search])
+    @results = search(params[:search]) if search_term?
   end
 
   private
@@ -9,31 +11,18 @@ class SearchController < ApplicationController
   def search(term)
     articles = Article.all
     terms = term.downcase.split(" ")
-    puts terms
 
     articles.inject([]) do |memo, article|
-      result = true
-      if article.wysiwyg?
-        content = article.wysiwyg_content.downcase.gsub(" ", "")
-      else
-        content = article.content.downcase.gsub(" ", "")
-      end
-      title = article.title.downcase.gsub(" ", "")
-      puts content
-      puts title
-      terms.each do |t|
-        if content.include?(t) || title.include?(t)
-          result = true unless result == false
-        else
-          result = false
-        end
+      content = article.search_content
+      title = article.search_title
+
+      result = terms.inject(1) do |memo2, t|
+        memo2 *= 0 if !(title.include?(t) || content.include?(t))
+        memo2
       end
 
-      if result
-        memo << article 
-      else
-        memo
-      end
+      memo << article if result == 1
+      memo
     end
   end
 
