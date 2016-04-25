@@ -12,7 +12,7 @@ feature "comment" do
   scenario "is displayed" do
     @article.comments.create(name: "MyName", content: "I like this")
     
-    visit "/bloggers/#{@blogger.id}/articles/example-title"
+    visit "/bloggers/#{@blogger.slug}/articles/example-title"
 
     expect(page).to have_content "MyName:"
     expect(page).to have_content "I like this"
@@ -20,7 +20,7 @@ feature "comment" do
 
   context "can be written" do
     scenario "from the individual article page", js: true do
-      visit "/bloggers/#{@blogger.id}/articles/example-title"
+      visit "/bloggers/#{@blogger.slug}/articles/example-title"
 
       click_button "Comment"
       fill_in "comment_name", with: "MyName"
@@ -34,7 +34,7 @@ feature "comment" do
     scenario "signed in blogger can delete comments" do
       @article.comments.create(name: "MyName", content: "I like this")
 
-      visit "/bloggers/#{@blogger.id}/articles/example-title"
+      visit "/bloggers/#{@blogger.slug}/articles/example-title"
 
       click_link "Delete"
 
@@ -45,9 +45,9 @@ feature "comment" do
     scenario "not signed in blogger can't delete comments" do
       @article.comments.create(name: "MyName", content: "I like this")
 
-      click_link "Sign Out"
+      click_link "Sign out"
 
-      visit "/bloggers/#{@blogger.id}/articles/example-title"
+      visit "/bloggers/#{@blogger.slug}/articles/example-title"
       within(".comments") do
         expect(page).not_to have_link "Delete"
       end
@@ -56,7 +56,7 @@ feature "comment" do
   
   context "will show error" do
     scenario "without a name", js: true do
-      visit "/bloggers/#{@blogger.id}/articles/example-title"
+      visit "/bloggers/#{@blogger.slug}/articles/example-title"
 
       click_button "Comment"
       fill_in "comment_name", with: ""
@@ -67,7 +67,7 @@ feature "comment" do
     end
 
     scenario "without content", js: true do
-      visit "/bloggers/#{@blogger.id}/articles/example-title"
+      visit "/bloggers/#{@blogger.slug}/articles/example-title"
 
       click_button "Comment"
       fill_in "comment_name", with: "MyName"

@@ -1,3 +1,9 @@
+<%= form_for [@blogger, new_subscriber] do |f| %>
+  <div class="form_item">
+    <%= f.text_field :email, placeholder: "Email" %>
+  </div>
+  <%= f.submit "Subscribe", class: "btn" %>
+<% end %>
 <% if current_user == @blogger %>
   <div>
     <button class="btn" id="new_article">New Article</button>

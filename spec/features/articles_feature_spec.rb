@@ -202,6 +202,7 @@ feature "blog" do
 
       visiter_subscribe
 
+      click_link "Sign in"
       sign_in
 
       expect { write_article }.to change { ActionMailer::Base.deliveries.count }.by(1)

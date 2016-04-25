@@ -2,43 +2,25 @@ feature "subscriber" do
   let!(:blogger) { Blogger.create(username: "MyUsername", email: "example@email.com", password: "randomletters") }
 
   before(:each) do
-    visit "/bloggers/#{blogger.id}/articles"
+    visit "/bloggers/#{blogger.slug}/articles"
   end
 
-  scenario "people can subscribe", js: true do
-    click_button "Subscribe"
+  scenario "people can subscribe" do
     fill_in "subscriber_email", with: "example@email.co.uk"
 
-    within(".subscribe_form") do
-      expect { click_button "Subscribe" }.to change(Subscriber, :count).by(1)
-    end
+    expect { click_button "Subscribe" }.to change(Subscriber, :count).by(1)
   end
 
   context "after subscribing visiter returns to the" do
-    scenario "main page if started there", js: true do
+    scenario "main page if started there" do
       visiter_subscribe
 
-      expect(current_path).to eq "/bloggers/#{blogger.id}/articles"
-    end
-
-    scenario "article page if started there", js: true do
-      blogger.articles.create(title: "Example Title", content: "Hello World!!")
-
-      visit current_path
-
-      click_link "Example Title"
-
-      visiter_subscribe
-
-      expect(current_path).to eq "/bloggers/#{blogger.slug}/articles/example-title"
+      expect(current_path).to eq "/bloggers/#{blogger.slug}/articles"
     end
   end
   
-  scenario "raises error when no email is entered", js: true do
+  scenario "raises error when no email is entered" do
     click_button "Subscribe"
-    within(".subscribe_form") do
-      click_button "Subscribe"
-    end
     
     expect(page).to have_content "Email can't be blank"
   end
