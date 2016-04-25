@@ -45,11 +45,9 @@ class SearchController < ApplicationController
 
   def find_articles
     if blogger_search?
-      if blogger = Blogger.where("lower(username) = ?", params[:blogger].downcase).first
-        blogger.articles.reverse
-      else
-        return []
-      end
+      return (blogger = Blogger.where("lower(username) = ?", 
+                                      params[:blogger].downcase).first) ?
+                                        blogger.articles.reverse : []
     else
       Article.all.reverse
     end

@@ -6,8 +6,8 @@
   <button type="button" id="advanced_search_button">Advanced Search options</button>
 
   <div id="advanced_search_options">
-    <%= check_box :strict, "option", { checked: true }, true, false %>
-    <%= text_field_tag :blogger, blogger_search %>
+    Search for whole phrase: <%= check_box :strict, "option", { checked: true }, true, false %>
+    Search for article by:<%= text_field_tag :blogger, blogger_search %>
     <%= image_submit_tag asset_path("search.png"), id: "search_button" %>
   </div>
 

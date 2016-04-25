@@ -170,6 +170,7 @@ feature "search" do
       expect(page).not_to have_content article2.title
       expect(page).not_to have_content article2.content
     end
+
     scenario "displays message if blogger searched for doesn't exist", js: true do
 
       click_button "search_button"
@@ -183,6 +184,35 @@ feature "search" do
       end
 
       expect(page).to have_content "Cannot find a blogger with username \"joshy\""
+    end
+
+    scenario "defaults to searching a bloggers articles when on their page" do
+      blogger = Blogger.create( username: "Joshy", 
+                              email: "example@email.co.uk", 
+                              password: "randomletters", 
+                              password_confirmation: "randomletters")
+      article = blogger.articles.create(title: "My Article", option: "markdown", content: "This is some content")
+
+      blogger2 = Blogger.create( username: "NotJosh", 
+                              email: "example@email.com", 
+                              password: "randomletters", 
+                              password_confirmation: "randomletters")
+      article2 = blogger2.articles.create(title: "AnotherArticle", option: "markdown", content: "This is some more content")
+
+      visit "/bloggers/#{blogger.slug}/articles"
+
+      fill_in "search", with: "content"
+      click_button "search_button"
+
+      expect(page).to have_content "Search Results For \"content\" By \"Joshy\":"
+      
+      expect(page).to have_content blogger.username
+      expect(page).to have_content article.title
+      expect(page).to have_content article.content
+
+      expect(page).not_to have_content blogger2.username
+      expect(page).not_to have_content article2.title
+      expect(page).not_to have_content article2.content
     end
   end
 

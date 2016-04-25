@@ -30,5 +30,10 @@ module ApplicationHelper
   def on_blogger_page?
     @blogger ||= false
   end
+
+  def blogger_page
+    return params[:blogger_id] ? 
+      (Blogger.find_by(slug: params[:blogger_id])).username : ""
+  end
   
 end

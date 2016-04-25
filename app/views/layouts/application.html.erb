@@ -105,6 +105,7 @@
       </div>
     </div>
   <% end %>
+  
   <% if hide? %>
 
     <div class="hidden">
@@ -116,7 +117,7 @@
   <% end %>
       <%= form_tag search_path do |f| %>
         <%= check_box :strict, "option", { checked: true, class: "hidden" }, true, false %>
-        <%= text_field_tag :blogger, "", class: "hidden" %>
+        <%= text_field_tag :blogger, blogger_page, class: "hidden" %>
         <%= image_submit_tag asset_path("search.png"), id: "search_button" %>
         <%= text_field_tag :search, previous_search %>
       <% end %>
