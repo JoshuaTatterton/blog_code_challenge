@@ -105,12 +105,22 @@
       </div>
     </div>
   <% end %>
+  <% if hide? %>
 
-  <%= form_tag search_path do |f| %>
-    <%= image_submit_tag asset_path("search.png"), id: "search_button" %>
-    <%= text_field_tag :search, previous_search %>
+    <div class="hidden">
+
+  <% else %>
+
+    <div>
+
   <% end %>
-  
+      <%= form_tag search_path do |f| %>
+        <%= check_box :strict, "option", { checked: true, class: "hidden" }, true, false %>
+        <%= text_field_tag :blogger, "", class: "hidden" %>
+        <%= image_submit_tag asset_path("search.png"), id: "search_button" %>
+        <%= text_field_tag :search, previous_search %>
+      <% end %>
+    </div>
 
   <div class="main">
     <% flash.each do |type, message| %>

@@ -30,9 +30,5 @@ module ApplicationHelper
   def on_blogger_page?
     @blogger ||= false
   end
-
-  def previous_search
-    @search_term if @search_term
-  end
   
 end

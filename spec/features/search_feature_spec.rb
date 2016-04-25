@@ -77,5 +77,113 @@ feature "search" do
 
     expect(page).to have_selector("input[value='article']")
   end
+  context "Advanced Search" do
+    scenario "there are advanced search options", js: true do
+      click_button "search_button"
+
+      expect(page).to have_button "advanced_search_button"
+      expect(page).not_to have_css "#advanced_search_options"
+
+      click_button "advanced_search_button"
+
+      expect(page).to have_css "#advanced_search_options"
+    end
+
+    scenario "can perform a non strict 'slack' search", js: true do
+      blogger = Blogger.create( username: "Joshy", 
+                              email: "example@email.co.uk", 
+                              password: "randomletters", 
+                              password_confirmation: "randomletters")
+      article = blogger.articles.create(title: "My Article", option: "markdown", content: "This is some content")
+
+      click_button "search_button"
+      click_button "advanced_search_button"
+
+      fill_in "search", with: "Content here"
+        
+      within ("#advanced_search_options") do
+        uncheck("strict_option")
+
+        click_button "search_button"
+      end
+
+      expect(page).to have_content "Search Results For \"Content here\":"
+      expect(page).to have_content blogger.username
+      expect(page).to have_content article.title
+      expect(page).to have_content article.content
+    end
+
+    scenario "is strict search by default", js: true do
+      blogger = Blogger.create( username: "Joshy", 
+                              email: "example@email.co.uk", 
+                              password: "randomletters", 
+                              password_confirmation: "randomletters")
+      article = blogger.articles.create(title: "My Article", option: "markdown", content: "This is some content")
+
+      click_button "search_button"
+      click_button "advanced_search_button"
+
+      fill_in "search", with: "Content here"
+        
+      within ("#advanced_search_options") do
+        click_button "search_button"
+      end
+
+      expect(page).not_to have_content "Search Results For \"Content here\":"
+      expect(page).not_to have_content blogger.username
+      expect(page).not_to have_content article.title
+      expect(page).not_to have_content article.content
+
+      expect(page).to have_content 'No results found for "Content here"'
+    end
+
+    scenario "can search for articles by a single blogger", js: true do
+      blogger = Blogger.create( username: "Joshy", 
+                              email: "example@email.co.uk", 
+                              password: "randomletters", 
+                              password_confirmation: "randomletters")
+      article = blogger.articles.create(title: "My Article", option: "markdown", content: "This is some content")
+
+      blogger2 = Blogger.create( username: "NotJosh", 
+                              email: "example@email.com", 
+                              password: "randomletters", 
+                              password_confirmation: "randomletters")
+      article2 = blogger2.articles.create(title: "AnotherArticle", option: "markdown", content: "This is some more content")
+
+      click_button "search_button"
+      click_button "advanced_search_button"
+
+      fill_in "search", with: "content"
+        
+      within ("#advanced_search_options") do
+        fill_in "blogger", with: "joshy"
+        click_button "search_button"
+      end
+
+      expect(page).to have_content "Search Results For \"content\" By \"joshy\":"
+      
+      expect(page).to have_content blogger.username
+      expect(page).to have_content article.title
+      expect(page).to have_content article.content
+
+      expect(page).not_to have_content blogger2.username
+      expect(page).not_to have_content article2.title
+      expect(page).not_to have_content article2.content
+    end
+    scenario "displays message if blogger searched for doesn't exist", js: true do
+
+      click_button "search_button"
+      click_button "advanced_search_button"
+
+      fill_in "search", with: "content"
+        
+      within ("#advanced_search_options") do
+        fill_in "blogger", with: "joshy"
+        click_button "search_button"
+      end
+
+      expect(page).to have_content "Cannot find a blogger with username \"joshy\""
+    end
+  end
 
 end
