@@ -102,6 +102,16 @@ feature "blogger" do
       expect(page).to have_content("You have signed up")
     end
 
+    scenario "can cancel signing up" do
+      visit "/"
+
+      click_link "Sign up"
+
+      click_link "Cancel"
+
+      expect(current_path).to eq "/"
+    end
+
     scenario "can't sign up without username" do
       visit "/"
 
@@ -187,6 +197,15 @@ feature "blogger" do
         expect(page).to have_content("You have signed in")
         expect(page).not_to have_button("Sign in")
         expect(page).to have_button("New Article")
+      end
+      scenario "can cancel signing in on the sign in page" do
+        click_link "Sign out"
+
+        click_link "Sign in"
+
+        click_link "Cancel"
+
+        expect(current_path).to eq "/"
       end
 
       scenario "directly via the nav bar (for larger pages)" do
