@@ -10,38 +10,22 @@
 <body>
   <div class="nav_bar">
 
-    <div class="sub_nav">
-      <% if on_blogger_page? && on_blogger_page? != current_user && !logged_in? %>
-        <button class="btn" id="subscribe">Subscribe</button>
+    <%= link_to "Home", root_path, class: "btn" %> 
+
+    <% if logged_in? %>
+      <%= link_to "My Blog", blogger_articles_path(current_user), class: "btn" %>
+      <%= link_to "Sign out", :sign_out, method: :post, class: "btn" %>
+    <% else %>
+
+      <%= link_to "Sign in", new_blogger_session_path, class: "btn" %>
+      <%= form_tag blogger_sessions_path, method: :post do |f| %>
+          <%= text_field_tag :email, nil, placeholder: "Email" %>
+          <%= password_field_tag :password, nil, placeholder: "Password" %>
+        <%= submit_tag "Sign in", class: "btn" %>
       <% end %>
-      <%= link_to "Home", root_path, class: "btn" %> 
-
-      <% if logged_in? %>
-        <%= link_to "My Blog", blogger_articles_path(current_user), class: "btn" %>
-      <% end %>
-    </div>
-
-    <div class="sub_nav">
-      <% if logged_in? %>
-
-        <% if on_blogger_page? && on_blogger_page? != current_user && logged_in? %>
-          <button class="btn" id="subscribe">Subscribe</button>
-        <% end %>
-        
-        <%= link_to "Sign out", :sign_out, method: :post, class: "btn" %>
-
-      <% else %>
-
-        <%= link_to "Sign up", new_blogger_path, class: "btn" %>
-        <%= link_to "Sign in", new_blogger_session_path, class: "btn" %>
-        <%= form_tag blogger_sessions_path, method: :post do |f| %>
-            <%= text_field_tag :email, nil, placeholder: "Email" %>
-            <%= password_field_tag :password, nil, placeholder: "Password" %>
-          <%= submit_tag "Sign in", class: "btn" %>
-        <% end %>
-
-      <% end %>
-    </div>
+      <%= link_to "Sign up", new_blogger_path, class: "btn" %>
+      
+    <% end %>
 
   </div>
   

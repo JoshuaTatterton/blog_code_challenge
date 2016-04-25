@@ -2,7 +2,7 @@ feature "blog" do
   let!(:blogger) { Blogger.create(username: "Username", email: "example@email.com", password: "randomletters") }
 
   scenario "message is displayed when there are no blog posts" do
-    visit "/bloggers/#{blogger.id}/articles"
+    visit "/bloggers/#{blogger.slug}/articles"
 
     expect(page).to have_content "No blog posts have been made."
   end
@@ -10,7 +10,7 @@ feature "blog" do
   scenario "when a blog post has been created the article is displayed" do
     blogger.articles.create(title: "Example Title", content: "Hello World!!")
 
-    visit "/bloggers/#{blogger.id}/articles"
+    visit "/bloggers/#{blogger.slug}/articles"
 
     expect(page).to have_content "Hello World!!"
     expect(page).not_to have_content "No blog posts have been made."
@@ -196,7 +196,7 @@ feature "blog" do
       visit "/"
 
       sign_up
-      click_link "Sign Out"
+      click_link "Sign out"
 
       visit "/bloggers/#{Blogger.last.slug}/articles"
 
@@ -245,7 +245,7 @@ feature "blog" do
     end
     
     scenario "which takes you back to the root" do
-      visit "/bloggers/#{blogger.id}/articles"
+      visit "/bloggers/#{blogger.slug}/articles"
 
       click_link "Home"
       
