@@ -8,7 +8,11 @@
 
     <%= link_to blogger_article_path(article.blogger, article), id: article.id do %>
       <%= article.title %>
-      <%= article.content %>
+      <% if article.wysiwyg? %>
+        <%= article.wysiwyg_content.html_safe %>
+      <% else %>
+        <%= markdown article.content %>
+      <% end %>
       -<%= article.blogger.username %>
     <% end %>
 

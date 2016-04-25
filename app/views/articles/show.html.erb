@@ -1,8 +1,42 @@
 <div class="whole_article">
-
+  <%= link_to "< #{@article.blogger.username}", blogger_articles_path(@article.blogger) %>
   <div class="title" ><%= @article.title %></div>
 
-  <%= render partial: "article", locals: { article: @article } %>
+  <div class="article_display" id="article_display_<%= @article.id %>">
+  
+  <% if @article.wysiwyg? %>
+    <%= @article.wysiwyg_content.html_safe %>
+  <% else %>
+    <%= markdown @article.content %>
+  <% end %>
+
+  <% if current_user == @blogger %>
+    <button class="edit_button btn" id="<%= @article.id %>">
+      Edit Article
+    </button>
+  <% end %>
+</div>
+
+<div class="article_editor" id="article_editor_<%= @article.id %>">
+  <%= form_for [@blogger, @article] do |f| %>
+    <div class="content_container">
+      <% if @article.wysiwyg? %>
+        <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content_#{@article.id}", ckeditor: { toolbar: "custom" } } %>
+      <% else %>
+        <%= f.text_area(:content, class: "markdown_text_editor") %>
+      <% end %>
+    </div>
+    <div class="submit_container">
+      <button id="cancel_edit">Cancel</button>
+      <div class="submit_option">
+        <%= f.submit "Edit Article", class: "btn" %>
+      </div>
+      <div class="submit_option">
+        <%= link_to "Delete Article", blogger_article_path(@blogger, @article), class: "btn", method: :delete %>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 </div>
 

@@ -29,6 +29,14 @@ var ready = function() {
     $("#markdown_content_container").hide();
     $("#wysiwig_content_container").show();
   });
+
+  $("#cancel_writing").click(function() {
+    $(".article_writer").hide();
+  });
+
+  $("#cancel_edit").click(function() {
+    $(".article_editor").hide();
+  });
 };
 
 $(document).ready(ready);

@@ -34,61 +34,14 @@ feature "blog" do
       expect(page).to have_content "Hello World!!"
     end
 
-    context "articles written in markdown can be" do
-      before(:each) do
-        write_article
-      end
+    scenario "can cancel writing articles", js: true do
+      click_button "new_article"
+      
+      expect(page).to have_css ".article_writer"
 
-      scenario "edited", js: true do
-        click_button "Edit Article - Example Title"
-        within(".article_editor") do
-          fill_in "article_content", with: "Hello New World!!"
-          click_button "Edit Article"
-        end
+      click_button "Cancel"
 
-        expect(page).to have_content "Hello New World!!"
-      end
-
-      scenario "deleted", js: true do
-        click_button "Edit Article - Example Title"
-        click_link "Delete Article"
-
-        expect(page).not_to have_content "Hello World!!"
-      end
-    end
-
-    context "articles written in wysiwyg can be" do
-      before(:each) do
-        write_article(option: "wysiwyg")
-      end
-
-      scenario "edited", js: true do
-
-        click_button "Edit Article - Example Title"
-        within(".article_editor") do
-          fill_in_ckeditor "wysiwyg_content_#{Article.last.id}", with: "Hello New World!!"
-          click_button "Edit Article"
-        end
-
-        expect(page).to have_content "Hello New World!!"
-      end
-
-      scenario "deleted", js: true do
-        click_button "Edit Article - Example Title"
-        click_link "Delete Article"
-
-        expect(page).not_to have_content "Hello World!!"
-      end
-    end
-
-    scenario "you go back to the same page as before you edited", js: true do
-      write_article
-
-      current_path_before = current_path
-
-      edit_article
-
-      expect(current_path).to eq current_path_before
+      expect(page).not_to have_css ".article_writer"
     end
   end
 
@@ -118,6 +71,16 @@ feature "blog" do
       expect(page).to have_content "Hello World!!"
     end
 
+    scenario "can navigate back to the blogger's page", js: true do
+      click_link "Example Title"
+
+      expect(page).to have_link "< #{@blogger.username}"
+      
+      click_link "< #{@blogger.username}"
+
+      expect(current_path).to eq "/bloggers/#{@blogger.slug}/articles"
+    end
+
     context "on their own page while signed in" do
       before(:each) do
         click_link "Example Title"
@@ -133,6 +96,16 @@ feature "blog" do
         edit_article
 
         expect(current_path).to eq "/bloggers/#{@blogger.slug}/articles/example-title"
+      end
+
+      scenario "can cancel editing", js: true do
+        click_button "Edit Article"
+
+        expect(page).to have_css ".article_editor"
+
+        click_button "Cancel"
+
+        expect(page).not_to have_css ".article_editor"
       end
 
       scenario "can be deleted by the blogger", js: true do
@@ -183,9 +156,7 @@ feature "blog" do
       fill_in_ckeditor "wysiwyg_content", with: "Hello World!!"
       click_button "Post Article"
 
-      within(".article_display") do
-        expect(page).to have_content "Hello World!!"
-      end
+      expect(page).to have_content "Hello World!!"
     end
   end
   

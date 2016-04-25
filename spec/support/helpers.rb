@@ -24,13 +24,13 @@ module Helpers
   end
 
   def edit_article
-    click_button "Edit Article - Example Title"
+    click_button "Edit Article"
     fill_in "article_content", with: "Hello New World!!"
     click_button "Edit Article"
   end
 
   def delete_article
-    click_button "Edit Article - Example Title"
+    click_button "Edit Article"
     click_link "Delete Article"
   end
 
