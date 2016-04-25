@@ -2,7 +2,7 @@ class Article < ActiveRecord::Base
 
   validates :title, presence: true, uniqueness: true
   
-  belongs_to :blogger, touch: true
+  belongs_to :blogger
   has_many :comments
   
   extend FriendlyId

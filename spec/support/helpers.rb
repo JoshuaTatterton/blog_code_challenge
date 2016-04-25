@@ -1,8 +1,8 @@
 module Helpers
 
   def sign_in
-    click_button "Sign In"
-    within(".sign_in_form") do
+    click_button "Sign in"
+    within(".main") do
       fill_in "email", with: "example@email.co.uk"
       fill_in "password", with: "randomletters"
       click_button "Sign In"
@@ -60,14 +60,16 @@ module Helpers
     options[:password] ||= "randomletters"
     options[:password_confirmation] ||= "randomletters"
 
-    click_button "sign_up"
-    within(".sign_up_form") do
+    click_link "Sign up"
+
+    within(".main") do
       fill_in "Username", with: options[:username]
       fill_in "Email", with: options[:email]
       fill_in "Password", with: options[:password]
       fill_in "Password confirmation", with: options[:password_confirmation]
-      click_button "Sign Up"
     end
+
+    click_button "Sign up"
   end
 
   def fill_in_ckeditor(locator, opts)

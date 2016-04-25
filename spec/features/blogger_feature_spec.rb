@@ -3,11 +3,11 @@ feature "blogger" do
   scenario "displays message if there are no bloggers" do
     visit "/"
 
-    expect(page).to have_content "Oops no bloggers are here"
-    expect(page).to have_content "Why don't you become the first blogger"
+    expect(page).to have_content "Oops there are no articles here."
+    expect(page).to have_content "Why don't you become a blogger and write the first one."
   end
 
-  scenario "has a button in the nav bar to take a blogger to their page", js: true do
+  scenario "has a button in the nav bar to take a blogger to their page" do
     visit "/"
 
     expect(page).not_to have_link "My Blog"
@@ -29,18 +29,16 @@ feature "blogger" do
     scenario "there are buttons to do things" do
       visit "/bloggers/my-username/articles"
       within(".nav_bar") do
-        expect(page).to have_button "Subscribe"
         expect(page).to have_link "Home"
-        expect(page).to have_button "Sign In"
-        expect(page).to have_button "Sign Up"
+        expect(page).to have_button "Sign in"
+        expect(page).to have_link "Sign up"
       end
       sign_up
       visit "/bloggers/my-username/articles"
       within(".nav_bar") do
-        expect(page).to have_button "Subscribe"
         expect(page).to have_link "Home"
         expect(page).to have_link "My Blog"
-        expect(page).to have_link "Sign Out"
+        expect(page).to have_link "Sign out"
       end
     end
   end
@@ -48,109 +46,106 @@ feature "blogger" do
   context "on the home page" do
 
     let!(:blogger) { Blogger.create(username: "My Username", email: "example@email.com", password: "randomletters") }
-    
-    scenario "there is a list of bloggers" do
-      Blogger.create(username: "Username", email: "example@email.co.uk", password: "randomletters")
-      
+
+    scenario "there is a link to the article page" do
+      article = blogger.articles.create(title: "Example Title", content: "Ok show me!!")
+
       visit "/"
 
-      expect(page).to have_link "My Username"
-      expect(page).to have_link "Username"
+      expect(page).to have_link "#{article.id}"
+
+      click_link "#{article.id}"
+
+      expect(current_path).to eq "/bloggers/#{blogger.slug}/articles/#{article.slug}"
     end
 
-    scenario "it displays the bloggers last article" do
-      article1 = blogger.articles.create(title: "Example Title", content: "Don't show me!!")
+    scenario "it displays the most recent blogs posts" do
+      article1 = blogger.articles.create(title: "Example Title", content: "Ok show me!!")
       article2 = blogger.articles.create(title: "Another Title", content: "Show Me!!")
       
       visit "/"
 
-      expect(page).not_to have_content article1.title
+      expect(page).to have_content article1.title
+      expect(page).to have_content article1.content
+      expect(page).to have_content "-#{article1.blogger.username}"
+
       expect(page).to have_content article2.title
-
-      expect(page).not_to have_content article1.content
       expect(page).to have_content article2.content
-    end
-
-    scenario "it displays message if bloggers blogger has posted no articles" do
-      visit "/"
-
-      expect(page).to have_content "#{blogger.username} recently signed up but has not posted anything yet."
+      expect(page).to have_content "-#{article2.blogger.username}"
     end
     
   end
 
-  scenario "a bloggers url has their username in it" do
-    Blogger.create(username: "My Username", email: "example@email.com", password: "randomletters")
-    visit "/"
+  # scenario "a bloggers url has their username in it" do
+  #   Blogger.create(username: "My Username", email: "example@email.com", password: "randomletters")
+  #   visit "/"
 
-    click_link "My Username"
+  #   click_link "My Username"
 
-    expect(current_path).to eq "/bloggers/my-username/articles"
-  end
+  #   expect(current_path).to eq "/bloggers/my-username/articles"
+  # end
 
   context "a prospective blogger" do
-    scenario "can sign up", js: true do
+    scenario "can sign up" do
       visit "/"
 
-      expect(page).not_to have_css ".sign_up_form"
+      click_link "Sign up"
 
-      sign_up
+      within(".main") do
+        fill_in "Username", with: "My Username"
+        fill_in "Email", with: "example@email.co.uk"
+        fill_in "Password", with: "randomletters"
+        fill_in "Password confirmation", with: "randomletters"
+        click_button "Sign up"
+      end
 
       expect(page).to have_content("You have signed up")
     end
 
-    scenario "can't sign up without username", js: true do
+    scenario "can't sign up without username" do
       visit "/"
-
-      expect(page).not_to have_css ".sign_up_form"
 
       sign_up(username: "")
 
       expect(page).to have_content("Sign up failed")
     end
 
-    scenario "can't sign up with a already used username", js: true do
+    scenario "can't sign up with a already used username (case insensitive)" do
       Blogger.create(username: "MyUsername", email: "example@email.co.uk", password: "randomletters")
       visit "/"
 
-      sign_up(email: "another@email.com")
+      sign_up(username: "myusername", email: "another@email.com")
 
       expect(page).to have_content("Sign up failed")
     end
 
-    scenario "can't sign up without email address", js: true do
+    scenario "can't sign up without email address" do
       visit "/"
-
-      expect(page).not_to have_css ".sign_up_form"
 
       sign_up(email: "")
 
       expect(page).to have_content("Sign up failed")
     end
 
-    scenario "can't sign up with a already used email address", js: true do
+    scenario "can't sign up with a already used email address (case insensitive)" do
       Blogger.create(username: "Username", email: "example@email.co.uk", password: "randomletters")
       visit "/"
 
-      sign_up(username: "another")
+      sign_up(username: "another", email: "Example@Email.co.uk")
 
       expect(page).to have_content("Sign up failed")
     end
 
-    scenario "can't sign up with different passwords", js: true do
+    scenario "can't sign up with different passwords" do
       visit "/"
-
-      expect(page).not_to have_css ".sign_up_form"
 
       sign_up(password_confirmation: "randomlett")
 
       expect(page).to have_content("Sign up failed")
     end
 
-    scenario "can't sign up with password less than 8 characters", js: true do
+    scenario "can't sign up with password less than 8 characters" do
       visit "/"
-
-      expect(page).not_to have_css ".sign_up_form"
 
       sign_up(password: "random", password_confirmation: "random")
 
@@ -165,46 +160,61 @@ feature "blogger" do
       sign_up
     end
 
-    scenario "who's signed in can sign out", js: true do
-      expect(page).to have_link("Sign Out")
+    scenario "who's signed in can sign out" do
+      expect(page).to have_link("Sign out")
 
-      click_link "Sign Out"
+      click_link "Sign out"
 
       expect(page).to have_content("You have signed out")
-      expect(page).not_to have_link("Sign Out")
+      expect(page).not_to have_link("Sign out")
       expect(current_path).to eq "/"
     end
 
-    scenario "can sign in", js: true do
-      click_link "Sign Out"
+    context "can sign in" do
+      scenario "through the sign in page (for smaller pages)" do
+        click_link "Sign out"
 
-      expect(page).to have_button("Sign In")
-      expect(page).not_to have_css ".sign_in_form"
+        expect(page).to have_link("Sign in")
 
-      click_button "Sign In"
-      within(".sign_in_form") do
+        click_link "Sign in"
+
+        within(".main") do
+          fill_in "Email", with: "example@email.co.uk"
+          fill_in "Password", with: "randomletters"
+          click_button "Sign in"
+        end
+
+        expect(page).to have_content("You have signed in")
+        expect(page).not_to have_button("Sign in")
+        expect(page).to have_button("New Article")
+      end
+
+      scenario "directly via the nav bar (for larger pages)" do
+        click_link "Sign out"
+
         fill_in "Email", with: "example@email.co.uk"
         fill_in "Password", with: "randomletters"
-        click_button "Sign In"
-      end
+        click_button "Sign in"
 
-      expect(page).to have_content("You have signed in")
-      expect(page).not_to have_button("Sign In")
-      expect(page).to have_button("New Article")
+        expect(page).to have_content("You have signed in")
+        expect(page).not_to have_button("Sign in")
+        expect(page).to have_button("New Article")
+      end
     end
 
-    scenario "can't sign in if details are incorrect", js: true do
-      click_link "Sign Out"
+    scenario "can't sign in if details are incorrect" do
+      click_link "Sign out"
 
-      click_button "Sign In"
-      within(".sign_in_form") do
+      click_link "Sign in"
+      
+      within(".main") do
         fill_in "Email", with: "example@email.co.uk"
         fill_in "Password", with: "lettersrandom"
-        click_button "Sign In"
+        click_button "Sign in"
       end
-
+      
       expect(page).to have_content("Sign in failed")
-      expect(page).to have_button("Sign In")
+      expect(page).to have_button("Sign in")
       expect(page).not_to have_button("New Article")
     end    
   end

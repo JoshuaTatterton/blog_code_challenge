@@ -1,52 +1,25 @@
-<div class="title">Recent Blogger Activity:</div>
-<% if @bloggers != [] %>
-  <% @bloggers.each do |blogger| %>
+<div>
+  Welcome to the BlogSite.
+  Either check out the most recent blogs or start your own.
+</div>
+<% if @articles != [] %>
 
-    <div class="blogger_container" id="<%= dom_id(blogger) %>">
-      <% if blogger.last_article %>
-        <div class="head">
-          <div class="username">
-            Blogger: <%= link_to blogger.username, blogger_articles_path(blogger), class: "btn" %>
-          </div>
+  <% @articles.each do |article| %>
 
-          <div class="title">
-            <%= blogger.last_article.title %>
-          </div>
-
-        </div>
-
-        <div class="content">
-          <% if blogger.last_article.wysiwyg? %>
-            <%= blogger.last_article.wysiwyg_content.html_safe %>
-          <% else %>
-            <%= markdown blogger.last_article.content %>
-          <% end %>
-          
-        </div>
-
-      <% else %>
-        <div class="head">
-          
-          <div>
-            Blogger: <%= link_to blogger.username, blogger_articles_path(blogger), class: "btn" %>
-          </div>
-
-        </div>
-
-        <div class="content title">
-          <%= blogger.username %> recently signed up but has not posted anything yet.
-        </div>
-      <% end %>
-
-    </div>
+    <%= link_to blogger_article_path(article.blogger, article), id: article.id do %>
+      <%= article.title %>
+      <%= article.content %>
+      -<%= article.blogger.username %>
+    <% end %>
 
   <% end %>
+
 <% else %>
 
   <div class="container">
-    <div>Oops no bloggers are here.</div>
+    <div>Oops there are no articles here.</div>
 
-    <div>Why don't you become the first blogger.</div>
+    <div>Why don't you become a blogger and write the first one.</div>
   </div>
 
 <% end %>

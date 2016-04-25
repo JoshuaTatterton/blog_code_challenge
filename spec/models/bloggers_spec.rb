@@ -6,22 +6,4 @@ describe Blogger, type: :model do
 
   it { should validate_presence_of(:username) }
 
-  it "know its last article" do
-    expect(subject.last_article).to eq nil
-
-    article1 = subject.articles.create(title: "Example Title", content: "Don't show me!!")
-    article2 = subject.articles.create(title: "Another Title", content: "Show Me!!")
-    
-    expect(subject.last_article).to eq article2
-  end
-
-  it "should change the updated_at when an article is added" do
-    before = subject.updated_at
-
-    subject.articles.create(title: "Example Title", content: "Hello World!!")
-
-    after = subject.updated_at
-
-    expect(before < after).to be_truthy
-  end
 end

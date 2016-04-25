@@ -1,5 +1,8 @@
 class BloggerSessionsController < ApplicationController
 
+  def new
+  end
+
   def create
     blogger = login(params[:email], params[:password])
     if logged_in?
