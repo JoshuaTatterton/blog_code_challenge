@@ -3,46 +3,59 @@
 <head>
   <title>BlogSite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='https://fonts.googleapis.com/css?family=Dancing+Script:700|Lobster|Roboto|Roboto+Slab:400,700' rel='stylesheet' type='text/css'>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="nav_bar">
+
+      <input type="checkbox" id="drawer-toggle" name="drawer-toggle"/>
+      <label for="drawer-toggle" id="drawer-toggle-label"></label>
+
     <div class="web_title">BlogSite</div>
-    <%= link_to "Home", root_path, class: "btn" %> 
 
-    <% if logged_in? %>
-      <%= link_to "My Blog", blogger_articles_path(current_user), class: "btn" %>
-      <%= link_to "Sign out", :sign_out, method: :post, class: "btn" %>
-    <% else %>
+    <div class="nav_bar">
 
-      <%= link_to "Sign in", new_blogger_session_path, class: "btn" %>
-      <%= form_tag blogger_sessions_path, method: :post do |f| %>
-          <%= text_field_tag :email, nil, placeholder: "Email" %>
-          <%= password_field_tag :password, nil, placeholder: "Password" %>
-        <%= submit_tag "Sign in", class: "btn" %>
-      <% end %>
-      <%= link_to "Sign up", new_blogger_path, class: "btn" %>
+      <div class="web_title">BlogSite</div>
       
-    <% end %>
-    
-    <div
-      <% if hide? %>
-        class="hidden">
-      <% else %>
-        >
-      <% end %>
-      <%= form_tag search_path do |f| %>
-          <%= check_box :strict, "option", { checked: true, class: "hidden" }, true, false %>
-        <%= text_field_tag :blogger, blogger_page, class: "hidden" %>
-        <%= image_submit_tag asset_path("search.png"), id: "search_button" %>
-        <%= text_field_tag :search, previous_search, placeholder: "Search . . ." %>
-      <% end %>
-    </div>
-  </div>
-  
-  
+      <div class="navigation">
+        <div id="nav_search"
+          <% if hide? %>
+          class="hidden">
+          <% else %>
+            >
+          <% end %>
+          <%= form_tag search_path do |f| %>
+              <%= check_box :strict, "option", { checked: true, class: "hidden" }, true, false %>
+            <%= text_field_tag :blogger, blogger_page, class: "hidden" %>
+            <%= image_submit_tag asset_path("search.png"), class: "search_button" %>
+            <%= text_field_tag :search, previous_search, placeholder: "Search . . .", class: "search_input" %>
+          <% end %>
+        </div>
+
+        <%= link_to "Home", root_path, class: "btn" %> 
+
+        <% if logged_in? %>
+
+          <%= link_to "My Blog", blogger_articles_path(current_user), class: "btn" %>
+          <%= link_to "Sign out", :sign_out, method: :post, class: "btn" %>
+        
+        <% else %>
+
+          <%= link_to "Sign in", new_blogger_session_path, class: "btn" %>
+          <div class="sign_in_form">
+            <%= form_tag blogger_sessions_path, method: :post do |f| %>
+                <%= text_field_tag :email, nil, placeholder: "Email" %>
+                <%= password_field_tag :password, nil, placeholder: "Password" %>
+              <%= submit_tag "Sign in", class: "btn" %>
+            <% end %>
+          </div>
+          <%= link_to "Sign up", new_blogger_path, class: "btn" %>
+          
+        <% end %>
+      </div>
+    </div>  
 
   <div class="main">
     <% flash.each do |type, message| %>
