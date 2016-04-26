@@ -1,5 +1,5 @@
 
-<%= form_for new_blogger do |f| %>
+<%= form_for @blogger do |f| %>
 
   <div>
     <%= f.label :username %>:
@@ -17,7 +17,7 @@
       <%= f.label :password_confirmation %>:
       <%= f.password_field :password_confirmation %>
   </div>
-  <%= link_to "Cancel", :back %>
+  <%= link_to "Cancel", root_path %>
   <%= f.submit "Sign up", class: "btn" %>
 
 <% end %>

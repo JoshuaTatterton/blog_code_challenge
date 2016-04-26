@@ -33,7 +33,7 @@ module ApplicationHelper
 
   def blogger_page
     return params[:blogger_id] ? 
-      (Blogger.find_by(slug: params[:blogger_id])).username : ""
+      (Blogger.find_by(slug: params[:blogger_id])).username : nil
   end
   
 end

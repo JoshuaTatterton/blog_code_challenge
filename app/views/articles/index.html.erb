@@ -4,6 +4,7 @@
   </div>
   <%= f.submit "Subscribe", class: "btn" %>
 <% end %>
+
 <% if current_user == @blogger %>
   <div>
     <button class="btn" id="new_article">New Article</button>
@@ -36,7 +37,7 @@
           <%= f.text_area(:content, class: "markdown_text_editor") %>
         </div>
         <button id="cancel_writing">Cancel</button>
-        <%= f.submit "Post Article", class: "btn" %>
+        <%= f.submit "Post", class: "btn" %>
       <% end %>
     </div>
   </div>
@@ -44,16 +45,18 @@
 
 <% if @articles != [] %>
   <% @articles.each do |a| %>
-    <div class="article_container">
-      <%= link_to "#{a.title}", blogger_article_path(@blogger, a), class: "btn" %>
+    <%= link_to blogger_article_path(@blogger, a), id: "id_#{a.id}" do %>
+      <div class="article_container">
+        <%= a.title %>
 
-      <% if a.wysiwyg? %>
-        <%= a.wysiwyg_content.html_safe %>
-      <% else %>
-        <%= markdown a.content %>
-      <% end %>
+        <% if a.wysiwyg? %>
+          <%= a.wysiwyg_content.html_safe %>
+        <% else %>
+          <%= markdown a.content %>
+        <% end %>
 
-    </div>
+      </div>
+    <% end %>
   <% end %>
 <% else %>
   No blog posts have been made.

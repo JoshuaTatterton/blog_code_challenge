@@ -7,13 +7,17 @@
   <% @articles.each do |article| %>
 
     <%= link_to blogger_article_path(article.blogger, article), id: article.id do %>
-      <%= article.title %>
-      <% if article.wysiwyg? %>
-        <%= article.wysiwyg_content.html_safe %>
-      <% else %>
-        <%= markdown article.content %>
-      <% end %>
-      -<%= article.blogger.username %>
+      
+      <div>
+        <%= article.title %>
+        <% if article.wysiwyg? %>
+          <%= article.wysiwyg_content.html_safe %>
+        <% else %>
+          <%= markdown article.content %>
+        <% end %>
+        -<%= article.blogger.username %>
+      </div>
+      
     <% end %>
 
   <% end %>

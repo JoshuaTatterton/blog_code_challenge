@@ -1,5 +1,12 @@
 <div class="whole_article">
   <%= link_to "< #{@article.blogger.username}", blogger_articles_path(@article.blogger) %>
+
+  <% if current_user == @blogger %>
+    <button class="edit_button btn" id="<%= @article.id %>">
+      Edit Article
+    </button>
+  <% end %>
+
   <div class="title" ><%= @article.title %></div>
 
   <div class="article_display" id="article_display_<%= @article.id %>">
@@ -10,11 +17,6 @@
     <%= markdown @article.content %>
   <% end %>
 
-  <% if current_user == @blogger %>
-    <button class="edit_button btn" id="<%= @article.id %>">
-      Edit Article
-    </button>
-  <% end %>
 </div>
 
 <div class="article_editor" id="article_editor_<%= @article.id %>">
@@ -29,10 +31,10 @@
     <div class="submit_container">
       <button id="cancel_edit">Cancel</button>
       <div class="submit_option">
-        <%= f.submit "Edit Article", class: "btn" %>
+        <%= f.submit "Edit", class: "btn" %>
       </div>
       <div class="submit_option">
-        <%= link_to "Delete Article", blogger_article_path(@blogger, @article), class: "btn", method: :delete %>
+        <%= link_to "Delete", blogger_article_path(@blogger, @article), class: "btn", method: :delete %>
       </div>
     </div>
   <% end %>

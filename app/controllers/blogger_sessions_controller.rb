@@ -1,6 +1,7 @@
 class BloggerSessionsController < ApplicationController
 
   def new
+    render layout: "clean"
   end
 
   def create
@@ -10,7 +11,7 @@ class BloggerSessionsController < ApplicationController
       redirect_to blogger_articles_path(current_user)
     else
       flash[:error] = "Sign in failed"
-      redirect_to :back
+      render :new, layout: "clean"
     end
   end
 

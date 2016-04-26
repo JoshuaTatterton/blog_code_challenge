@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CodeChallenge</title>
+  <title>BlogSite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -9,7 +9,7 @@
 </head>
 <body>
   <div class="nav_bar">
-
+    <div class="web_title">BlogSite</div>
     <%= link_to "Home", root_path, class: "btn" %> 
 
     <% if logged_in? %>
@@ -26,25 +26,23 @@
       <%= link_to "Sign up", new_blogger_path, class: "btn" %>
       
     <% end %>
-
-  </div>
-  
-  <% if hide? %>
-
-    <div class="hidden">
-
-  <% else %>
-
-    <div>
-
-  <% end %>
+    
+    <div
+      <% if hide? %>
+        class="hidden">
+      <% else %>
+        >
+      <% end %>
       <%= form_tag search_path do |f| %>
-        <%= check_box :strict, "option", { checked: true, class: "hidden" }, true, false %>
+          <%= check_box :strict, "option", { checked: true, class: "hidden" }, true, false %>
         <%= text_field_tag :blogger, blogger_page, class: "hidden" %>
         <%= image_submit_tag asset_path("search.png"), id: "search_button" %>
-        <%= text_field_tag :search, previous_search %>
+        <%= text_field_tag :search, previous_search, placeholder: "Search . . ." %>
       <% end %>
     </div>
+  </div>
+  
+  
 
   <div class="main">
     <% flash.each do |type, message| %>

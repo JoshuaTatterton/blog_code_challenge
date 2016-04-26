@@ -28,7 +28,7 @@ feature "blog" do
       fill_in "article_title", with: "Example Title"
       choose "article_option_markdown"
       fill_in "article_content", with: "Hello World!!"
-      click_button "Post Article"
+      click_button "Post"
 
       expect(page).to have_content "Example Title"
       expect(page).to have_content "Hello World!!"
@@ -54,10 +54,12 @@ feature "blog" do
       @blogger = Blogger.last
 
       write_article
+
+      @article = @blogger.articles.last
     end
 
     scenario "have their own named page", js: true do
-      click_link "Example Title"
+      click_link "id_#{@article.id}"
 
       wait(2.seconds).for { current_path }.not_to eq "/bloggers/#{@blogger.slug}/articles"
 
@@ -65,14 +67,14 @@ feature "blog" do
     end
 
     scenario "are displayed on their own page", js: true do
-      click_link "Example Title"
+      click_link "id_#{@article.id}"
 
       expect(page).to have_content "Example Title"
       expect(page).to have_content "Hello World!!"
     end
 
     scenario "can navigate back to the blogger's page", js: true do
-      click_link "Example Title"
+      click_link "id_#{@article.id}"
 
       expect(page).to have_link "< #{@blogger.username}"
       
@@ -83,7 +85,7 @@ feature "blog" do
 
     context "on their own page while signed in" do
       before(:each) do
-        click_link "Example Title"
+        click_link "id_#{@article.id}"
       end
 
       scenario "can be edited by the blogger", js: true do
@@ -137,7 +139,7 @@ feature "blog" do
       expect(page).not_to have_css "#cke_wysiwyg_content"
 
       fill_in "article_content", with: "Hello World!!"
-      click_button "Post Article"
+      click_button "Post"
 
       expect(page).to have_content "Hello World!!"
     end
@@ -154,7 +156,7 @@ feature "blog" do
       expect(page).to have_css "#cke_wysiwyg_content"
 
       fill_in_ckeditor "wysiwyg_content", with: "Hello World!!"
-      click_button "Post Article"
+      click_button "Post"
 
       expect(page).to have_content "Hello World!!"
     end
@@ -192,7 +194,7 @@ feature "blog" do
       fill_in "article_title", with: ""
       choose "article_option_markdown"
       fill_in "article_content", with: "Hello World!!"
-      click_button "Post Article"
+      click_button "Post"
 
       expect(page).to have_content "Title can't be blank"
     end

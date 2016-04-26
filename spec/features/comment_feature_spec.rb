@@ -36,8 +36,10 @@ feature "comment" do
 
       visit "/bloggers/#{@blogger.slug}/articles/example-title"
 
-      click_link "Delete"
-
+      within(".comments") do
+        click_link "Delete"
+      end
+      
       expect(page).not_to have_content "MyName:"
       expect(page).not_to have_content "I like this"
     end

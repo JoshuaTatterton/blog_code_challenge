@@ -19,19 +19,19 @@ module Helpers
       elsif options[:option] == "wysiwyg"
         fill_in_ckeditor "wysiwyg_content", with: "Hello World!!"
       end
-      click_button "Post Article"
+      click_button "Post"
     end
   end
 
   def edit_article
     click_button "Edit Article"
     fill_in "article_content", with: "Hello New World!!"
-    click_button "Edit Article"
+    click_button "Edit"
   end
 
   def delete_article
     click_button "Edit Article"
-    click_link "Delete Article"
+    click_link "Delete"
   end
 
   def write_comment
