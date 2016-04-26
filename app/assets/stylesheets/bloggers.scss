@@ -2,3 +2,59 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+#home_text {
+  font-family: 'Roboto Slab', serif;
+  margin: 0 9.083333% 0 9.083333%; /** 27.25 / 300 **/
+  width: 81.8333333%; /** 245.5 / 300 **/
+}
+.article_container {
+  display: block;
+  margin: 0.75em 6.66666666% 0 6.66666666%; /** 20 / 300 **/
+  width: 86.6666666%; /** 260 / 300 **/
+  padding: 1em 2.788462% 1em 2.788462%; /** left/right 7.25 / 260 **/
+  background-color: #fcfcfc;
+  -webkit-border-radius: 0 0 1em 1em;
+  -moz-border-radius: 0 0 1em 1em;
+  border-radius: 0 0 1em 1em;
+  -webkit-box-shadow: 0.1em 0.1em 0.1em #323232;
+  -moz-box-shadow: 0.1em 0.1em 0.1em #323232;
+  box-shadow: 0.1em 0.1em 0.1em #323232;
+  text-decoration: none;
+  color: #323232;
+  cursor: pointer;
+}
+.article_container:active {
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+
+  -webkit-box-shadow: -0.1em -0.1em 0.1em #323232;
+  -moz-box-shadow: -0.1em -0.1em 0.1em #323232;
+  box-shadow: -0.1em -0.1em 0.1em #323232;
+}
+.title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.4em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.content {
+  margin: 0.5em 0;
+  max-height: 6.5em;
+  overflow: hidden;
+}
+.username {
+  width: 100%;
+  height: auto;
+  text-align: right;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.messages {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.4em;
+  font-weight: bold;
+}

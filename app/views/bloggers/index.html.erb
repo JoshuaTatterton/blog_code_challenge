@@ -1,4 +1,4 @@
-<div>
+<div id="home_text">
   Welcome to the BlogSite.
   Either check out the most recent blogs or start your own.
 </div>
@@ -6,15 +6,21 @@
 
   <% @articles.each do |article| %>
 
-    <%= link_to blogger_article_path(article.blogger, article), id: article.id do %>
+    <%= link_to blogger_article_path(article.blogger, article), class: "article_container", id: article.id do %>
       
-      <div>
+      <div class="title">
         <%= article.title %>
+      </div>
+
+      <div class="content">
         <% if article.wysiwyg? %>
           <%= article.wysiwyg_content.html_safe %>
         <% else %>
           <%= markdown article.content %>
         <% end %>
+      </div>
+
+      <div class="username">
         -<%= article.blogger.username %>
       </div>
       
@@ -25,9 +31,9 @@
 <% else %>
 
   <div class="container">
-    <div>Oops there are no articles here.</div>
+    <div class="messages">Oops there are no articles here.</div>
 
-    <div>Why don't you become a blogger and write the first one.</div>
+    <div class="messages">Why don't you become a blogger and write the first one.</div>
   </div>
 
 <% end %>
