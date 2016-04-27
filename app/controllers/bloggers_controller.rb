@@ -16,7 +16,7 @@ class BloggersController < ApplicationController
       auto_login(@blogger)
       redirect_to blogger_articles_path(@blogger)
     else
-      flash[:error] = "Sign up failed"
+      flash.now[:error] = "Sign up failed"
       render :new, layout: "clean"
     end
   end
