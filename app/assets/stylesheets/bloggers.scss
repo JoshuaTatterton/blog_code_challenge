@@ -2,11 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-/****************
+/****************************************
   
   HOME PAGE
 
-****************/
+****************************************/
 
 #home_text {
   font-family: 'Roboto Slab', serif;
@@ -68,13 +68,13 @@
   font-weight: bold;
 }
 
-/****************
+/****************************************
   
-  SIGN UP PAGE
+  SIGN UP & SIGN IN PAGE
 
-****************/
+****************************************/
 
-.new_blogger {
+.new_blogger, .new_blogger_session {
   display: block;
   background-color: #fcfcfc;
   font-size: 1.6em;
@@ -98,8 +98,12 @@
   width: 100%; 
   border: solid 0.05em #323232;
 }
+.input .field_with_errors {
+  width: 100%;
+}
 
-.new_blogger .btn {
+.new_blogger .btn,
+.new_blogger_session .btn {
   display: inline-block;
   background-color: #f0f0f0;
   color: #323232;
@@ -118,7 +122,8 @@
   -moz-text-shadow: -0.025em -0.025em 0 #fcfcfc;
   text-shadow: -0.025em -0.025em 0 #fcfcfc;
 }
-.new_blogger .btn:nth-last-child(1) {
+.new_blogger .btn:nth-last-child(1),
+.new_blogger_session .btn:nth-last-child(1) {
   background-color: #31abff;
   color: #f0f0f0;
 
@@ -127,11 +132,14 @@
   -moz-text-shadow: -0.025em -0.025em 0 #323232;
   text-shadow: -0.025em -0.025em 0 #323232;
 }
-.new_blogger .btn:active {
-  -webkit-transition-duration: 0.01s;
-  -moz-transition-duration: 0.01s;
-  -o-transition-duration: 0.01s;
-  transition-duration: 0.01s;
+.new_blogger .btn:active,
+.new_blogger_session .btn:active {
+  -webkit-transition-duration: 0s;
+  -moz-transition-duration: 0s;
+  -o-transition-duration: 0s;
+  transition-duration: 0s;
+
+  outline: none;
 
   -webkit-box-shadow: -0.1em -0.1em 0.1em #323232;
   -moz-box-shadow: -0.1em -0.1em 0.1em #323232;
@@ -140,6 +148,12 @@
 .field_with_errors {
   display: inline-block;
 }
+
+/****************************************
+  
+   PAGE
+
+****************************************/
 
 
 

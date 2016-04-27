@@ -10,8 +10,8 @@ class BloggerSessionsController < ApplicationController
       flash[:success] = "You have signed in"
       redirect_to blogger_articles_path(current_user)
     else
-      flash.now[:error] = "Sign in failed"
-      render :new, layout: "clean"
+      flash[:error] = "Sign in failed"
+      redirect_to new_blogger_session_path
     end
   end
 

@@ -1,12 +1,19 @@
-<%= form_tag blogger_sessions_path, method: :post do |f| %>
+<%= form_tag blogger_sessions_path, method: :post, class: "new_blogger_session" do |f| %>
+  
   <div>
     <%= label_tag :email %>:
-    <%= text_field_tag :email %>
   </div>
+  <div class="input">
+    <%= text_field_tag :email, nil, class: "input_box" %>
+  </div>
+
   <div>
     <%= label_tag :password %>:
-    <%= password_field_tag :password %>
   </div>
-  <%= link_to "Cancel", root_path %>
+  <div class="input">
+    <%= password_field_tag :password, nil, class: "input_box" %>
+  </div>
+
+  <%= link_to "Cancel", root_path, class: "btn" %>
   <%= submit_tag "Sign in", class: "btn" %>
 <% end %>
