@@ -1,3 +1,11 @@
 .o-nav_sign_in__form {
   display: none;
 }
+
+.o-sign__form {
+  display: block;
+  width: 86.6666666%; /** 260 / 300 **/
+  margin: 0.75em 6.66666666% 1rem 6.66666666%; /** 20 / 300 **/
+  padding: 1em 7.692308% 1em 7.692308%; /** left/right 20 / 260 **/
+  box-sizing: border-box;
+}

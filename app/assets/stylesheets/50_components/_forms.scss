@@ -1,0 +1,64 @@
+.o-sign__form {
+  background-color: #fcfcfc;
+  font-size: 1.6em;
+
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  border-radius: 1em;
+
+  -webkit-box-shadow: 0.1em 0.1em 0.1em #323232;
+  -moz-box-shadow: 0.1em 0.1em 0.1em #323232;
+  box-shadow: 0.1em 0.1em 0.1em #323232;
+}
+
+.c-form__input {
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+.c-form__field {
+  font-size: inherit;
+  width: 100%; 
+  border: solid 0.05em #323232;
+  box-sizing: border-box;
+}
+
+.c-form__submit {
+  display: inline-block;
+  background-color: #31abff;
+  color: #f0f0f0;
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.4rem;
+  font-weight: normal;
+  text-align: center;
+  text-decoration: none;
+  width: calc(45.4545454% - 0.1em); /** 100 / 220 - shadow width**/
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  margin: 0.5rem 0 0 8.295085%; /** 20 / 220 = 9.0909% too large because of shadows, iterated to sf's **/
+
+  -webkit-box-shadow: 0.1em 0.1em 0.1em #323232;
+  -moz-box-shadow: 0.1em 0.1em 0.1em #323232;
+  box-shadow: 0.1em 0.1em 0.1em #323232;
+
+  -webkit-text-shadow: -0.025em -0.025em 0 #323232;
+  -moz-text-shadow: -0.025em -0.025em 0 #323232;
+  text-shadow: -0.025em -0.025em 0 #323232;
+}
+.c-form__submit:focus {
+  outline: none;
+}
+.c-form__submit:active {
+  -webkit-box-shadow: -0.1em -0.1em 0.1em #323232;
+  -moz-box-shadow: -0.1em -0.1em 0.1em #323232;
+  box-shadow: -0.1em -0.1em 0.1em #323232;
+}
+.c-form__submit--cancel {
+  background-color: #f0f0f0;
+  color: #323232;
+  margin-left: 0;
+
+  -webkit-text-shadow: -0.025em -0.025em 0 #fcfcfc;
+  -moz-text-shadow: -0.025em -0.025em 0 #fcfcfc;
+  text-shadow: -0.025em -0.025em 0 #fcfcfc;
+}

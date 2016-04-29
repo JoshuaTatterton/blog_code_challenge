@@ -1,35 +1,35 @@
 
-<%= form_for @blogger do |f| %>
+<%= form_for @blogger, html: { class: "o-sign__form" } do |f| %>
 
   <div>
     <%= f.label :username %>:
   </div>
-  <div class="input">
-    <%= f.text_field :username, class: "input_box" %>
+  <div class="c-form__input">
+    <%= f.text_field :username, class: "c-form__field" %>
   </div>
 
   <div>
     <%= f.label :email %>:
   </div>
-  <div class="input">
-    <%= f.text_field :email, class: "input_box" %>
+  <div class="c-form__input">
+    <%= f.text_field :email, class: "c-form__field" %>
   </div>
 
   <div>
     <%= f.label :password %>:
   </div>
-  <div class="input">
-    <%= f.password_field :password, class: "input_box"%>
+  <div class="c-form__input">
+    <%= f.password_field :password, class: "c-form__field"%>
   </div>
   
   <div>
     <%= f.label :password_confirmation %>:
   </div>
-  <div class="pass_conf_input">
-    <%= f.password_field :password_confirmation, class: "input_box" %>
+  <div class="c-form__input">
+    <%= f.password_field :password_confirmation, class: "c-form__field" %>
   </div>
 
-  <%= link_to "Cancel", root_path, class: "btn" %>
-  <%= f.submit "Sign up", class: "btn" %>
+  <%= link_to "Cancel", root_path, class: "c-form__submit c-form__submit--cancel" %>
+  <%= f.submit "Sign up", class: "c-form__submit" %>
 
 <% end %>
