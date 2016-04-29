@@ -53,7 +53,7 @@
 
   <div class="o-main">
     <% flash.each do |type, message| %>
-      <div class="alert flash <%= type %>">
+      <div class="alert c-flash__<%= type %>">
         <%= message %>
       </div>
     <% end %>

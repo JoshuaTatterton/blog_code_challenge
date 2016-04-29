@@ -4,7 +4,46 @@
     <%= @blogger.username %>
   </div>
 
-  <%= form_for [@blogger, new_subscriber], html: { class: "o-subscribe_form" } do |f| %>
+  <% if current_user == @blogger %>
+
+    <button class="c-article__new" id="new_article">New Article</button>
+
+    <div class="article_writer o-article_container c-form__article">
+      <%= form_for [@blogger, @article] do |f| %>
+        <div>
+          <%= f.label :title %>
+          <%= f.text_field :title, class: "c-form__title" %>
+        </div>
+        <div class="">
+          <div class="">
+            What do you want to write your post in:
+          </div> 
+          <div class="c-form__selectors">
+            <div class="">
+              <%= f.radio_button :option, "markdown" %>
+              <%= f.label :option, ":Markdown" %>
+            </div>
+            <div class="">
+              <%= f.radio_button :option, "wysiwyg" %>
+              <%= f.label :option, ":WYSIWYG" %>
+            </div>
+          </div>
+        </div>
+        <div class="content_container" id="wysiwig_content_container">
+          <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content", ckeditor: { toolbar: "custom" } } %>
+        </div>
+        <div class="content_container" id="markdown_content_container">
+          <%= f.text_area(:content, class: "c-form__markdown_editor") %>
+        </div>
+        <button type="button" class="c-form__submit c-form__submit--cancel" id="cancel_writing">Cancel</button>
+        <%= f.submit "Post", class: "c-form__submit" %>
+      <% end %>
+    </div>
+    
+
+  <% else %>
+
+    <%= form_for [@blogger, new_subscriber], html: { class: "o-form" } do |f| %>
 
     <div class="c-subscribe_form__text">
       Subscribe to receive emails when <%= @blogger.username %> posts a new blog.
@@ -14,43 +53,6 @@
     </div>
     <%= f.submit "Subscribe", class: "c-subscribe_form__submit" %>
   <% end %>
-
-  <% if current_user == @blogger %>
-    <div>
-      <button class="btn" id="new_article">New Article</button>
-      
-      <div class="article_writer article_container">
-        <%= form_for [@blogger, @article] do |f| %>
-          <div>
-            <%= f.label :title %>
-            <%= f.text_field :title %>
-          </div>
-          <div class="type_selector">
-            <div class="type_section">
-              What do you want to write your post in:
-            </div> 
-            <div class="radio_selectors">
-              <div class="type_section">
-                <%= f.radio_button :option, "markdown" %>
-                <%= f.label :option, ":Markdown" %>
-              </div>
-              <div class="type_section">
-                <%= f.radio_button :option, "wysiwyg" %>
-                <%= f.label :option, ":WYSIWYG" %>
-              </div>
-            </div>
-          </div>
-          <div class="content_container" id="wysiwig_content_container">
-            <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content", ckeditor: { toolbar: "custom" } } %>
-          </div>
-          <div class="content_container" id="markdown_content_container">
-            <%= f.text_area(:content, class: "markdown_text_editor") %>
-          </div>
-          <button id="cancel_writing">Cancel</button>
-          <%= f.submit "Post", class: "btn" %>
-        <% end %>
-      </div>
-    </div>
   <% end %>
 
   <% if @articles != [] %>

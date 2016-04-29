@@ -10,7 +10,8 @@ CKEDITOR.editorConfig = function (config) {
     { items: [ 'TextColor' ] },
     { items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
     { items: [ 'FontSize' ] },
-    { items: [ 'Format', 'Font' ] }
+    { items: [ 'Format'] },
+    { items: [ 'Font' ] }
   ];
   config.toolbar = "simple";
 
