@@ -1,63 +1,81 @@
-<%= form_for [@blogger, new_subscriber] do |f| %>
-  <div class="form_item">
-    <%= f.text_field :email, placeholder: "Email" %>
-  </div>
-  <%= f.submit "Subscribe", class: "btn" %>
-<% end %>
+<div class="blogger_page">
 
-<% if current_user == @blogger %>
-  <div>
-    <button class="btn" id="new_article">New Article</button>
-    
-    <div class="article_writer article_container">
-      <%= form_for [@blogger, @article] do |f| %>
-        <div>
-          <%= f.label :title %>
-          <%= f.text_field :title %>
-        </div>
-        <div class="type_selector">
-          <div class="type_section">
-            What do you want to write your post in:
-          </div> 
-          <div class="radio_selectors">
+  <div class="username">
+    <%= @blogger.username %>
+  </div>
+
+  <%= form_for [@blogger, new_subscriber] do |f| %>
+
+    <div>
+      Subscribe to receive emails when <%= @blogger.username %> posts a new blog.
+    </div>
+    <div class="form_item">
+      <%= f.text_field :email, placeholder: "Email" %>
+    </div>
+    <%= f.submit "Subscribe", class: "btn" %>
+  <% end %>
+
+  <% if current_user == @blogger %>
+    <div>
+      <button class="btn" id="new_article">New Article</button>
+      
+      <div class="article_writer article_container">
+        <%= form_for [@blogger, @article] do |f| %>
+          <div>
+            <%= f.label :title %>
+            <%= f.text_field :title %>
+          </div>
+          <div class="type_selector">
             <div class="type_section">
-              <%= f.radio_button :option, "markdown" %>
-              <%= f.label :option, ":Markdown" %>
-            </div>
-            <div class="type_section">
-              <%= f.radio_button :option, "wysiwyg" %>
-              <%= f.label :option, ":WYSIWYG" %>
+              What do you want to write your post in:
+            </div> 
+            <div class="radio_selectors">
+              <div class="type_section">
+                <%= f.radio_button :option, "markdown" %>
+                <%= f.label :option, ":Markdown" %>
+              </div>
+              <div class="type_section">
+                <%= f.radio_button :option, "wysiwyg" %>
+                <%= f.label :option, ":WYSIWYG" %>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="content_container" id="wysiwig_content_container">
-          <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content", ckeditor: { toolbar: "custom" } } %>
-        </div>
-        <div class="content_container" id="markdown_content_container">
-          <%= f.text_area(:content, class: "markdown_text_editor") %>
-        </div>
-        <button id="cancel_writing">Cancel</button>
-        <%= f.submit "Post", class: "btn" %>
-      <% end %>
-    </div>
-  </div>
-<% end %>
-
-<% if @articles != [] %>
-  <% @articles.each do |a| %>
-    <%= link_to blogger_article_path(@blogger, a), id: "id_#{a.id}" do %>
-      <div class="article_container">
-        <%= a.title %>
-
-        <% if a.wysiwyg? %>
-          <%= a.wysiwyg_content.html_safe %>
-        <% else %>
-          <%= markdown a.content %>
+          <div class="content_container" id="wysiwig_content_container">
+            <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content", ckeditor: { toolbar: "custom" } } %>
+          </div>
+          <div class="content_container" id="markdown_content_container">
+            <%= f.text_area(:content, class: "markdown_text_editor") %>
+          </div>
+          <button id="cancel_writing">Cancel</button>
+          <%= f.submit "Post", class: "btn" %>
         <% end %>
-
       </div>
-    <% end %>
+    </div>
   <% end %>
-<% else %>
-  No blog posts have been made.
-<%end%>
+
+  <% if @articles != [] %>
+    
+      <% @articles.each do |a| %>
+        <%= link_to blogger_article_path(@blogger, a), class: "article_container", id: "id_#{a.id}" do %>
+          <div >
+
+            <div class="title">
+              <%= a.title %>
+            </div>
+
+            <div class="content">
+              <% if a.wysiwyg? %>
+                <%= a.wysiwyg_content.html_safe %>
+              <% else %>
+                <%= markdown a.content %>
+              <% end %>
+            </div>
+
+          </div>
+        <% end %>
+      <% end %>
+  
+  <% else %>
+    No blog posts have been made.
+  <%end%>
+</div>
