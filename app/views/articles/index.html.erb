@@ -1,18 +1,18 @@
 <div class="blogger_page">
 
-  <div class="username">
+  <div class="c-blogger__username">
     <%= @blogger.username %>
   </div>
 
-  <%= form_for [@blogger, new_subscriber] do |f| %>
+  <%= form_for [@blogger, new_subscriber], html: { class: "o-subscribe_form" } do |f| %>
 
-    <div>
+    <div class="c-subscribe_form__text">
       Subscribe to receive emails when <%= @blogger.username %> posts a new blog.
     </div>
-    <div class="form_item">
-      <%= f.text_field :email, placeholder: "Email" %>
+    <div class="c-form__input">
+      <%= f.text_field :email, placeholder: "Email", class: "c-form__field" %>
     </div>
-    <%= f.submit "Subscribe", class: "btn" %>
+    <%= f.submit "Subscribe", class: "c-subscribe_form__submit" %>
   <% end %>
 
   <% if current_user == @blogger %>
@@ -56,14 +56,14 @@
   <% if @articles != [] %>
     
       <% @articles.each do |a| %>
-        <%= link_to blogger_article_path(@blogger, a), class: "article_container", id: "id_#{a.id}" do %>
+        <%= link_to blogger_article_path(@blogger, a), class: "o-article_container", id: "id_#{a.id}" do %>
           <div >
 
-            <div class="title">
+            <div class="c-article__title">
               <%= a.title %>
             </div>
 
-            <div class="content">
+            <div class="c-article__content">
               <% if a.wysiwyg? %>
                 <%= a.wysiwyg_content.html_safe %>
               <% else %>

@@ -62,3 +62,31 @@
   -moz-text-shadow: -0.025em -0.025em 0 #fcfcfc;
   text-shadow: -0.025em -0.025em 0 #fcfcfc;
 }
+
+.c-subscribe_form__text {
+  margin-bottom: 0.25rem;
+}
+.c-subscribe_form__submit {
+  background-color: #31abff;
+  color: #f0f0f0;
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.4rem;
+  font-weight: normal;
+  text-align: center;
+  text-decoration: none;
+  width: 100%;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  
+  -webkit-box-shadow: 0.1em 0.1em 0.1em #323232;
+  -moz-box-shadow: 0.1em 0.1em 0.1em #323232;
+  box-shadow: 0.1em 0.1em 0.1em #323232;
+
+  -webkit-text-shadow: -0.025em -0.025em 0 #323232;
+  -moz-text-shadow: -0.025em -0.025em 0 #323232;
+  text-shadow: -0.025em -0.025em 0 #323232;
+}
+.c-subscribe_form__submit:focus {
+  outline: none;
+}

@@ -1,5 +1,5 @@
 <div class="whole_article">
-  <%= link_to "< #{@article.blogger.username}", blogger_articles_path(@article.blogger) %>
+  <%= link_to "< #{@article.blogger.username}", blogger_articles_path(@article.blogger) , class: "c-blogger__username" %>
 
   <% if current_user == @blogger %>
     <button class="edit_button btn" id="<%= @article.id %>">
@@ -11,78 +11,79 @@
 
   <div class="article_display" id="article_display_<%= @article.id %>">
   
-  <% if @article.wysiwyg? %>
-    <%= @article.wysiwyg_content.html_safe %>
-  <% else %>
-    <%= markdown @article.content %>
-  <% end %>
+    <% if @article.wysiwyg? %>
+      <%= @article.wysiwyg_content.html_safe %>
+    <% else %>
+      <%= markdown @article.content %>
+    <% end %>
 
-</div>
+  </div>
 
-<div class="article_editor" id="article_editor_<%= @article.id %>">
-  <%= form_for [@blogger, @article] do |f| %>
-    <div class="content_container">
-      <% if @article.wysiwyg? %>
-        <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content_#{@article.id}", ckeditor: { toolbar: "custom" } } %>
-      <% else %>
-        <%= f.text_area(:content, class: "markdown_text_editor") %>
-      <% end %>
-    </div>
-    <div class="submit_container">
-      <button id="cancel_edit">Cancel</button>
-      <div class="submit_option">
-        <%= f.submit "Edit", class: "btn" %>
-      </div>
-      <div class="submit_option">
-        <%= link_to "Delete", blogger_article_path(@blogger, @article), class: "btn", method: :delete %>
-      </div>
-    </div>
-  <% end %>
-</div>
-
-</div>
-
-<button class="btn" id="comment">Comment</button>
-
-<div class="comment_new">
-  <%= form_for [@blogger, @article, @comment] do |f| %>
-    <div class="comment_info_container">
-      <div class="comment_item">
-        <div class="label_container">
-          <%= f.label :name, class: "comment_label" %>:
-        </div>
-        <div class="input_container"> 
-          <%= f.text_field :name, class: "comment_input" %>
-        </div>
-      </div>
-      <div class="comment_item">
-        <div class="label_container">  
-          <%= f.label :comment, class: "comment_label"%>:
-        </div>
-        <div class="input_container"> 
-          <%= f.text_area :content, class: "comment_input comment_content" %>
-        </div>
-      </div>
-    </div>
-    <%= f.submit "Post Comment", class: "btn" %>
-  <% end %>
-</div>
-
-<table class="comments">
-  <% @comments.each do |comment| %>
-    <tr>
-      <td class="comment_head">
-        <%= comment.name %>:
-      </td>
-      <td class="comment_main">
-        <%= comment.content %>
-      </td>
-      <td class="comment_sub">
-        <%= comment.created_at.strftime("%e/%-m/%y at %H:%M") %>
-        <% if current_user == @blogger %>
-          <%= link_to "Delete", blogger_article_comment_path(@blogger, @article, comment), method: :delete, class: "btn" %>
+  <div class="article_editor" id="article_editor_<%= @article.id %>">
+    <%= form_for [@blogger, @article] do |f| %>
+      <div class="content_container">
+        <% if @article.wysiwyg? %>
+          <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content_#{@article.id}", ckeditor: { toolbar: "custom" } } %>
+        <% else %>
+          <%= f.text_area(:content, class: "markdown_text_editor") %>
         <% end %>
-      </td>
-    </tr>
-  <% end %>
+      </div>
+      <div class="submit_container">
+        <button id="cancel_edit">Cancel</button>
+        <div class="submit_option">
+          <%= f.submit "Edit", class: "btn" %>
+        </div>
+        <div class="submit_option">
+          <%= link_to "Delete", blogger_article_path(@blogger, @article), class: "btn", method: :delete %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  </div>
+
+  <button class="btn" id="comment">Comment</button>
+
+  <div class="comment_new">
+    <%= form_for [@blogger, @article, @comment] do |f| %>
+      <div class="comment_info_container">
+        <div class="comment_item">
+          <div class="label_container">
+            <%= f.label :name, class: "comment_label" %>:
+          </div>
+          <div class="input_container"> 
+            <%= f.text_field :name, class: "comment_input" %>
+          </div>
+        </div>
+        <div class="comment_item">
+          <div class="label_container">  
+            <%= f.label :comment, class: "comment_label"%>:
+          </div>
+          <div class="input_container"> 
+            <%= f.text_area :content, class: "comment_input comment_content" %>
+          </div>
+        </div>
+      </div>
+      <%= f.submit "Post Comment", class: "btn" %>
+    <% end %>
+  </div>
+
+  <table class="comments">
+    <% @comments.each do |comment| %>
+      <tr>
+        <td class="comment_head">
+          <%= comment.name %>:
+        </td>
+        <td class="comment_main">
+          <%= comment.content %>
+        </td>
+        <td class="comment_sub">
+          <%= comment.created_at.strftime("%e/%-m/%y at %H:%M") %>
+          <% if current_user == @blogger %>
+            <%= link_to "Delete", blogger_article_comment_path(@blogger, @article, comment), method: :delete, class: "btn" %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
 </div>
