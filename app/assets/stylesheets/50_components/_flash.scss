@@ -1,8 +1,12 @@
-.c-flash__error {
+.c-flash {
   max-width: 80%; /** 240 / 300 **/
   margin: 0.5rem 0 0 10%;
-
   font-family: 'Roboto Slab', serif;
   text-transform: uppercase;
+}
+.c-flash__error {
   color: red;
+}
+.c-flash__success {
+  color: green;
 }

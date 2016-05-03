@@ -1,9 +1,15 @@
-.o-nav_bar {
+.o-nav_toggle {
+  position: absolute;
+  will-change: transform;
+  opacity: 0;
+}
+
+.o-nav {
   display: inline-block;
-  width: calc(100% - 3.5em);
+  width: calc(100% - 3.5rem);
   position: fixed;
   top: 0;
-  left: calc(-100% + 3.5em);
+  left: calc(-100% + 3.5rem);
   height: 100%;
   overflow-x: hidden;
 
@@ -20,28 +26,24 @@
   transition: .25s ease-in-out;
   
   -webkit-text-size-adjust: none;
+
+  text-align: center;
+  background-color: #31abff;
+  color: #f0f0f0;  
 }
-.o-nav_toggle:checked ~ .o-nav_bar {
+.o-nav_toggle:checked ~ .o-nav {
   left: 0;
 }
 
-.o-nav_toggle {
-  position: absolute;
-}
-
-.o-navigation {
+.o-nav__links {
   margin-top: 4.5rem;
 }
 
-.o-nav_search {
-  height: 3em;
+.o-nav__search {
+  height: 3rem;
   padding: 0;
   vertical-align: middle;
 }
-
-
-
-
 
 
 

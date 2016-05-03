@@ -1,5 +1,5 @@
 
-<%= form_for @blogger, html: { class: "o-form o-form__sign" } do |f| %>
+<%= form_for @blogger, html: { class: "o-sign_form" } do |f| %>
 
   <div>
     <%= f.label :username %>:
@@ -29,7 +29,7 @@
     <%= f.password_field :password_confirmation, class: "c-form__field" %>
   </div>
 
-  <%= link_to "Cancel", root_path, class: "c-form__submit c-form__submit--cancel" %>
-  <%= f.submit "Sign up", class: "c-form__submit" %>
+  <%= link_to "Cancel", root_path, class: "c-btn c-form__btn c-form__btn--cancel" %>
+  <%= f.submit "Sign up", class: "c-btn c-form__btn" %>
 
 <% end %>

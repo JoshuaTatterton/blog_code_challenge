@@ -6,7 +6,7 @@
 
   <% @articles.each do |article| %>
 
-    <%= link_to blogger_article_path(article.blogger, article), class: "o-article_container", id: article.id do %>
+    <%= link_to blogger_article_path(article.blogger, article), class: "o-article", id: article.id do %>
       
       <div class="c-article__title">
         <%= article.title %>

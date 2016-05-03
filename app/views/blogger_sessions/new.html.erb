@@ -1,4 +1,4 @@
-<%= form_tag blogger_sessions_path, method: :post, class: "o-form o-form__sign" do |f| %>
+<%= form_tag blogger_sessions_path, method: :post, class: "o-sign_form" do |f| %>
   
   <div>
     <%= label_tag :email %>:
@@ -14,7 +14,7 @@
     <%= password_field_tag :password, nil, class: "c-form__field" %>
   </div>
 
-  <%= link_to "Cancel", root_path, class: "c-form__submit c-form__submit--cancel" %>
-  <%= submit_tag "Sign in", class: "c-form__submit" %>
+  <%= link_to "Cancel", root_path, class: "c-btn c-form__btn c-form__btn--cancel" %>
+  <%= submit_tag "Sign in", class: "c-btn c-form__btn" %>
 
 <% end %>

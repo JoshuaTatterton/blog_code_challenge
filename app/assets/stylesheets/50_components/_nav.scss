@@ -1,13 +1,3 @@
-.o-nav_bar {
-  text-align: center;
-  background-color: #31abff;
-  color: #f0f0f0;  
-}
-
-.o-nav_toggle {
-  will-change: transform;
-  opacity: 0;
-}
 .c-nav_toggle__label {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -16,8 +6,8 @@
   -ms-user-select: none;
   user-select: none;
   left: 0px;
-  height: 3.5em;
-  width: 3.5em;
+  height: 3.5rem;
+  width: 3.5rem;
   cursor: pointer;
   display: block;
   position: fixed;
@@ -25,7 +15,7 @@
 
   background: #31abff center no-repeat;
   background-image: asset-url("arrow_right.png");
-  background-size: 2em 2em;
+  background-size: 2rem 2rem;
 
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -41,10 +31,10 @@
 }
 .o-nav_toggle:checked ~ .c-nav_toggle__label{
   background-image: asset-url("arrow_left.png");
-  left: calc(100% - 3.5em);
+  left: calc(100% - 3.5rem);
 }
 
-.c-nav_bar__title {
+.c-nav__title {
   color: #f0f0f0;
   background: #31abff;
   width: calc(100% - 3.5rem);
@@ -65,7 +55,7 @@
   -webkit-text-size-adjust: none;
 }
 
-.o-nav_toggle:checked ~ .o-nav_bar .c-nav_bar__title {
+.o-nav_toggle:checked ~ .o-nav .c-nav__title {
   left: 0;
 }
 
@@ -88,7 +78,7 @@
   border: none;
 }
 
-.c-nav_bar__button {
+.c-nav__button {
   font-family: 'Roboto Slab', serif;
   display: block;
   color: inherit;
@@ -97,7 +87,7 @@
   padding: 1rem 0;
   font-size: 1.5rem;
 }
-.c-nav_bar__button:active {
+.c-nav__button:active {
   color: #323232;
   background-color: #f0f0f0;
 }

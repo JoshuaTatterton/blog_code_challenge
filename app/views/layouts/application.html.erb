@@ -15,37 +15,37 @@
 
     <div class="c-web_title">BlogSite</div>
     
-    <div class="o-nav_bar">
+    <div class="o-nav">
 
-      <div class="c-web_title c-nav_bar__title">BlogSite</div>
+      <div class="c-web_title c-nav__title">BlogSite</div>
 
-      <div class="o-navigation">
+      <div class="o-nav__links">
 
-        <%= form_tag search_path, class: "o-nav_search" do |f| %>
+        <%= form_tag search_path, class: "o-nav__search" do |f| %>
           <%= check_box :strict, "option", { checked: true, class: "c-search__field--hide" }, true, false %>
           <%= text_field_tag :blogger, blogger_page, type: "hidden" %>
           <%= image_submit_tag asset_path("search.png"), class: "c-search__image" %>
           <%= text_field_tag :search, previous_search, placeholder: "Search . . .", class: "c-search__field" %>
         <% end %>
 
-        <%= link_to "Home", root_path, class: "c-nav_bar__button" %> 
+        <%= link_to "Home", root_path, class: "c-nav__button" %> 
 
         <% if logged_in? %>
 
-          <%= link_to "My Blog", blogger_articles_path(current_user), class: "c-nav_bar__button" %>
-          <%= link_to "Sign out", :sign_out, method: :post, class: "c-nav_bar__button" %>
+          <%= link_to "My Blog", blogger_articles_path(current_user), class: "c-nav__button" %>
+          <%= link_to "Sign out", :sign_out, method: :post, class: "c-nav__button" %>
         
         <% else %>
 
-          <%= link_to "Sign in", new_blogger_session_path, class: "c-nav_bar__button" %>
+          <%= link_to "Sign in", new_blogger_session_path, class: "c-nav__button" %>
           
-          <%= form_tag blogger_sessions_path, method: :post, class: "o-nav_sign_in__form" do |f| %>
+          <%= form_tag blogger_sessions_path, method: :post, class: "o-nav__sign_in_form" do |f| %>
               <%= text_field_tag :email, nil, placeholder: "Email" %>
               <%= password_field_tag :password, nil, placeholder: "Password" %>
-            <%= submit_tag "Sign in", class: "c-nav_bar__button" %>
+            <%= submit_tag "Sign in", class: "c-nav__button" %>
           <% end %>
 
-          <%= link_to "Sign up", new_blogger_path, class: "c-nav_bar__button" %>
+          <%= link_to "Sign up", new_blogger_path, class: "c-nav__button" %>
           
         <% end %>
       </div>
@@ -53,7 +53,7 @@
 
   <div class="o-main">
     <% flash.each do |type, message| %>
-      <div class="alert c-flash__<%= type %>">
+      <div class="alert c-flash c-flash__<%= type %>">
         <%= message %>
       </div>
     <% end %>

@@ -1,5 +1,5 @@
 <div class="whole_article">
-  <%= link_to "< #{@article.blogger.username}", blogger_articles_path(@article.blogger) , class: "c-blogger__username" %>
+  <%= link_to "< #{@article.blogger.username}", blogger_articles_path(@article.blogger) , class: "c-blogger_username" %>
 
   <% if current_user == @blogger %>
     <button class="edit_button btn" id="<%= @article.id %>">

@@ -1,14 +1,14 @@
 <div class="blogger_page">
 
-  <div class="c-blogger__username">
+  <div class="c-blogger_username">
     <%= @blogger.username %>
   </div>
 
   <% if current_user == @blogger %>
 
-    <button class="c-article__new" id="new_article">New Article</button>
+    <button class="c-btn c-btn__new_article" id="new_article">New Article</button>
 
-    <div class="article_writer o-article_container c-form__article">
+    <div class="article_writer o-article_form">
       <%= form_for [@blogger, @article] do |f| %>
         <div>
           <%= f.label :title %>
@@ -35,8 +35,8 @@
         <div class="content_container" id="markdown_content_container">
           <%= f.text_area(:content, class: "c-form__markdown_editor") %>
         </div>
-        <button type="button" class="c-form__submit c-form__submit--cancel" id="cancel_writing">Cancel</button>
-        <%= f.submit "Post", class: "c-form__submit" %>
+        <button type="button" class="c-btn c-form__btn c-form__btn--cancel" id="cancel_writing">Cancel</button>
+        <%= f.submit "Post", class: "c-btn c-form__btn" %>
       <% end %>
     </div>
     
@@ -45,20 +45,21 @@
 
     <%= form_for [@blogger, new_subscriber], html: { class: "o-form" } do |f| %>
 
-    <div class="c-subscribe_form__text">
-      Subscribe to receive emails when <%= @blogger.username %> posts a new blog.
-    </div>
-    <div class="c-form__input">
-      <%= f.text_field :email, placeholder: "Email", class: "c-form__field" %>
-    </div>
-    <%= f.submit "Subscribe", class: "c-subscribe_form__submit" %>
-  <% end %>
+      <div class="c-form__text">
+        Subscribe to receive emails when <%= @blogger.username %> posts a new blog.
+      </div>
+      <div class="c-form__input">
+        <%= f.text_field :email, placeholder: "Email", class: "c-form__field" %>
+      </div>
+      <%= f.submit "Subscribe", class: "c-btn c-form__btn c-form__btn--subscribe" %>
+    <% end %>
+
   <% end %>
 
   <% if @articles != [] %>
     
       <% @articles.each do |a| %>
-        <%= link_to blogger_article_path(@blogger, a), class: "o-article_container", id: "id_#{a.id}" do %>
+        <%= link_to blogger_article_path(@blogger, a), class: "o-article", id: "id_#{a.id}" do %>
           <div >
 
             <div class="c-article__title">

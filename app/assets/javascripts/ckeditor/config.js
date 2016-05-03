@@ -6,8 +6,8 @@ CKEDITOR.editorConfig = function (config) {
   config.toolbar_custom = [
     { items: ["Bold",  "Italic",  "Underline",  "Strike",  "-",  "Subscript",  "Superscript"] }, 
     { groups: [ 'clipboard', 'undo' ] },
-    { items: [ 'Scayt', 'SpecialChar' ] },
     { items: [ 'TextColor' ] },
+    { items: [ 'Scayt', 'SpecialChar' ] },
     { items: [ 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
     { items: [ 'FontSize' ] },
     { items: [ 'Format'] },

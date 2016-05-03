@@ -1,15 +1,53 @@
-.o-nav_sign_in__form {
+.o-nav__sign_in_form {
   display: none;
 }
 
 .o-form {
-  display: block;
+  display: inline-block;
   width: 86.6666666%; /** 260 / 300 **/
-  margin: 0.75em 6.66666666% 0.5rem 6.66666666%; /** 20 / 300 **/
+  margin: 0.75rem 6.66666666% 0.5rem 6.66666666%; /** 20 / 300 **/
   box-sizing: border-box;
 }
 
-.o-form__sign {
-  margin: 0.75em 6.66666666% 1rem 6.66666666%; /** 20 / 300 **/
-  padding: 1em 7.692308% 1em 7.692308%; /** left/right 20 / 260 **/
+.o-sign_form {
+  display: inline-block;
+  width: 86.6666666%; /** 260 / 300 **/
+  margin: 0.75rem 6.66666666% 1rem 6.66666666%; /** 20 / 300 **/
+  padding: 1rem 7.692308% 1rem 7.692308%; /** left/right 20 / 260 **/
+  box-sizing: border-box;
+
+  background-color: #fcfcfc;
+  font-size: 1.6rem;
+
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  border-radius: 1rem;
+
+  -webkit-box-shadow: 0.1rem 0.1em 0.1rem #323232;
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  box-shadow: 0.1rem 0.1rem 0.1rem #323232;
 }
+
+.o-article_form {
+  display: inline-block;
+  width: 86.6666666%; /** 260 / 300 **/
+  margin: 0.75rem 6.66666666% 0 6.66666666%; /** 20 / 300 **/
+  padding: 0.75rem 3.8461538% 1rem 3.8461538%; /** 10 / 260 **/
+  box-sizing: border-box;
+  background-color: #fcfcfc;
+  color: #323232;
+  text-decoration: none;
+
+  -webkit-border-radius: 0 0 1rem 1rem;
+  -moz-border-radius: 0 0 1rem 1rem;
+  border-radius: 0 0 1rem 1rem;
+
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+}
+
+  
+
+  
+

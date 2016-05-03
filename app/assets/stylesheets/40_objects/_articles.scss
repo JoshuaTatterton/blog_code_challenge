@@ -1,7 +1,33 @@
-.o-article_container {
+.o-article {
   display: block;
   margin: 0.75rem 6.66666666% 0 6.66666666%; /** 20 / 300 **/
   width: 86.6666666%; /** 260 / 300 **/
   padding: 1rem 0;
   cursor: pointer;
+
+  background-color: #fcfcfc;
+  color: #323232;
+  text-decoration: none;
+
+  -webkit-border-radius: 0 0 1rem 1rem;
+  -moz-border-radius: 0 0 1rem 1rem;
+  border-radius: 0 0 1rem 1rem;
+
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  
+  will-change: transform;
+}
+
+.o-article:active {
+  -webkit-box-shadow: -0.1rem -0.1rem 0.1rem #323232;
+  -moz-box-shadow: -0.1rem -0.1rem 0.1rem #323232;
+  box-shadow: -0.1rem -0.1rem 0.1rem #323232;
+}
+.o-article__form:active {
+  will-change: transform;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  box-shadow: 0.1rem 0.1rem 0.1rem #323232;
 }
