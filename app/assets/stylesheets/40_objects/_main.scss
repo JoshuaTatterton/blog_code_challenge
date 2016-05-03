@@ -20,6 +20,6 @@
   -webkit-text-size-adjust: none;
 }
 
-.o-nav_toggle:checked ~ .o-main {
+.o-toggle:checked ~ .o-main {
   margin-left: calc(100% - 3.5rem);
 }

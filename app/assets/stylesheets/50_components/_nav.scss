@@ -29,7 +29,7 @@
   
   -webkit-text-size-adjust: none;
 }
-.o-nav_toggle:checked ~ .c-nav_toggle__label{
+.o-toggle:checked ~ .c-nav_toggle__label{
   background-image: asset-url("arrow_left.png");
   left: calc(100% - 3.5rem);
 }
@@ -55,7 +55,7 @@
   -webkit-text-size-adjust: none;
 }
 
-.o-nav_toggle:checked ~ .o-nav .c-nav__title {
+.o-toggle:checked ~ .o-nav .c-nav__title {
   left: 0;
 }
 

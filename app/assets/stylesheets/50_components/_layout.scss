@@ -25,6 +25,6 @@
   -webkit-text-size-adjust: none;
 }
 
-.o-nav_toggle:checked ~ .c-web_title {
+.o-toggle:checked ~ .c-web_title {
   left: calc(100% - 3.5rem);
 }

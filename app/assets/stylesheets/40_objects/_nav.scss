@@ -1,4 +1,4 @@
-.o-nav_toggle {
+.o-toggle {
   position: absolute;
   will-change: transform;
   opacity: 0;
@@ -31,7 +31,7 @@
   background-color: #31abff;
   color: #f0f0f0;  
 }
-.o-nav_toggle:checked ~ .o-nav {
+.o-toggle:checked ~ .o-nav {
   left: 0;
 }
 

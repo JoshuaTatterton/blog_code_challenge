@@ -6,36 +6,32 @@
 
   <% if current_user == @blogger %>
 
-    <button class="c-btn c-btn__new_article" id="new_article">New Article</button>
+    <input type="checkbox" class="o-toggle" name="new_toggle" id="new_toggle"/>
+    <label for="new_toggle" class="c-btn c-btn__new_article">New Article</label>
 
-    <div class="article_writer o-article_form">
+    <div class="o-article_form">
       <%= form_for [@blogger, @article] do |f| %>
-        <div>
-          <%= f.label :title %>
-          <%= f.text_field :title, class: "c-form__title" %>
+        <div class="">
+          <%= f.label :title %>:
+          <%= f.text_field :title, class: "c-form__title_field" %>
         </div>
         <div class="">
-          <div class="">
-            What do you want to write your post in:
-          </div> 
-          <div class="c-form__selectors">
-            <div class="">
-              <%= f.radio_button :option, "markdown" %>
-              <%= f.label :option, ":Markdown" %>
-            </div>
-            <div class="">
-              <%= f.radio_button :option, "wysiwyg" %>
-              <%= f.label :option, ":WYSIWYG" %>
-            </div>
-          </div>
+          What do you want to write your post in:
+        </div> 
+
+        <%= f.radio_button :option, "markdown", class: "c-markdown_toggle" %>
+        <%= f.label :option, ":Markdown", class: "c-markdown_label" %>
+        <br>
+        <%= f.radio_button :option, "wysiwyg", class: "c-wysiwyg_toggle" %>
+        <%= f.label :option, ":WYSIWYG" %>
+        
+        <div class="c-form__wysiwyg_editor">
+          <%= f.cktext_area :wysiwyg_content, { ckeditor: { toolbar: "custom" } } %>
         </div>
-        <div class="content_container" id="wysiwig_content_container">
-          <%= f.cktext_area :wysiwyg_content, { id: "wysiwyg_content", ckeditor: { toolbar: "custom" } } %>
-        </div>
-        <div class="content_container" id="markdown_content_container">
-          <%= f.text_area(:content, class: "c-form__markdown_editor") %>
-        </div>
-        <button type="button" class="c-btn c-form__btn c-form__btn--cancel" id="cancel_writing">Cancel</button>
+
+        <%= f.text_area(:content, class: "c-form__markdown_editor") %>
+
+        <label for="new_toggle" class="c-btn c-form__btn c-form__btn--cancel" id="cancel_writing">Cancel</label>
         <%= f.submit "Post", class: "c-btn c-form__btn" %>
       <% end %>
     </div>

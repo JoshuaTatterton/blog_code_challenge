@@ -29,7 +29,7 @@
 }
 
 .o-article_form {
-  display: inline-block;
+  display: none;
   width: 86.6666666%; /** 260 / 300 **/
   margin: 0.75rem 6.66666666% 0 6.66666666%; /** 20 / 300 **/
   padding: 0.75rem 3.8461538% 1rem 3.8461538%; /** 10 / 260 **/
@@ -46,8 +46,9 @@
   -moz-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
   box-shadow: 0.1rem 0.1rem 0.1rem #323232;
 }
-
-  
+.o-toggle:checked ~ .o-article_form {
+  display: inline-block;
+}
 
   
 
