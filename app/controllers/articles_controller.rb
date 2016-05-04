@@ -11,6 +11,7 @@ class ArticlesController < ApplicationController
     @blogger = Blogger.find(params[:blogger_id])
     @article = Article.find(params[:id])
     @comments = @article.comments.all
+    @articles = sample_articles(@blogger, @article)
     @comment = @article.comments.new
   end
 
@@ -47,6 +48,31 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :content, :option, :wysiwyg_content)
+  end
+
+  def sample_articles(blogger, current_article)
+    alt = []
+
+    if blogger.articles.length > 5
+      puts "big"
+      while alt.length < 5
+        a = blogger.articles.sample
+        if !(alt.include?(a)) && !(a == current_article)
+          alt.push(a)
+        end
+      end
+    else
+
+      blogger.articles.length.times do |i|
+        a = blogger.articles[i]
+        
+        if !(a == current_article)
+          alt << (a)
+        end
+      end
+    end 
+    
+    alt
   end
 
 end

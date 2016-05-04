@@ -7,9 +7,9 @@
   <% if current_user == @blogger %>
 
     <input type="checkbox" class="o-toggle" name="new_toggle" id="new_toggle"/>
-    <label for="new_toggle" class="c-btn c-btn__new_article">New Article</label>
+    <label for="new_toggle" class="c-btn c-btn--wide">New Article</label>
 
-    <div class="o-article_form">
+    <div class="o-article__form">
       <%= form_for [@blogger, @article] do |f| %>
         <div class="">
           <%= f.label :title %>:
@@ -29,9 +29,9 @@
           <%= f.cktext_area :wysiwyg_content, { ckeditor: { toolbar: "custom" } } %>
         </div>
 
-        <%= f.text_area(:content, class: "c-form__markdown_editor") %>
+        <%= f.text_area(:content, class: "c-form__markdown_editor u-form__markdown_editor--hide") %>
 
-        <label for="new_toggle" class="c-btn c-form__btn c-form__btn--cancel" id="cancel_writing">Cancel</label>
+        <label for="new_toggle" class="c-btn c-form__btn c-form__btn--alt" id="cancel_writing">Cancel</label>
         <%= f.submit "Post", class: "c-btn c-form__btn" %>
       <% end %>
     </div>
@@ -47,7 +47,7 @@
       <div class="c-form__input">
         <%= f.text_field :email, placeholder: "Email", class: "c-form__field" %>
       </div>
-      <%= f.submit "Subscribe", class: "c-btn c-form__btn c-form__btn--subscribe" %>
+      <%= f.submit "Subscribe", class: "c-btn c-form__btn c-form__btn--full" %>
     <% end %>
 
   <% end %>

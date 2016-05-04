@@ -1,0 +1,12 @@
+.u-article--thin {
+  display: inline-block;
+  width: 84.6153846; /** 220 / 260 **/
+  margin: 0 1rem 0 0;
+  vertical-align: top;
+}
+.u-article--thin:nth-last-child(1) {
+  margin-right: 0.15rem; /** reduce to only account for shadow **/
+}
+.u-article__content--full {
+  max-height: none !important;
+}

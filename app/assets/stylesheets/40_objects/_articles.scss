@@ -25,9 +25,25 @@
   -moz-box-shadow: -0.1rem -0.1rem 0.1rem #323232;
   box-shadow: -0.1rem -0.1rem 0.1rem #323232;
 }
-.o-article__form:active {
-  will-change: transform;
-  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
-  -moz-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
-  box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+
+.o-whole_article {
+  display: block;
+  margin: 0.75rem 6.66666666% 0 6.66666666%; /** 20 / 300 **/
+  width: 86.6666666%; /** 260 / 300 **/
 }
+.o-toggle:checked ~ .o-whole_article {
+  display: none;
+}
+
+.o-article_container {
+  display: block;
+  margin: 0.75rem 6.66666666% 0 6.66666666%; /** 20 / 300 **/
+  padding-bottom: 0.75rem;
+  width: 86.6666666%; /** 260 / 300 **/
+  vertical-align: top; 
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+
+

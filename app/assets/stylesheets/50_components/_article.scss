@@ -3,6 +3,9 @@
   margin: 0 10% 0 10%; /** 30 / 300 **/
   width: 80%; /** 240 / 300 **/
 }
+.c-text--full {
+  margin: 0 6.66666666% 0 6.66666666%; /** 20 / 300 **/
+}
 
 .c-article__title {
   font-family: 'Roboto Slab', serif;
@@ -32,3 +35,16 @@
   font-size: 1.4rem;
   font-weight: bold;
 }
+
+.c-article_edit {
+  display: none;
+}
+.o-toggle:checked ~ .c-article_edit {
+  transformation-delay: 0.1s;
+  display: inline-block;
+}
+
+
+
+
+

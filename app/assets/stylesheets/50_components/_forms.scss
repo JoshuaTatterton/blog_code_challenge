@@ -22,11 +22,19 @@
   padding: 0;
   box-sizing: border-box;
 }
+.c-btn:focus {
+  outline: none;
+}
+.c-btn:active {
+  -webkit-box-shadow: -0.1rem -0.1rem 0.1rem #323232;
+  -moz-box-shadow: -0.1rem -0.1rem 0.1rem #323232;
+  box-shadow: -0.1rem -0.1rem 0.1rem #323232;
+}
 
 .c-form__btn {
   display: inline-block;
   float: left;
-  width: 45.4545454%; /** 100 / 220 - shadow width**/
+  width: 45.4545454%; /** 100 / 220 **/
   margin: 0.5rem 0 0 9.0909%; /*calc(8.295085% - 0.21em)*/ /** 20 / 220 = 9.0909% too large because of shadows, iterated to sf's 8.295085% - **/
 
   -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
@@ -37,15 +45,8 @@
   -moz-text-shadow: -0.025rem -0.025rem 0 #323232;
   text-shadow: -0.025rem -0.025rem 0 #323232;
 }
-.c-form__btn:focus {
-  outline: none;
-}
-.c-form__btn:active {
-  -webkit-box-shadow: -0.1rem -0.1rem 0.1rem #323232;
-  -moz-box-shadow: -0.1rem -0.1rem 0.1rem #323232;
-  box-shadow: -0.1rem -0.1rem 0.1rem #323232;
-}
-.c-form__btn--cancel {
+
+.c-form__btn--alt {
   background-color: #f0f0f0;
   color: #323232;
   margin-left: 0;
@@ -54,15 +55,22 @@
   -moz-text-shadow: -0.025rem -0.025rem 0 #fcfcfc;
   text-shadow: -0.025rem -0.025rem 0 #fcfcfc;
 }
-.c-form__btn--subscribe {
+.c-form__btn--full {
   margin: 0;
   width: 100%;
+}
+.c-form__btn--small {
+  font-size: 1rem;
+  width: 90%;
+  margin: 0.1rem 5% 0.2rem 5%;
+  background-color: #f0f0f0;
+  color: #323232;
 }
 .c-form__text {
   margin-bottom: 0.25rem;
 }
 
-.c-btn__new_article {
+.c-btn--wide {
   display: block;
   width: 86.6666666%; /** 260 / 300 **/
   margin: 0.75rem 6.66666666% 0.5rem 6.66666666%; /** 20 / 300 **/
@@ -75,7 +83,7 @@
   -moz-text-shadow: -0.025rem -0.025rem 0 #323232;
   text-shadow: -0.025rem -0.025rem 0 #323232;
 }
-.o-toggle:checked ~ .c-btn__new_article {
+.o-toggle:checked ~ .c-btn--wide {
   display: none;
 }
 
@@ -104,7 +112,7 @@
   margin: 0 calc(50% - 3rem) 0.5rem 0; /** 50% - estimated content size 6em **/
 }
 .c-form__markdown_editor {
-  display: none;
+  display: block;
   font-size: 1rem;
   border: solid 0.05rem #323232;
   width: 100%;

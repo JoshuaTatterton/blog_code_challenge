@@ -32,7 +32,7 @@
 
         <% if logged_in? %>
 
-          <%= link_to "My Blog", blogger_articles_path(current_user), class: "c-nav__button" %>
+          <%= link_to "My blog", blogger_articles_path(current_user), class: "c-nav__button" %>
           <%= link_to "Sign out", :sign_out, method: :post, class: "c-nav__button" %>
         
         <% else %>
