@@ -76,6 +76,11 @@
   padding-left: 0.25rem;
   font-size: 1.5rem;
   border: none;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .c-nav__button {

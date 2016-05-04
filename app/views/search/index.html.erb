@@ -27,46 +27,38 @@
 <% end %>
 
 <div class="results">
- 
-  <% if blogger_search? && !blogger? %>
   
-    <div class="o-search c-messages">
+  <div class="o-search c-messages">
+    <% if blogger_search? && !blogger? %>
+
       Cannot find a blogger with username "<%= blogger_search %>"
-    </div>
 
-  <% elsif no_results? && blogger_search? %>
+    <% elsif no_results? && blogger_search? %>
 
-    <div class="o-search c-messages">
-      No results found for "<%= previous_search %>" by "<%= blogger_search %>"
-    </div>
+        No results found for "<%= previous_search %>" by "<%= blogger_search %>"
 
-  <% elsif no_results? %>
+    <% elsif no_results? %>
 
-    <div class="o-search c-messages">
-      No results found for "<%= previous_search %>"
-    </div>
+        No results found for "<%= previous_search %>"
 
-  <% elsif search_term? && blogger_search? %>
+    <% elsif search_term? && blogger_search? %>
 
-    <div class="o-search c-messages">
-      Search Results For "<%= previous_search %>" By "<%= blogger_search %>":
-    </div>
+        Search Results For "<%= previous_search %>" By "<%= blogger_search %>":
 
-    <%= render partial: "articles" %>
+    <% elsif search_term? %>
 
-  <% elsif search_term? %>
+        Search Results For "<%= previous_search %>":
 
-    <div class="o-search c-messages">
-      Search Results For "<%= previous_search %>":
-    </div>
+    <% else %>
+
+        Please enter word/phrase to search.
+
+    <% end %>
+  </div>
+  
+  <% if search_term? %>
 
     <%= render partial: "articles" %>
-
-  <% else %>
-
-    <div class="c-messages">
-      Please enter word/phrase to search.
-    </div>
 
   <% end %>
 
