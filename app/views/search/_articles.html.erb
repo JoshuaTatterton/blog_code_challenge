@@ -1,13 +1,23 @@
 <% @results.each do |result| %>
 
-  <div>
-    <%= result.title %>
-    <% if result.wysiwyg? %>
-      <%= result.wysiwyg_content.html_safe %>
-    <% else %>
-      <%= markdown result.content %>
-    <% end %>
-    -<%= result.blogger.username %>
-  </div>
+  <%= link_to blogger_article_path(result.blogger, result), class: "o-article", id: result.id do %>
+
+    <div class="c-article__title">
+      <%= result.title %>
+    </div>
+
+    <div class="c-article__content">
+      <% if result.wysiwyg? %>
+        <%= result.wysiwyg_content.html_safe %>
+      <% else %>
+        <%= markdown result.content %>
+      <% end %>
+    </div>
+
+    <div class="c-article__username">
+      -<%= result.blogger.username %>
+    </div>
+  
+  <% end %>
 
 <% end %>

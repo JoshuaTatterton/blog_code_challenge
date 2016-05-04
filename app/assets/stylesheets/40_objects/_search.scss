@@ -1,0 +1,28 @@
+.o-search {
+  width: 86.6666666%; /** 260 / 300 **/
+  margin: 0 6.66666666% 0.5rem 6.66666666%; /** 20 / 300 **/
+}
+.o-search__main {
+  width: 100%;
+  height: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.o-search__options {
+  display: none;
+  width: 100%;
+  
+  padding: 0.2rem;
+
+  background-color: #fcfcfc;
+  border: solid 0.1rem #323232;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.o-toggle:checked ~ .o-search__options {
+  display: inline-block;
+}
+

@@ -1,43 +1,73 @@
 <%= form_tag search_path do %>
+  <div class="o-search">
 
-  <%= image_submit_tag asset_path("search.png"), id: "search_button" %>
-  <%= text_field_tag :search, previous_search %>
+    <div class="o-search__main">
+      <%= image_submit_tag asset_path("search.png"), class: "c-search__btn" %><!--
+   --><%=text_field_tag :search, previous_search, class: "c-search__term" %>
+    </div>
 
-  <button type="button" id="advanced_search_button">Advanced Search options</button>
+    <input type="checkbox" class="o-toggle" name="search_toggle" id="search_toggle"/>
+    <label for="search_toggle" class="c-search__option_btn">
+      Advanced Search Options <div class="c-search__arrow"></div>
+    </label>
 
-  <div id="advanced_search_options">
-    Search for whole phrase: <%= check_box :strict, "option", { checked: true }, true, false %>
-    Search for article by:<%= text_field_tag :blogger, blogger_search %>
-    <%= image_submit_tag asset_path("search.png"), id: "search_button" %>
+    <div class="o-search__options">
+      <div>
+        Search for whole phrase: <%= check_box :strict, "option", { checked: true }, true, false %>
+      </div>
+      <div>
+        Search for article by:
+      </div>
+      <%= text_field_tag :blogger, blogger_search, placeholder: "Username . . .", class: "c-search__blogger" %>
+
+      <%= image_submit_tag asset_path("search.png"), class: "c-search__btn c-search__btn--small" %>
+    </div>
+
   </div>
-
 <% end %>
-<% if blogger_search? && !blogger? %>
 
-  Cannot find a blogger with username "<%= blogger_search %>"
-
-<% elsif no_results? && blogger_search? %>
-
-  No results found for "<%= previous_search %>" by "<%= blogger_search %>"
-
-<% elsif no_results? %>
-
-  No results found for "<%= previous_search %>"
-
-<% elsif search_term? && blogger_search? %>
-
-  Search Results For "<%= previous_search %>" By "<%= blogger_search %>":
-
-  <%= render partial: "articles" %>
-
-<% elsif search_term? %>
-
-  Search Results For "<%= previous_search %>":
+<div class="results">
+ 
+  <% if blogger_search? && !blogger? %>
   
-  <%= render partial: "articles" %>
+    <div class="o-search c-messages">
+      Cannot find a blogger with username "<%= blogger_search %>"
+    </div>
 
-<% else %>
+  <% elsif no_results? && blogger_search? %>
 
-  Please enter word/phrase to search.
+    <div class="o-search c-messages">
+      No results found for "<%= previous_search %>" by "<%= blogger_search %>"
+    </div>
 
-<% end %>
+  <% elsif no_results? %>
+
+    <div class="o-search c-messages">
+      No results found for "<%= previous_search %>"
+    </div>
+
+  <% elsif search_term? && blogger_search? %>
+
+    <div class="o-search c-messages">
+      Search Results For "<%= previous_search %>" By "<%= blogger_search %>":
+    </div>
+
+    <%= render partial: "articles" %>
+
+  <% elsif search_term? %>
+
+    <div class="o-search c-messages">
+      Search Results For "<%= previous_search %>":
+    </div>
+
+    <%= render partial: "articles" %>
+
+  <% else %>
+
+    <div class="c-messages">
+      Please enter word/phrase to search.
+    </div>
+
+  <% end %>
+
+</div>
