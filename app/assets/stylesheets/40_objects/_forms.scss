@@ -10,6 +10,11 @@
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
+
+  @media only screen and (min-width: 426px) {
+    width: 96.153846153846%; /** 500 / 520 **/
+    margin: 0.75rem 1.923076923077% 0.25rem 1.923076923077%; /** 10 / 520 **/
+  }
 }
 
 .o-sign_form {
@@ -29,9 +34,16 @@
   -moz-border-radius: 1rem;
   border-radius: 1rem;
 
-  -webkit-box-shadow: 0.1rem 0.1em 0.1rem #323232;
-  -moz-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
-  box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  -webkit-box-shadow: 0.1rem 0.1em 0.1rem lighten(#323232, 30%);
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+  box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+
+  @media only screen and (min-width: 426px) {
+    text-align: right;
+    width: 84.615384615385%; /** 440 / 520 **/
+    margin: 0.75rem 7.692307692308% 1rem 7.692307692308%; /** 40 / 520 **/
+    padding: 1.5rem 4.545454545% 1rem 4.545454545%; /** 20 / 440 **/ 
+  }
 }
 
 .o-article__form {
@@ -51,15 +63,21 @@
   -moz-border-radius: 0 0 1rem 1rem;
   border-radius: 0 0 1rem 1rem;
 
-  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
-  -moz-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
-  box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+  box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+
+  @media only screen and (min-width: 426px) {
+    width: 92.307692307692%; /** 480 / 520 **/
+    margin: 0.75rem 3.846153846154% 0.25rem 3.846153846154%; /** 20 / 520 **/
+    padding: 0.75rem 4.16666666% 1rem 4.16666666%; /** 20 / 480 **/
+  }
 }
 .o-article__form:active {
   will-change: transform;
-  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
-  -moz-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
-  box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+  box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
 }
 .o-toggle:checked ~ .o-article__form {
   display: inline-block;

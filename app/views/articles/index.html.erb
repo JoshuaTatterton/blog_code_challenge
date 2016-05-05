@@ -7,7 +7,7 @@
   <% if current_user == @blogger %>
 
     <input type="checkbox" class="o-toggle" name="new_toggle" id="new_toggle"/>
-    <label for="new_toggle" class="c-btn c-btn--wide">New Article</label>
+    <label for="new_toggle" class="c-btn c-btn--wide c-btn--fit">New Article</label>
 
     <div class="o-article__form">
       <%= form_for [@blogger, @article] do |f| %>
@@ -21,7 +21,6 @@
 
         <%= f.radio_button :option, "markdown", class: "c-markdown_toggle" %>
         <%= f.label :option, ":Markdown", class: "c-markdown_label" %>
-        <br>
         <%= f.radio_button :option, "wysiwyg", class: "c-wysiwyg_toggle" %>
         <%= f.label :option, ":WYSIWYG" %>
         
@@ -31,8 +30,8 @@
 
         <%= f.text_area(:content, class: "c-form__markdown_editor u-form__markdown_editor--hide") %>
 
-        <label for="new_toggle" class="c-btn c-form__btn c-form__btn--alt" id="cancel_writing">Cancel</label>
-        <%= f.submit "Post", class: "c-btn c-form__btn" %>
+        <label for="new_toggle" class="c-btn c-form__btn c-form__btn--alt" id="cancel_writing">Cancel</label><!--
+     --><%= f.submit "Post", class: "c-btn c-form__btn" %>
       <% end %>
     </div>
     
@@ -44,16 +43,18 @@
       <div class="c-form__text">
         Subscribe to receive emails when <%= @blogger.username %> posts a new blog.
       </div>
-      <div class="c-form__input">
+      <div class="c-form__input u-form__input--full">
         <%= f.text_field :email, placeholder: "Email", class: "c-form__field" %>
-      </div>
-      <%= f.submit "Subscribe", class: "c-btn c-form__btn c-form__btn--full" %>
+      </div><!--
+     --><%= f.submit "Subscribe", class: "c-btn c-form__btn c-form__btn--full" %>
     <% end %>
 
   <% end %>
 
   <% if @articles != [] %>
-    
+
+    <div class="o-article-wrapper">
+
       <% @articles.each do |a| %>
         <%= link_to blogger_article_path(@blogger, a), class: "o-article", id: "id_#{a.id}" do %>
           <div >
@@ -73,7 +74,9 @@
           </div>
         <% end %>
       <% end %>
-  
+
+    </div>
+
   <% else %>
     No blog posts have been made.
   <%end%>

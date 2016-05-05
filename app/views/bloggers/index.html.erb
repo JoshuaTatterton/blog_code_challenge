@@ -4,29 +4,33 @@
 </div>
 <% if @articles != [] %>
 
-  <% @articles.each do |article| %>
+  <div class="o-article-wrapper">
+    
+    <% @articles.each do |article| %>
 
-    <%= link_to blogger_article_path(article.blogger, article), class: "o-article", id: article.id do %>
-      
-      <div class="c-article__title">
-        <%= article.title %>
-      </div>
+      <%= link_to blogger_article_path(article.blogger, article), class: "o-article", id: article.id do %>
+        
+        <div class="c-article__title">
+          <%= article.title %>
+        </div>
 
-      <div class="c-article__content">
-        <% if article.wysiwyg? %>
-          <%= article.wysiwyg_content.html_safe %>
-        <% else %>
-          <%= markdown article.content %>
-        <% end %>
-      </div>
+        <div class="c-article__content">
+          <% if article.wysiwyg? %>
+            <%= article.wysiwyg_content.html_safe %>
+          <% else %>
+            <%= markdown article.content %>
+          <% end %>
+        </div>
 
-      <div class="c-article__username">
-        -<%= article.blogger.username %>
-      </div>
-      
+        <div class="c-article__username">
+          -<%= article.blogger.username %>
+        </div>
+        
+      <% end %>
+
     <% end %>
-
-  <% end %>
+  
+  </div>
 
 <% else %>
 

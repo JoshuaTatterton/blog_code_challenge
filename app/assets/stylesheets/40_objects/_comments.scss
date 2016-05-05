@@ -6,4 +6,9 @@
   border-collapse: collapse;
   border: 0.1rem solid #f0f0f0;
   background-color: #fcfcfc;
+
+  @media only screen and (min-width: 426px) {
+    width: 92.307692307692%; /** 240 / 260 **/
+    margin: 0.75rem 3.846153846154% 0.25rem 3.846153846154%; /** 10 / 260 **/
+  }
 }

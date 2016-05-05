@@ -1,20 +1,16 @@
 <%= form_tag blogger_sessions_path, method: :post, class: "o-sign_form" do |f| %>
   
-  <div>
-    <%= label_tag :email %>:
-  </div>
-  <div class="c-form__input">
-    <%= text_field_tag :email, nil, class: "c-form__field" %>
-  </div>
+   <%= label_tag :email, "Email:", class: "c-sign_form__label" %><!--
+--><div class="c-form__input c-sign_form__input">
+     <%= text_field_tag :email, nil, class: "c-form__field" %>
+   </div>
 
-  <div>
-    <%= label_tag :password %>:
-  </div>
-  <div class="c-form__input">
-    <%= password_field_tag :password, nil, class: "c-form__field" %>
-  </div>
+   <%= label_tag :password, "Password:", class: "c-sign_form__label" %><!--
+--><div class="c-form__input c-sign_form__input">
+     <%= password_field_tag :password, nil, class: "c-form__field" %>
+   </div>
 
-  <%= link_to "Cancel", root_path, class: "c-btn c-form__btn c-form__btn--alt" %>
-  <%= submit_tag "Sign in", class: "c-btn c-form__btn" %>
+   <%= link_to "Cancel", root_path, class: "c-btn c-form__btn c-form__btn--alt" %><!--
+--><%= submit_tag "Sign in", class: "c-btn c-form__btn c-sign_form__btn" %>
 
 <% end %>

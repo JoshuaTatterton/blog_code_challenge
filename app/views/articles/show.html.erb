@@ -2,12 +2,12 @@
 
   <% if current_user == @blogger %>
     <input type="checkbox" class="o-toggle" name="edit_toggle" id="edit_toggle"/>
-    <label for="edit_toggle" class="c-btn c-btn--wide">Edit Article</label>
+    <label for="edit_toggle" class="c-btn c-btn--wide c-btn--fit">Edit Article</label>
   <% end %>
 
 <div class="o-whole_article">
 
-  <div class="c-article__title" ><%= @article.title %></div>
+  <div class="c-article__title u-article__title--center"><%= @article.title %></div>
 
   <div class="c-article__content u-article__content--full">
   
@@ -23,7 +23,7 @@
 
 <div class="o-article__form">
 
-  <div class="c-article__title" ><%= @article.title %></div>
+  <div class="c-article__title"><%= @article.title %></div>
 
   <%= form_for [@blogger, @article] do |f| %>
 
@@ -33,12 +33,9 @@
       <%= f.text_area(:content, class: "c-form__markdown_editor") %>
     <% end %>
 
-    <label for="edit_toggle" class="c-btn c-form__btn c-form__btn--alt">Cancel</label>
-
-    <%= f.submit "Edit", class: "c-btn c-form__btn" %>
-
-
-    <%= link_to "Delete", blogger_article_path(@blogger, @article), class: "c-btn c-form__btn c-form__btn--alt u-form__btn--center", method: :delete, data: { confirm: 'Are you sure you wish to delete this post?' } %>
+    <label for="edit_toggle" class="c-btn c-form__btn c-form__btn--alt u-form__btn--three">Cancel</label><!--
+ --><%= f.submit "Edit", class: "c-btn c-form__btn u-form__btn--three" %><!--
+ --><%= link_to "Delete", blogger_article_path(@blogger, @article), class: "c-btn c-form__btn c-form__btn--alt u-form__btn--center u-form__btn--three", method: :delete, data: { confirm: 'Are you sure you wish to delete this post?' } %>
 
   <% end %>
 
@@ -54,17 +51,17 @@
       <%= f.label :name %>:
       <%= f.text_field :name, class: "c-form__title_field" %>
 
-        <div class="comment_item">
-          <div class="label_container">  
-            <%= f.label :comment, class: "comment_label"%>:
+        <div class="">
+          <div class="">  
+            <%= f.label :comment, class: ""%>:
           </div>
-          <div class="input_container"> 
+          <div class=""> 
             <%= f.text_area :content, class: "c-form__markdown_editor u-form__markdown_editor--short" %>
           </div>
         </div>
 
-      <label for="comment_toggle" class="c-btn c-form__btn c-form__btn--alt">Cancel</label>
-      <%= f.submit "Comment", class: "c-btn c-form__btn" %>
+      <label for="comment_toggle" class="c-btn c-form__btn c-form__btn--alt">Cancel</label><!--
+   --><%= f.submit "Comment", class: "c-btn c-form__btn" %>
 
     <% end %>
   </div>
@@ -82,7 +79,7 @@
           <td class="c-comments__time">
             <%= comment.posted_at(Time.now) %>
             <% if current_user == @blogger %>
-              <%= link_to "Delete", blogger_article_comment_path(@blogger, @article, comment), method: :delete, class: "c-btn c-form__btn c-form__btn--full c-form__btn--small", data: { confirm: 'Are you sure you wish to delete this comment?' } %>
+              <%= link_to "Delete", blogger_article_comment_path(@blogger, @article, comment), method: :delete, class: "c-btn c-form__btn c-form__btn--small", data: { confirm: 'Are you sure you wish to delete this comment?' } %>
             <% end %>
           </td>
         </tr>

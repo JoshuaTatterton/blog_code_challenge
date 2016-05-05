@@ -32,6 +32,10 @@
 .o-toggle:checked ~ .c-nav_toggle__label{
   background-image: asset-url("arrow_left.png");
   left: calc(100% - 3.5rem);
+
+  @media only screen and (min-width: 426px) {
+    left: 50%;
+  }
 }
 
 .c-nav__title {
@@ -41,6 +45,13 @@
 
   left: calc(-100%);
   z-index: 1;
+  
+  will-change: transform;
+
+  @media only screen and (min-width: 426px) {
+    width: 50%;
+    left: -50%;
+  }
 
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

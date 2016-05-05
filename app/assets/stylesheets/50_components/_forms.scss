@@ -1,13 +1,28 @@
+.c-sign_form__label {
+  display: inline-block;
+  vertical-align: text-bottom;
+  @media only screen and (min-width: 426px) {
+    width: 49%; /** 200 / 400  split among width and margin right **/
+    margin: 0.25rem 1% 0 0;
+  }
+}
 .c-form__input {
+  display: inline-block;
   width: 100%;
   margin-bottom: 0.25rem;
+}
+.c-sign_form__input {
+  @media only screen and (min-width: 426px) {
+    width: 50%; /** 200 / 400 **/
+    margin-top: 0.25rem;
+  }
 }
 .c-form__field {
   font-size: 1rem;
   padding: 0 0.25rem;
   height: 2rem;
   width: 100%; 
-  border: solid 0.05rem #323232;
+  border: solid 0.1rem #323232;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
@@ -15,6 +30,7 @@
 }
 
 .c-btn {
+  display: inline-block;
   background-color: #31abff;
   color: #f0f0f0;
   font-family: 'Roboto Slab', serif;
@@ -34,24 +50,32 @@
   outline: none;
 }
 .c-btn:active {
-  -webkit-box-shadow: -0.1rem -0.1rem 0.1rem #323232;
-  -moz-box-shadow: -0.1rem -0.1rem 0.1rem #323232;
-  box-shadow: -0.1rem -0.1rem 0.1rem #323232;
+  -webkit-box-shadow: inset 0.1rem 0.1rem 0.1rem lighten(#323232, 50%);
+  -moz-box-shadow: inset 0.1rem 0.1rem 0.1rem lighten(#323232, 50%);
+  box-shadow: inset 0.1rem 0.1rem 0.1rem lighten(#323232, 50%);
 }
 
 .c-form__btn {
-  display: inline-block;
-  float: left;
   width: 45.4545454%; /** 100 / 220 **/
   margin: 0.5rem 0 0 9.0909%; /*calc(8.295085% - 0.21em)*/ /** 20 / 220 = 9.0909% too large because of shadows, iterated to sf's 8.295085% - **/
 
-  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
-  -moz-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
-  box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 50%);
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 50%);
+  box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 50%);
 
   -webkit-text-shadow: -0.025rem -0.025rem 0 #323232;
   -moz-text-shadow: -0.025rem -0.025rem 0 #323232;
   text-shadow: -0.025rem -0.025rem 0 #323232;
+  
+  @media only screen and (min-width: 426px) {
+    width: 31.818181818%; /** 140 / 440 **/
+    margin: 0.5rem 2.2727272727% 0.5rem 11.3636363636%; /** 10 / 440, 50 / 440 the left will now be 50 and right 60 **/
+  }
+}
+.c-sign_form__btn {
+  @media only screen and (min-width: 426px) {
+    margin-right: 0;
+  }
 }
 
 .c-form__btn--alt {
@@ -62,10 +86,19 @@
   -webkit-text-shadow: -0.025rem -0.025rem 0 #fcfcfc;
   -moz-text-shadow: -0.025rem -0.025rem 0 #fcfcfc;
   text-shadow: -0.025rem -0.025rem 0 #fcfcfc;
+  @media only screen and (min-width: 426px) {
+    margin-left: 11.3636363636%; /** 70 / 440 **/
+  }
 }
 .c-form__btn--full {
   margin: 0;
   width: 100%;
+  height: 2rem;
+  
+  @media only screen and (min-width: 426px) {
+    width: 48%; /** 240 / 500 **/
+    margin-left: 4%; /** 20 / 500 **/
+  }
 }
 .c-form__btn--small {
   font-size: 1rem;
@@ -79,53 +112,64 @@
 }
 
 .c-btn--wide {
-  display: block;
+  display: inline-block;
   width: 86.6666666%; /** 260 / 300 **/
   margin: 0.75rem 6.66666666% 0.5rem 6.66666666%; /** 20 / 300 **/
 
-  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
-  -moz-box-shadow: 0.1rem 0.1rem 0.1rem #323232;
-  box-shadow: 0.1rem 0.1rem 0.1rem #323232;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 50%);
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 50%);
+  box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 50%);
 
   -webkit-text-shadow: -0.025rem -0.025rem 0 #323232;
   -moz-text-shadow: -0.025rem -0.025rem 0 #323232;
-  text-shadow: -0.025rem -0.025rem 0 #323232;
+  text-shadow: -0.025rem -0.025rem 0 #323232;  
+
+  @media only screen and (min-width: 426px) {
+    width: 92.307692307692%; /** 480 / 520 **/
+    margin: 0.75rem 3.846153846154% 0.5rem 3.846153846154%; /** 20 / 520 **/
+  }
 }
 .o-toggle:checked ~ .c-btn--wide {
   display: none;
+}
+.c-btn--fit {
+  @media only screen and (min-width: 426px) {
+    width: 42.307692307692%; /** 220 / 520 **/
+    margin: 0.75rem 0 0.5rem 3.846153846154%; /** 20 / 520 **/
+  }
 }
 
 .c-form__title_field {
   text-align: left;
   font-size: inherit;
   width: calc(100% - 3rem); 
-  border: solid 0.05rem #323232;
+  max-width: 14.75rem;
+  border: solid 0.1rem #323232;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-.c-form__selectors--last {
-  margin-bottom: 0.5rem;
-}
-
 .c-markdown_toggle {
-  margin-left: calc(50% - 3rem); /** 50% - estimated content size 6em **/
-}
-.c-markdown_label {
-  /*margin-right: calc(50% - 3rem);*/ /** 50% - estimated content size 6em **/
+  margin-left: calc(50% - 3rem); /** 50% - half estimated content size 6em **/
+
+  @media only screen and (min-width: 426px) {
+    margin: 0 0 0.5rem calc(29.545454545% - 3rem); /** 130 / 440 - half estimated content size 6rem **/
+  }
 }
 .c-wysiwyg_toggle {
-  margin: 0 0 0.5rem calc(50% - 3rem); /** 50% - estimated content size 6em **/
+  margin: 0 0 0.5rem calc(50% - 3rem); /** 50% - half estimated content size 6em **/
+
+  @media only screen and (min-width: 426px) {
+    margin-left: calc(29.545454545% - 3rem); /** 130 / 440 - half estimated content size 6em **/
+  }
 }
-.c-wysiwyg_label {
-  margin: 0 calc(50% - 3rem) 0.5rem 0; /** 50% - estimated content size 6em **/
-}
+
 .c-form__markdown_editor {
   display: block;
   font-size: 1rem;
-  border: solid 0.05rem #323232;
+  border: solid 0.1rem #323232;
   width: 100%;
   height: 8rem;
   -webkit-box-sizing: border-box;

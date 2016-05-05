@@ -1,5 +1,7 @@
 .o-toggle {
   position: absolute;
+  left: 0;
+  top: 0;
   will-change: transform;
   opacity: 0;
 }
@@ -12,6 +14,11 @@
   left: calc(-100% + 3.5rem);
   height: 100%;
   overflow-x: hidden;
+  
+  @media only screen and (min-width: 426px) {
+    width: 50%;
+    left: -50%;
+  }
 
   -webkit-overflow-scrolling: touch;
 

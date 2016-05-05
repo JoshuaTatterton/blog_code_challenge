@@ -1,9 +1,21 @@
 .u-form__btn--center {
-  margin-left: calc(50% - 22.727272727%) !important;  /** (100 / 220) / 2 **/
+  margin-left: calc(50% - 22.727272727%);  /** (100 / 220) / 2 **/
+}
+.u-form__btn--three {
+  @media only screen and (min-width: 426px) {
+    width: 25%; /** 110 / 440 **/
+    margin: 0.5rem 1.13636363636% 0.5rem 5.6818181818% !important; /** 5 / 440, 25 / 440  the left will now be 25 and right 30**/
+  }
 }
 .u-form__markdown_editor--hide {
   display: none;
 }
 .u-form__markdown_editor--short {
   height: 4rem !important;
+}
+.u-form__input--full {
+  @media only screen and (min-width: 426px) {
+    vertical-align: top;
+    width: 48%; /** 240 / 500 **/
+  }
 }

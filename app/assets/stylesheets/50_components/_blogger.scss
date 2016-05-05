@@ -1,9 +1,15 @@
 .c-blogger_username {
-  display: block;
+  display: inline-block;
   font-family: 'Dancing Script', cursive;
   font-size: 1.4rem;
   font-weight: bold;
   color: #323232;
   max-width: 80%; /** 240 / 300 **/
-  margin: 0 10% 0 10%; /** 30 / 300 **/
+  margin: 0 10%; /** 30 / 300 **/
+
+  @media only screen and (min-width: 426px) {
+    width: 46.153846153846%; /** 240 / 520 **/
+    max-width: 46.153846153846%; /** 240 / 520 **/
+    margin: 0 0 0 3.846153846154%; /** 20 / 520 **/
+  }
 }

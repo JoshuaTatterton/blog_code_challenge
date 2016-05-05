@@ -1,23 +1,27 @@
-<% @results.each do |result| %>
-
-  <%= link_to blogger_article_path(result.blogger, result), class: "o-article", id: result.id do %>
-
-    <div class="c-article__title">
-      <%= result.title %>
-    </div>
-
-    <div class="c-article__content">
-      <% if result.wysiwyg? %>
-        <%= result.wysiwyg_content.html_safe %>
-      <% else %>
-        <%= markdown result.content %>
-      <% end %>
-    </div>
-
-    <div class="c-article__username">
-      -<%= result.blogger.username %>
-    </div>
+<div class="o-article-wrapper">
   
+  <% @results.each do |result| %>
+
+    <%= link_to blogger_article_path(result.blogger, result), class: "o-article", id: result.id do %>
+
+      <div class="c-article__title">
+        <%= result.title %>
+      </div>
+
+      <div class="c-article__content">
+        <% if result.wysiwyg? %>
+          <%= result.wysiwyg_content.html_safe %>
+        <% else %>
+          <%= markdown result.content %>
+        <% end %>
+      </div>
+
+      <div class="c-article__username">
+        -<%= result.blogger.username %>
+      </div>
+    
+    <% end %>
+
   <% end %>
 
-<% end %>
+</div>
