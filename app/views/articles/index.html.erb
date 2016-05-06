@@ -2,12 +2,12 @@
 
   <div class="c-blogger_username">
     <%= @blogger.username %>
-  </div>
+  </div><!--
 
-  <% if current_user == @blogger %>
+--><% if current_user == @blogger %><!--
 
-    <input type="checkbox" class="o-toggle" name="new_toggle" id="new_toggle"/>
-    <label for="new_toggle" class="c-btn c-btn--wide c-btn--fit">New Article</label>
+ --><input type="checkbox" class="o-toggle" name="new_toggle" id="new_toggle"/><!--
+ --><label for="new_toggle" class="c-btn c-btn--wide c-btn--fit">New Article</label>
 
     <div class="o-article__form">
       <%= form_for [@blogger, @article] do |f| %>

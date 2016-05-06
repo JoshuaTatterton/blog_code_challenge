@@ -7,13 +7,20 @@
     width: 50%; /** 240 / 480 **/
     margin-right: 3.846153846154%; /** 20 / 520 **/
   }
+  @media only screen and (min-width: 560px) {
+    width: 48.148148148148148%; /** 260 / 540 **/
+    margin-right: 3.225806451613%; /** 20 / 620 **/
+  }
 }
 .u-article--thin:nth-last-child(1) {
   margin-right: 0.15rem; /** reduce to only account for shadow **/
 }
 .u-article__content--full {
+  margin: 0.5rem 0;
   max-height: none !important;
 }
 .u-article__title--center {
+  margin: 0;
+  width: 100%;
   text-align: center;
 }

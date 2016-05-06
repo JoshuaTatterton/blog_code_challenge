@@ -15,6 +15,10 @@
     width: 96.153846153846%; /** 500 / 520 **/
     margin: 0.75rem 1.923076923077% 0.25rem 1.923076923077%; /** 10 / 520 **/
   }
+  @media only screen and (min-width: 560px) {
+    width: 93.548387096774%; /** 580 / 620 **/
+    margin: 0.75rem 3.225806451613% 0.25rem 3.225806451613%; /** 20 / 620 **/
+  }
 }
 
 .o-sign_form {
@@ -41,8 +45,13 @@
   @media only screen and (min-width: 426px) {
     text-align: right;
     width: 84.615384615385%; /** 440 / 520 **/
-    margin: 0.75rem 7.692307692308% 1rem 7.692307692308%; /** 40 / 520 **/
+    margin: 1rem 7.692307692308% 1rem 7.692307692308%; /** 40 / 520 **/
     padding: 1.5rem 4.545454545% 1rem 4.545454545%; /** 20 / 440 **/ 
+  }
+  @media only screen and (min-width: 560px) {
+    width: 30rem;
+    margin: 1.5rem calc((100% - 30rem)/2) 1rem calc((100% - 30rem)/2); /** page width -  **/
+    padding: 2rem 1.6083125rem 1.5rem 1.6083125rem; /** 4.545454545% of 30rem **/
   }
 }
 
@@ -71,6 +80,11 @@
     width: 92.307692307692%; /** 480 / 520 **/
     margin: 0.75rem 3.846153846154% 0.25rem 3.846153846154%; /** 20 / 520 **/
     padding: 0.75rem 4.16666666% 1rem 4.16666666%; /** 20 / 480 **/
+  }
+  @media only screen and (min-width: 560px) {
+    width: 87.096774193548%; /** 540 / 640 **/
+    margin: 0.75rem 6.451612903226% 0.25rem 6.451612903226%; /** 40 / 620 **/
+    padding: 0.75rem 3.7037037037% 1rem 3.7037037037%; /** 20 / 540 **/
   }
 }
 .o-article__form:active {

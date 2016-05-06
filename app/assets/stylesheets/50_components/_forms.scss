@@ -16,6 +16,9 @@
     width: 50%; /** 200 / 400 **/
     margin-top: 0.25rem;
   }
+  @media only screen and (min-width: 560px) {
+    margin-bottom: 0.75rem;
+  }
 }
 .c-form__field {
   font-size: 1rem;
@@ -99,6 +102,10 @@
     width: 48%; /** 240 / 500 **/
     margin-left: 4%; /** 20 / 500 **/
   }
+  @media only screen and (min-width: 560px) {
+    width: calc((100% - 1.5rem)/2); /** (width - column gap) / 2 **/
+    margin-left: 1.5rem; /** 20 / 500 **/
+  }
 }
 .c-form__btn--small {
   font-size: 1rem;
@@ -128,14 +135,28 @@
     width: 92.307692307692%; /** 480 / 520 **/
     margin: 0.75rem 3.846153846154% 0.5rem 3.846153846154%; /** 20 / 520 **/
   }
+  @media only screen and (min-width: 560px) {
+    width: 87.096774193548%; /** 540 / 640 **/
+    margin: 0.75rem 6.451612903226% 0.25rem 6.451612903226%; /** 40 / 620 **/
+  }
 }
 .o-toggle:checked ~ .c-btn--wide {
   display: none;
 }
 .c-btn--fit {
   @media only screen and (min-width: 426px) {
-    width: 42.307692307692%; /** 220 / 520 **/
+    width: 46.153846153846%; /** 240 / 520 **/
     margin: 0.75rem 0 0.5rem 3.846153846154%; /** 20 / 520 **/
+  }
+  @media only screen and (min-width: 560px) {
+    width: calc((93.548387096774% - 1.5rem)/2); /** width - margins - column gap / 2 **/
+    margin: 0.75rem 0 0.5rem 1.5rem; /** same as gap in o-article-wrapper **/
+  }
+}
+.c-btn__article--fit {
+  @media only screen and (min-width: 560px) {
+    width: 41.935483870968%; /** 260 / 620 **/
+    margin: 0.75rem 0 0.5rem 3.225806451613%; /** 20 / 620 **/
   }
 }
 

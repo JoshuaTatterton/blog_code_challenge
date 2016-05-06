@@ -8,7 +8,12 @@
   background-color: #fcfcfc;
 
   @media only screen and (min-width: 426px) {
-    width: 92.307692307692%; /** 240 / 260 **/
-    margin: 0.75rem 3.846153846154% 0.25rem 3.846153846154%; /** 10 / 260 **/
+    width: 92.307692307692%; /** 480 / 520 **/
+    margin: 0.75rem 3.846153846154% 0.25rem 3.846153846154%; /** 20 / 520 **/
+  }
+
+  @media only screen and (min-width: 560px) {
+    width: 87.096774193548%; /** 540 / 640 **/
+    margin: 0.75rem 6.451612903226% 0.25rem 6.451612903226%; /** 40 / 620 **/
   }
 }

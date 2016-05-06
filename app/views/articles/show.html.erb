@@ -1,9 +1,9 @@
- <%= link_to "< #{@article.blogger.username}", blogger_articles_path(@article.blogger) , class: "c-blogger_username" %>
+ <%= link_to "< #{@article.blogger.username}", blogger_articles_path(@article.blogger) , class: "c-blogger_username c-blogger_username__article" %><!--
 
-  <% if current_user == @blogger %>
-    <input type="checkbox" class="o-toggle" name="edit_toggle" id="edit_toggle"/>
-    <label for="edit_toggle" class="c-btn c-btn--wide c-btn--fit">Edit Article</label>
-  <% end %>
+--><% if current_user == @blogger %><!--
+  --><input type="checkbox" class="o-toggle" name="edit_toggle" id="edit_toggle"/><!--
+  --><label for="edit_toggle" class="c-btn c-btn--wide c-btn--fit c-btn__article--fit">Edit Article</label>
+   <% end %>
 
 <div class="o-whole_article">
 

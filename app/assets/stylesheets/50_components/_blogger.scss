@@ -8,8 +8,21 @@
   margin: 0 10%; /** 30 / 300 **/
 
   @media only screen and (min-width: 426px) {
-    width: 46.153846153846%; /** 240 / 520 **/
-    max-width: 46.153846153846%; /** 240 / 520 **/
+    width: 44.230769230769%; /** 230 / 520 **/
+    max-width: 44.230769230769%; /** 230 / 520 **/
     margin: 0 0 0 3.846153846154%; /** 20 / 520 **/
+  }
+  @media only screen and (min-width: 560px) {
+    width: calc((45.16129032258% - 0.75rem)); /** half width - margin - column gap/2 **/
+    max-width: calc((45.16129032258% - 0.75rem)); /** half width - margin - column gap/2 **/
+    margin: 0 0 0 4.838709677419%; /** 30 / 620 **/
+  }
+}
+
+.c-blogger_username__article {
+  @media only screen and (min-width: 560px) {
+    width: 41.935483870968%; /** 260 / 620 **/
+    max-width: 41.935483870968%; /** 260 / 620 **/
+    margin: 0 0 0 6.451612903226%; /** 40 / 620 **/
   }
 }

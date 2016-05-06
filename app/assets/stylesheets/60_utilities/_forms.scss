@@ -11,11 +11,17 @@
   display: none;
 }
 .u-form__markdown_editor--short {
-  height: 4rem !important;
+  height: 4rem;
+  @media only screen and (min-width: 560px) {
+    height: 5rem; 
+  }
 }
 .u-form__input--full {
   @media only screen and (min-width: 426px) {
     vertical-align: top;
     width: 48%; /** 240 / 500 **/
+  }
+  @media only screen and (min-width: 560px) {
+    width: calc((100% - 1.5rem)/2); /** (width - column gap) / 2 **/
   }
 }

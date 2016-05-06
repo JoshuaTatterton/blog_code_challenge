@@ -6,6 +6,10 @@
     width: 96.153846153846%; /** 500 / 520 **/
     margin: 0 1.923076923077% 0.5rem 1.923076923077%; /** 10 / 520 **/
   }
+  @media only screen and (min-width: 560px) {
+    width: 93.548387096774%; /** 580 / 620 **/
+    margin: 0 3.225806451613% 0.5rem 3.225806451613%; /** 20 / 620 **/
+  }
 }
 .o-search__main {
   display: inline-block;
@@ -15,6 +19,10 @@
 
   @media only screen and (min-width: 426px) {
     width: 48%; /** (240 / 500) **/
+    margin-bottom: 1rem;
+  }
+  @media only screen and (min-width: 560px) {
+    width: calc((100% - 1.5rem)/2); /** width - column gap **/
     margin-bottom: 1rem;
   }
 }
