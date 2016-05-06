@@ -9,7 +9,11 @@
   }
   @media only screen and (min-width: 560px) {
     width: 48.148148148148148%; /** 260 / 540 **/
-    margin-right: 3.225806451613%; /** 20 / 620 **/
+    margin-right: 3.7037037037037%; /** 20 / 540 **/
+  }
+  @media only screen and (min-width: 780px) {
+    width: 33.76233766234%; /** 260 / 770 **/
+    margin-right: 2.597402597403%; /** 20 / 770 **/
   }
 }
 .u-article--thin:nth-last-child(1) {

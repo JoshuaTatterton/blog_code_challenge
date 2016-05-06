@@ -18,6 +18,10 @@
   transition: .25s ease-in-out;
   
   -webkit-text-size-adjust: none;
+
+  @media only screen and (min-width: 780px) {
+    margin-top: 4.5rem;
+  }
 }
 
 .o-toggle:checked ~ .o-main {
@@ -25,5 +29,8 @@
 
   @media only screen and (min-width: 426px) {
     margin-left: 50%;
+  }
+  @media only screen and (min-width: 780px) {
+    margin-left: 0;
   }
 }

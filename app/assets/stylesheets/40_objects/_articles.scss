@@ -21,6 +21,16 @@
     -moz-column-gap: 1.5rem; /** 20 / 620 **/ /* Firefox */
     column-gap: 1.5rem; /** 20 / 620 **/
   }
+  @media only screen and (min-width: 780px) {
+    width: 97.590361445783%; /** 810 / 830 **/
+    margin: 0 1.204819277108%; /** 10 / 830 **/
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 0.75rem; /** 20 / 620 **/ /* Chrome, Safari, Opera */
+    -moz-column-gap: 0.75rem; /** 20 / 620 **/ /* Firefox */
+    column-gap: 0.75rem; /** 20 / 620 **/
+  }
 }
 
 .o-article {
@@ -78,6 +88,10 @@
     width: 87.096774193548%; /** 540 / 620 **/
     margin: 0.75rem 6.451612903226%; /** 40 / 620 **/
   }
+  @media only screen and (min-width: 780px) {
+    width: 92.771084337349%; /** 770 / 830 **/
+    margin: 0.75rem 3.614457831325%; /** 30 / 830 **/
+  }
 }
 .o-toggle:checked ~ .o-whole_article {
   display: none;
@@ -98,7 +112,11 @@
   @media only screen and (min-width: 560px) {
     width: 87.096774193548%; /** 540 / 620 **/
     margin: 0.75rem 6.451612903226% 0 6.451612903226%; /** 40 / 620 **/
+  }
 
+  @media only screen and (min-width: 780px) {
+    width: 92.771084337349%; /** 770 / 830 **/
+    margin: 0.75rem 3.614457831325% 0 3.614457831325%; /** 30 / 830 **/
   }
 }
 

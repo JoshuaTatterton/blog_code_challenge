@@ -15,7 +15,7 @@
           <%= f.label :title %>:
           <%= f.text_field :title, class: "c-form__title_field" %>
         </div>
-        <div class="">
+        <div class="c-form__article__text">
           What do you want to write your post in:
         </div> 
 
@@ -42,8 +42,8 @@
 
       <div class="c-form__text">
         Subscribe to receive emails when <%= @blogger.username %> posts a new blog.
-      </div>
-      <div class="c-form__input u-form__input--full">
+      </div><!--
+   --><div class="c-form__input u-form__input--full">
         <%= f.text_field :email, placeholder: "Email", class: "c-form__field" %>
       </div><!--
      --><%= f.submit "Subscribe", class: "c-btn c-form__btn c-form__btn--full" %>

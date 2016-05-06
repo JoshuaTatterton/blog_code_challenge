@@ -37,6 +37,14 @@
   text-align: center;
   background-color: #31abff;
   color: #f0f0f0;  
+
+  @media only screen and (min-width: 780px) {
+    width: 100%;
+    height: 4rem;
+    left: 0;
+    text-align: left;
+    z-index: 1;
+  }
 }
 .o-toggle:checked ~ .o-nav {
   left: 0;
@@ -44,12 +52,30 @@
 
 .o-nav__links {
   margin-top: 4.5rem;
+
+  @media only screen and (min-width: 780px) {
+    margin-top: 0;
+    height: 4rem;
+    text-align: right;
+  }
 }
 
 .o-nav__search {
-  height: 3rem;
+  height: 3.5rem;
   padding: 0;
   vertical-align: middle;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  @media only screen and (min-width: 780px) {
+    float: right;
+    margin: 0 1.204819277108%; /** 10 / 830 **/
+    padding: 0.5rem 0;
+    height: 4rem;
+  }
 }
 
 

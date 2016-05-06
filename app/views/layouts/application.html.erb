@@ -24,8 +24,8 @@
         <%= form_tag search_path, class: "o-nav__search" do |f| %>
           <%= check_box :strict, "option", { checked: true, class: "c-search__field--hide" }, true, false %>
           <%= text_field_tag :blogger, blogger_page, type: "hidden" %>
-          <%= image_submit_tag asset_path("search.png"), class: "c-search__image" %>
-          <%= text_field_tag :search, previous_search, placeholder: "Search . . .", class: "c-search__field" %>
+          <%= image_submit_tag asset_path("search.png"), class: "c-search__image" %><!--
+       --><%= text_field_tag :search, previous_search, placeholder: "Search . . .", class: "c-search__field" %>
         <% end %>
 
         <%= link_to "Home", root_path, class: "c-nav__button" %> 

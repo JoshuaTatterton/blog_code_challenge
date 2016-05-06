@@ -57,6 +57,10 @@
     padding-top: 0.25rem;
     font-size: 1rem;
   }
+  @media only screen and (min-width: 780px) {
+    width: calc(33.3333333333% - 0.5rem); /** third width - (2/3)column gap **/
+    margin: 0 0 0 calc(33.3333333333% + 1rem); /** third width + (4/3)column gap **/
+  }
 }
 .c-search__option_btn:active {
   -webkit-box-shadow: inset 0.1rem 0.1rem 0.1rem lighten(#323232, 50%);
@@ -94,6 +98,9 @@
   }
   @media only screen and (min-width: 560px) {
     margin-left: calc(41.379310344828% - 12rem); /** 240 / 580 - estimated left object width **/
+  }
+  @media only screen and (min-width: 780px) {
+    margin-left: calc(33.3333333333% - 12rem); /** third width - estimated left object width **/
   }
 }
 .c-search__blogger {
