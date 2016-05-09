@@ -61,6 +61,10 @@
     width: calc(33.3333333333% - 0.5rem); /** third width - (2/3)column gap **/
     margin: 0 0 0 calc(33.3333333333% + 1rem); /** third width + (4/3)column gap **/
   }
+  @media only screen and (min-width: 64rem) {
+    width: calc(25% - 1rem);
+    margin: 0.25rem 0 0 calc(50% + 1.75rem)
+  }
 }
 .c-search__option_btn:active {
   -webkit-box-shadow: inset 0.1rem 0.1rem 0.1rem lighten(#323232, 50%);
@@ -90,6 +94,9 @@
   @media only screen and (min-width: 560px) {
     display: inline-block;
   }
+  @media only screen and (min-width: 64rem) {
+    display: inline;
+  }
 }
 .c-search__blogger_label{
   @media only screen and (min-width: 426px) {
@@ -101,6 +108,9 @@
   }
   @media only screen and (min-width: 780px) {
     margin-left: calc(33.3333333333% - 12rem); /** third width - estimated left object width **/
+  }
+  @media only screen and (min-width: 64rem) {
+    margin: 0;
   }
 }
 .c-search__blogger {
@@ -119,6 +129,9 @@
 
   @media only screen and (min-width: 560px) {
     width: 20.689655172414%; /** 120 / 580 **/
+  }
+  @media only screen and (min-width: 64rem) {
+    width: 7.5rem;
   }
 }
 

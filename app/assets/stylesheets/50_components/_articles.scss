@@ -11,8 +11,13 @@
     margin: 0 4.838709677419%; /** 30 / 620 **/
   }
   @media only screen and (min-width: 780px) {
+    font-size: 1.4rem;
     width: 95.180722891566%; /** 790 / 830 **/
     margin: 0 2.409638554217%; /** 20 / 830 **/
+  }
+  @media only screen and (min-width: 64rem) {
+    width: calc(75% - 1rem); /** width: - gap **/
+    margin: 0.75rem 0 0.5rem calc(3.846154% / 4); /** text margin of 1 column / no. of columns **/
   }
 }
 .c-text--full {
@@ -30,6 +35,11 @@
   @media only screen and (min-width: 780px) {
     width: 92.771084337349%; /** 770 / 830 **/
     margin: 0 3.614457831325%; /** 30 / 830 **/
+  }
+  @media only screen and (min-width: 780px) {
+    width: 100%; 
+    margin: 0.75rem 0 0 0.75rem;
+    vertical-align: top;
   }
 }
 

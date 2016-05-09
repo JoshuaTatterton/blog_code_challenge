@@ -1,0 +1,19 @@
+.c-main__search_image {
+  float: left;
+  height: 2rem;
+  width: 2rem;
+}
+.c-main__search_field {
+  float: left;
+  width: calc(98% - 2rem); /** 100% - 3xMargins - BtnWidth **/
+  height: 2rem;
+  margin-left: 2%;
+  padding-left: 0.25rem;
+  font-size: 1rem;
+  border: none;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}

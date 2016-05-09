@@ -1,21 +1,9 @@
 .c-flash {
+  text-align: center;
   max-width: 80%; /** 240 / 300 **/
   margin: 0.5rem 0 0.5rem 10%;
   font-family: 'Roboto Slab', serif;
   text-transform: uppercase;
-  
-  @media only screen and (min-width: 426px) {
-    width: 92.307692307692%;  /** 480 / 520 **/
-    margin: 0.5rem 0 0.5rem 3.846153846154%; /** 20 / 520 **/
-  }
-  @media only screen and (min-width: 560px) {
-    width: 87.096774193548%; /** 540 / 620 **/
-    margin: 0.5rem 0 0.5rem 6.451612903226%; /** 40 / 620 **/
-  }
-  @media only screen and (min-width: 780px) {
-    width: 28rem;
-    margin: 0.5rem 0 0 calc((100% - 28rem)/2); /** (page width - width) / 2 **/
-  }
 }
 .c-flash__error {
   color: red;

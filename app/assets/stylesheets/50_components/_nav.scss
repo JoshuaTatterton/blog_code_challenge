@@ -73,14 +73,24 @@
 
     margin: 0 0 0 1.204819277108%; /** 10 / 830 **/
     width: 20%;
-    left: 0;
+    left: auto;
     height: 4rem;
     line-height: 3.75rem;
     text-align:left;
   }
+  @media only screen and (min-width: 64rem) {
+    margin: 0;
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: 0 ease-in;
+    transition: none;
+  }
 }
 .o-toggle:checked ~ .o-nav .c-nav__title {
   left: 0;
+  @media only screen and (min-width: 64rem) {
+    margin-left: calc((100% - 64rem) / 2);
+  }
 }
 .c_nav__title--clean {
   display: none;
@@ -137,6 +147,7 @@
   text-decoration: none;
   width: 100%;
   padding: 1rem 0;
+  vertical-align: top;
   font-size: 1.5rem;
 
   -webkit-box-sizing: border-box;
@@ -159,9 +170,30 @@
   color: #323232;
   background-color: #f0f0f0;
 }
+.c-nav__btn--sign {
+  @media only screen and (min-width: 64rem) {
+    display: none;
+  }
+}
 
+.c-nav__sign_field {
+  width: 10rem;
+  height: 2rem;
+  margin: 1rem 0 0 1.204819277108%; /** 10 / 830 **/
+  padding-left: 0.25rem;
+  font-size: 1rem;
+  border: none;
 
-
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.c-nav__button--sign {
+  line-height: 1.5rem;
+  background: none;
+  border: none;
+}
 
 
 

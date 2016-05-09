@@ -14,6 +14,10 @@
     width: 97.590361445783%; /** 810 / 830 **/
     margin: 0 1.204819277108% 0.5rem 1.204819277108%; /** 10 / 830 **/
   }
+  @media only screen and (min-width: 64rem) {
+    width: 100%;
+    margin: 0.75rem 0 0 0;
+  }
 }
 .o-search__main {
   display: inline-block;
@@ -29,7 +33,10 @@
     width: calc((100% - 1.5rem)/2); /** width - column gap **/
   }
   @media only screen and (min-width: 780px) {
-    width: calc(33.3333333333% - 0.75rem); /** third width - margin - column gap/2 **/
+    width: calc(33.3333333333% - 0.75rem); /** third width - margin - column gap **/
+  }
+  @media only screen and (min-width: 64rem) {
+    width: calc(25% - 1rem);
   }
 }
 
@@ -46,6 +53,11 @@
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
+
+  @media only screen and (min-width: 64rem) {
+    width: calc(50% - 0.5rem);
+    float: right;
+  }
 }
 .o-toggle:checked ~ .o-search__options {
   display: inline-block;

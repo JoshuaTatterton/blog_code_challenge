@@ -1,3 +1,6 @@
+.o-comment_container {
+}
+
 .o-comments {
   display: table;
   width: 86.6666666%; /** 260 / 300 **/
@@ -19,5 +22,9 @@
   @media only screen and (min-width: 780px) {
     width: 92.771084337349%; /** 770 / 830 **/
     margin: 0.75rem 3.614457831325% 0.25rem 3.614457831325%; /** 30 / 830 **/
+  }
+  @media only screen and (min-width: 64rem) {
+    width: 100%;
+    margin: 0.75rem 0 0.25rem 0; /** 30 / 830 **/
   }
 }

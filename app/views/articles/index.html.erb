@@ -9,6 +9,30 @@
  --><input type="checkbox" class="o-toggle" name="new_toggle" id="new_toggle"/><!--
  --><label for="new_toggle" class="c-btn c-btn--wide c-btn--fit">New Article</label>
 
+  <% else %>
+
+    <%= form_for [@blogger, new_subscriber], html: { class: "o-form" } do |f| %>
+
+      <div class="c-form__text">
+        Subscribe to receive emails when <%= @blogger.username %> posts a new blog.
+      </div><!--
+   --><div class="c-form__input u-form__input--full">
+        <%= f.text_field :email, placeholder: "Email", class: "c-form__field" %>
+      </div><!--
+     --><%= f.submit "Subscribe", class: "c-btn c-form__btn c-form__btn--full" %>
+    <% end %>
+
+  <% end %>
+
+  <%= form_tag search_path, class: "o-main__search" do |f| %>
+    <%= check_box :strict, "option", { checked: true, class: "c-search__field--hide" }, true, false %>
+    <%= text_field_tag :blogger, blogger_page, type: "hidden" %>
+    <%= image_submit_tag asset_path("search.png"), class: "c-main__search_image" %><!--
+ --><%= text_field_tag :search, previous_search, placeholder: "Search . . .", class: "c-main__search_field" %>
+  <% end %>
+
+  <% if current_user == @blogger %>
+
     <div class="o-article__form">
       <%= form_for [@blogger, @article] do |f| %>
         <div class="">
@@ -34,21 +58,7 @@
      --><%= f.submit "Post", class: "c-btn c-form__btn" %>
       <% end %>
     </div>
-    
-
-  <% else %>
-
-    <%= form_for [@blogger, new_subscriber], html: { class: "o-form" } do |f| %>
-
-      <div class="c-form__text">
-        Subscribe to receive emails when <%= @blogger.username %> posts a new blog.
-      </div><!--
-   --><div class="c-form__input u-form__input--full">
-        <%= f.text_field :email, placeholder: "Email", class: "c-form__field" %>
-      </div><!--
-     --><%= f.submit "Subscribe", class: "c-btn c-form__btn c-form__btn--full" %>
-    <% end %>
-
+  
   <% end %>
 
   <% if @articles != [] %>

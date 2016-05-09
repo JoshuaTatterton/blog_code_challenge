@@ -15,6 +15,11 @@
     width: 33.76233766234%; /** 260 / 770 **/
     margin-right: 2.597402597403%; /** 20 / 770 **/
   }
+  @media only screen and (min-width: 64rem) {
+    width: 99%; 
+    margin-right: 0;
+    margin-bottom: 0.75rem;
+  }
 }
 .u-article--thin:nth-last-child(1) {
   margin-right: 0.15rem; /** reduce to only account for shadow **/
