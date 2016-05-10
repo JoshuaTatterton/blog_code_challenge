@@ -66,23 +66,23 @@
     <div class="o-article-wrapper">
 
       <% @articles.each do |a| %>
+
         <%= link_to blogger_article_path(@blogger, a), class: "o-article", id: "id_#{a.id}" do %>
-          <div >
 
-            <div class="c-article__title">
-              <%= a.title %>
-            </div>
-
-            <div class="c-article__content">
-              <% if a.wysiwyg? %>
-                <%= a.wysiwyg_content.html_safe %>
-              <% else %>
-                <%= markdown a.content %>
-              <% end %>
-            </div>
-
+          <div class="c-article__title">
+            <%= a.title %>
           </div>
+
+          <div class="c-article__content">
+            <% if a.wysiwyg? %>
+              <%= a.wysiwyg_content.html_safe %>
+            <% else %>
+              <%= markdown a.content %>
+            <% end %>
+          </div>
+
         <% end %>
+
       <% end %>
 
     </div>

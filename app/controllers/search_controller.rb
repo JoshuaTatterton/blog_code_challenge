@@ -3,8 +3,6 @@ class SearchController < ApplicationController
   include SearchHelper
 
   def index
-    @hide = true
-
     @search_term = params[:search]
     @blogger_search = params[:blogger]
 
@@ -38,7 +36,7 @@ class SearchController < ApplicationController
 
   def slack_search(title, content, terms)
     terms.inject(0) do |memo2, t|
-      memo2 += 1 if !(title.include?(t) || content.include?(t))
+      memo2 += 1 if title.include?(t) || content.include?(t)
       memo2
     end
   end

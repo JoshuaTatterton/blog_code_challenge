@@ -4,6 +4,9 @@
   margin: 0.5rem 0 0.5rem 10%;
   font-family: 'Roboto Slab', serif;
   text-transform: uppercase;
+  @media only screen and (min-width: 780px) {
+    font-size: 1.4rem;
+  }
 }
 .c-flash__error {
   color: red;
