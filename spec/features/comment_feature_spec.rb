@@ -19,13 +19,13 @@ feature "comment" do
   end
 
   context "can be written" do
-    scenario "from the individual article page", js: true do
+    scenario "from the individual article page" do
       visit "/bloggers/#{@blogger.slug}/articles/example-title"
 
-      click_button "Comment"
+      find("label", text: "Comment").click
       fill_in "comment_name", with: "MyName"
       fill_in "comment_content", with: "I like this"
-      click_button "Post Comment"
+      click_button "Comment"
 
       expect(page).to have_content "MyName:"
       expect(page).to have_content "I like this"
@@ -36,7 +36,7 @@ feature "comment" do
 
       visit "/bloggers/#{@blogger.slug}/articles/example-title"
 
-      within(".comments") do
+      within(".o-comments") do
         click_link "Delete"
       end
       
@@ -50,31 +50,32 @@ feature "comment" do
       click_link "Sign out"
 
       visit "/bloggers/#{@blogger.slug}/articles/example-title"
-      within(".comments") do
+      within(".o-comments") do
         expect(page).not_to have_link "Delete"
       end
     end
   end
   
   context "will show error" do
-    scenario "without a name", js: true do
+    scenario "without a name" do
       visit "/bloggers/#{@blogger.slug}/articles/example-title"
 
-      click_button "Comment"
+      find("label", text: "Comment").click
+
       fill_in "comment_name", with: ""
       fill_in "comment_content", with: "I like this"
-      click_button "Post Comment"
+      click_button "Comment"
 
       expect(page).to have_content "Name can't be blank"
     end
 
-    scenario "without content", js: true do
+    scenario "without content" do
       visit "/bloggers/#{@blogger.slug}/articles/example-title"
 
-      click_button "Comment"
+      find("label", text: "Comment").click
       fill_in "comment_name", with: "MyName"
       fill_in "comment_content", with: ""
-      click_button "Post Comment"
+      click_button "Comment"
 
       expect(page).to have_content "Content can't be blank"
     end

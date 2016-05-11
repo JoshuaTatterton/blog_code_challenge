@@ -2,8 +2,10 @@ feature "search" do
   
   before(:each) { visit "/" }
   scenario "there is a search bar" do
-    fill_in "search", with: "search term"
-    click_button "search_button"
+    within(".o-nav__search") do
+      fill_in "search", with: "search term"
+      find("input.c-search__image").click
+    end
 
     expect(current_path).to eq "/search"
   end
@@ -15,8 +17,10 @@ feature "search" do
                               password_confirmation: "randomletters")
     article = blogger.articles.create(title: "My Article", option: "markdown", content: "This is some content")
 
-    fill_in "search", with: "content"
-    click_button "search_button"
+    within(".o-nav__search") do
+      fill_in "search", with: "content"
+      find("input.c-search__image").click
+    end
 
     expect(page).to have_content "Search Results For \"content\":"
     expect(page).to have_content blogger.username
@@ -31,8 +35,10 @@ feature "search" do
                               password_confirmation: "randomletters")
     article = blogger.articles.create(title: "My Article", option: "markdown", content: "This is some content")
 
-    fill_in "search", with: "article"
-    click_button "search_button"
+    within(".o-nav__search") do
+      fill_in "search", with: "article"
+      find("input.c-search__image").click
+    end
 
     expect(page).to have_content "Search Results For \"article\":"
     expect(page).to have_content blogger.username
@@ -47,9 +53,10 @@ feature "search" do
                               password_confirmation: "randomletters")
     article = blogger.articles.create(title: "My Article", option: "wysiwyg", wysiwyg_content: "<p>This is some content</p>")
 
-    fill_in "search", with: "this"
-    click_button "search_button"
-
+    within(".o-nav__search") do
+      fill_in "search", with: "this"
+      find("input.c-search__image").click
+    end
     expect(page).to have_content "Search Results For \"this\":"
     expect(page).to have_content blogger.username
     expect(page).to have_content article.title
@@ -57,54 +64,66 @@ feature "search" do
   end
 
   scenario "displays message if no search term entered" do
-    click_button "search_button"
+    within(".o-nav__search") do
+      find("input.c-search__image").click
+    end
 
     expect(page).not_to have_content "Search Results For \"\":"
     expect(page).to have_content "Please enter word/phrase to search."
   end
 
   scenario "displays message if no results are found" do
-    fill_in "search", with: "this"
-    click_button "search_button"
+    within(".o-nav__search") do
+      fill_in "search", with: "this"
+      find("input.c-search__image").click
+    end
 
     expect(page).not_to have_content "Search Results For \"this\":"
     expect(page).to have_content 'No results found for "this"'
   end
 
   scenario "it prefills the search bar with the search term" do
-    fill_in "search", with: "article"
-    click_button "search_button"
+    within(".o-nav__search") do
+      fill_in "search", with: "article"
+      find("input.c-search__image").click
+    end
 
     expect(page).to have_selector("input[value='article']")
   end
   context "Advanced Search" do
     scenario "there are advanced search options", js: true do
-      click_button "search_button"
+      within(".o-main__search") do
+        find("input.c-main__search_image").click
+      end
 
-      expect(page).to have_button "advanced_search_button"
-      expect(page).not_to have_css "#advanced_search_options"
+      expect(page).to have_css "label.c-search__option_btn"
+      expect(page).not_to have_css ".o-search__options"
 
-      click_button "advanced_search_button"
+      find("label.c-search__option_btn").click
 
-      expect(page).to have_css "#advanced_search_options"
+      expect(page).to have_css ".o-search__options"
     end
 
-    scenario "can perform a non strict 'slack' search", js: true do
+    scenario "can perform a non strict 'slack' search" do
       blogger = Blogger.create( username: "Joshy", 
                               email: "example@email.co.uk", 
                               password: "randomletters", 
                               password_confirmation: "randomletters")
       article = blogger.articles.create(title: "My Article", option: "markdown", content: "This is some content")
 
-      click_button "search_button"
-      click_button "advanced_search_button"
+      within(".o-main__search") do
+        find("input.c-main__search_image").click
+      end
+      find("label.c-search__option_btn").click
 
-      fill_in "search", with: "Content here"
+      within(".o-search__main") do
+        fill_in "search", with: "Content here"
+      end
         
-      within ("#advanced_search_options") do
+      within (".o-search__options") do
         uncheck("strict_option")
 
-        click_button "search_button"
+        find("input.c-search__btn").click
       end
 
       expect(page).to have_content "Search Results For \"Content here\":"
@@ -113,20 +132,24 @@ feature "search" do
       expect(page).to have_content article.content
     end
 
-    scenario "is strict search by default", js: true do
+    scenario "is strict search by default" do
       blogger = Blogger.create( username: "Joshy", 
                               email: "example@email.co.uk", 
                               password: "randomletters", 
                               password_confirmation: "randomletters")
       article = blogger.articles.create(title: "My Article", option: "markdown", content: "This is some content")
 
-      click_button "search_button"
-      click_button "advanced_search_button"
+      within(".o-main__search") do
+        find("input.c-main__search_image").click
+      end
+      find("label.c-search__option_btn").click
 
-      fill_in "search", with: "Content here"
+      within(".o-search__main") do
+        fill_in "search", with: "Content here"
+      end
         
-      within ("#advanced_search_options") do
-        click_button "search_button"
+      within (".o-search__options") do
+        find("input.c-search__btn").click
       end
 
       expect(page).not_to have_content "Search Results For \"Content here\":"
@@ -137,7 +160,7 @@ feature "search" do
       expect(page).to have_content 'No results found for "Content here"'
     end
 
-    scenario "can search for articles by a single blogger", js: true do
+    scenario "can search for articles by a single blogger" do
       blogger = Blogger.create( username: "Joshy", 
                               email: "example@email.co.uk", 
                               password: "randomletters", 
@@ -150,14 +173,18 @@ feature "search" do
                               password_confirmation: "randomletters")
       article2 = blogger2.articles.create(title: "AnotherArticle", option: "markdown", content: "This is some more content")
 
-      click_button "search_button"
-      click_button "advanced_search_button"
+      within(".o-main__search") do
+        find("input.c-main__search_image").click
+      end
+      find("label.c-search__option_btn").click
 
-      fill_in "search", with: "content"
+      within(".o-search__main") do
+        fill_in "search", with: "content"
+      end
         
-      within ("#advanced_search_options") do
+      within (".o-search__options") do
         fill_in "blogger", with: "joshy"
-        click_button "search_button"
+        find("input.c-search__btn").click
       end
 
       expect(page).to have_content "Search Results For \"content\" By \"joshy\":"
@@ -171,16 +198,20 @@ feature "search" do
       expect(page).not_to have_content article2.content
     end
 
-    scenario "displays message if blogger searched for doesn't exist", js: true do
+    scenario "displays message if blogger searched for doesn't exist" do
 
-      click_button "search_button"
-      click_button "advanced_search_button"
+      within(".o-main__search") do
+        find("input.c-main__search_image").click
+      end
+      find("label.c-search__option_btn").click
 
-      fill_in "search", with: "content"
+      within(".o-search__main") do
+        fill_in "search", with: "content"
+      end
         
-      within ("#advanced_search_options") do
+      within (".o-search__options") do
         fill_in "blogger", with: "joshy"
-        click_button "search_button"
+        find("input.c-search__btn").click
       end
 
       expect(page).to have_content "Cannot find a blogger with username \"joshy\""
@@ -201,8 +232,11 @@ feature "search" do
 
       visit "/bloggers/#{blogger.slug}/articles"
 
-      fill_in "search", with: "content"
-      click_button "search_button"
+      
+      within(".o-main__search") do
+        fill_in "search", with: "content"
+        find("input.c-main__search_image").click
+      end
 
       expect(page).to have_content "Search Results For \"content\" By \"Joshy\":"
       

@@ -10,15 +10,15 @@ feature "blogger" do
   scenario "has a button in the nav bar to take a blogger to their page" do
     visit "/"
 
-    expect(page).not_to have_link "My Blog"
+    expect(page).not_to have_link "My blog"
 
     sign_up
 
     visit "/"
 
-    expect(page).to have_link "My Blog"
+    expect(page).to have_link "My blog"
 
-    click_link "My Blog"
+    click_link "My blog"
 
     expect(current_path).to eq "/bloggers/#{Blogger.last.slug}/articles"
   end
@@ -28,16 +28,17 @@ feature "blogger" do
 
     scenario "there are buttons to do things" do
       visit "/bloggers/my-username/articles"
-      within(".nav_bar") do
+      within(".o-nav") do
         expect(page).to have_link "Home"
         expect(page).to have_button "Sign in"
+        expect(page).to have_link "Sign in"
         expect(page).to have_link "Sign up"
       end
       sign_up
       visit "/bloggers/my-username/articles"
-      within(".nav_bar") do
+      within(".o-nav") do
         expect(page).to have_link "Home"
-        expect(page).to have_link "My Blog"
+        expect(page).to have_link "My blog"
         expect(page).to have_link "Sign out"
       end
     end
@@ -76,14 +77,17 @@ feature "blogger" do
     
   end
 
-  # scenario "a bloggers url has their username in it" do
-  #   Blogger.create(username: "My Username", email: "example@email.com", password: "randomletters")
-  #   visit "/"
+  scenario "a bloggers url has their username in it" do
+    blogger = Blogger.create(username: "My Username", email: "example@email.com", password: "randomletters")
+    article = blogger.articles.create(title: "Example Title", content: "Some Content!!")
+    
+    visit "/"
 
-  #   click_link "My Username"
+    click_link "#{article.id}"
+    click_link "< My Username"
 
-  #   expect(current_path).to eq "/bloggers/my-username/articles"
-  # end
+    expect(current_path).to eq "/bloggers/my-username/articles"
+  end
 
   context "a prospective blogger" do
     scenario "can sign up" do
@@ -91,10 +95,10 @@ feature "blogger" do
 
       click_link "Sign up"
 
-      within(".main") do
+      within(".o-main") do
         fill_in "Username", with: "My Username"
         fill_in "Email", with: "example@email.co.uk"
-        fill_in "Password", with: "randomletters"
+        fill_in "blogger_password", with: "randomletters"
         fill_in "Password confirmation", with: "randomletters"
         click_button "Sign up"
       end
@@ -188,7 +192,7 @@ feature "blogger" do
 
         click_link "Sign in"
 
-        within(".main") do
+        within(".o-main") do
           fill_in "Email", with: "example@email.co.uk"
           fill_in "Password", with: "randomletters"
           click_button "Sign in"
@@ -196,7 +200,7 @@ feature "blogger" do
 
         expect(page).to have_content("You have signed in")
         expect(page).not_to have_button("Sign in")
-        expect(page).to have_button("New Article")
+        expect(page).to have_css("label", text: "New Article")
       end
       scenario "can cancel signing in on the sign in page" do
         click_link "Sign out"
@@ -217,7 +221,7 @@ feature "blogger" do
 
         expect(page).to have_content("You have signed in")
         expect(page).not_to have_button("Sign in")
-        expect(page).to have_button("New Article")
+        expect(page).to have_css("label", text: "New Article")
       end
     end
 
@@ -226,7 +230,7 @@ feature "blogger" do
 
       click_link "Sign in"
       
-      within(".main") do
+      within(".o-main") do
         fill_in "Email", with: "example@email.co.uk"
         fill_in "Password", with: "lettersrandom"
         click_button "Sign in"

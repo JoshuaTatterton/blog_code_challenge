@@ -67,7 +67,7 @@
 
       <% @articles.each do |a| %>
 
-        <%= link_to blogger_article_path(@blogger, a), class: "o-article", id: "id_#{a.id}" do %>
+        <%= link_to blogger_article_path(@blogger, a), class: "o-article", id: "#{a.id}" do %>
 
           <div class="c-article__title">
             <%= a.title %>

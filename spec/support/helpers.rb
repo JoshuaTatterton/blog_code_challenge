@@ -1,7 +1,7 @@
 module Helpers
 
   def sign_in
-    within(".main") do
+    within(".o-main") do
       fill_in "email", with: "example@email.co.uk"
       fill_in "password", with: "randomletters"
       click_button "Sign in"
@@ -10,8 +10,10 @@ module Helpers
 
   def write_article(options={})
     options[:option] ||= "markdown"
-    click_button "new_article"
-    within(".article_writer") do
+
+    find("label", text: "New Article").click
+
+    within(".o-article__form") do
       fill_in "article_title", with: "Example Title"
       choose "article_option_#{options[:option]}"
       if options[:option] == "markdown"
@@ -24,18 +26,18 @@ module Helpers
   end
 
   def edit_article
-    click_button "Edit Article"
+    find("label", text: "Edit").click
     fill_in "article_content", with: "Hello New World!!"
     click_button "Edit"
   end
 
   def delete_article
-    click_button "Edit Article"
+    find("label", text: "Edit").click
     click_link "Delete"
   end
 
   def write_comment
-    click_button "Comment"
+    find("label", text: "Comment").click
     fill_in "comment_name", with: "MyName"
     fill_in "comment_content", with: "I like this"
     click_button "Post Comment"
@@ -58,14 +60,15 @@ module Helpers
 
     click_link "Sign up"
 
-    within(".main") do
+    expect(current_path).to eq "/bloggers/new"
+
+    within(".o-sign_form") do
       fill_in "Username", with: options[:username]
       fill_in "Email", with: options[:email]
-      fill_in "Password", with: options[:password]
+      fill_in "blogger_password", with: options[:password]
       fill_in "Password confirmation", with: options[:password_confirmation]
-    end
-
-    click_button "Sign up"
+      click_button "Sign up"
+    end    
   end
 
   def fill_in_ckeditor(locator, opts)

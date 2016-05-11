@@ -23,8 +23,9 @@ feature "blog" do
       sign_up
     end
 
-    scenario "articles can be written", js: true do
-      click_button "new_article"
+    scenario "articles can be written" do
+      find("label", text: "New Article").click
+
       fill_in "article_title", with: "Example Title"
       choose "article_option_markdown"
       fill_in "article_content", with: "Hello World!!"
@@ -35,13 +36,15 @@ feature "blog" do
     end
 
     scenario "can cancel writing articles", js: true do
-      click_button "new_article"
+      expect(page).not_to have_css ".o-article__form"
+
+      find("label", text: "New Article").click
       
-      expect(page).to have_css ".article_writer"
+      expect(page).to have_css ".o-article__form"
 
-      click_button "Cancel"
+      find("label", text: "Cancel").click
 
-      expect(page).not_to have_css ".article_writer"
+      expect(page).not_to have_css ".o-article__form"
     end
   end
 
@@ -58,23 +61,23 @@ feature "blog" do
       @article = @blogger.articles.last
     end
 
-    scenario "have their own named page", js: true do
-      click_link "id_#{@article.id}"
+    scenario "have their own named page" do
+      click_link "#{@article.id}"
 
       wait(2.seconds).for { current_path }.not_to eq "/bloggers/#{@blogger.slug}/articles"
 
       expect(current_path).to eq "/bloggers/#{@blogger.slug}/articles/example-title"     
     end
 
-    scenario "are displayed on their own page", js: true do
-      click_link "id_#{@article.id}"
+    scenario "are displayed on their own page" do
+      click_link "#{@article.id}"
 
       expect(page).to have_content "Example Title"
       expect(page).to have_content "Hello World!!"
     end
 
-    scenario "can navigate back to the blogger's page", js: true do
-      click_link "id_#{@article.id}"
+    scenario "can navigate back to the blogger's page" do
+      click_link "#{@article.id}"
 
       expect(page).to have_link "< #{@blogger.username}"
       
@@ -85,32 +88,32 @@ feature "blog" do
 
     context "on their own page while signed in" do
       before(:each) do
-        click_link "id_#{@article.id}"
+        click_link "#{@article.id}"
       end
 
-      scenario "can be edited by the blogger", js: true do
+      scenario "can be edited by the blogger" do
         edit_article
 
         expect(page).to have_content "Hello New World!!"
       end
 
-      scenario "you go back to the same page as before you edited", js: true do
+      scenario "you go back to the same page as before you edited" do
         edit_article
 
         expect(current_path).to eq "/bloggers/#{@blogger.slug}/articles/example-title"
       end
 
       scenario "can cancel editing", js: true do
-        click_button "Edit Article"
+        find("label", text: "Edit").click
 
-        expect(page).to have_css ".article_editor"
+        expect(page).to have_css ".o-article__form"
 
-        click_button "Cancel"
+        find("label", text: "Cancel").click
 
-        expect(page).not_to have_css ".article_editor"
+        expect(page).not_to have_css ".o-article__form"
       end
 
-      scenario "can be deleted by the blogger", js: true do
+      scenario "can be deleted by the blogger" do
         delete_article
 
         expect(page).not_to have_content "Example Title"
@@ -124,7 +127,7 @@ feature "blog" do
 
       sign_up
 
-      click_button "new_article"
+      find("label", text: "New Article").click
     end
 
     scenario "markdown", js: true do
@@ -153,9 +156,9 @@ feature "blog" do
       choose "article_option_wysiwyg"
 
       expect(page).not_to have_field "article_content", type: "textarea"
-      expect(page).to have_css "#cke_wysiwyg_content"
+      expect(page).to have_css ".c-form__wysiwyg_editor"
 
-      fill_in_ckeditor "wysiwyg_content", with: "Hello World!!"
+      fill_in_ckeditor "article_wysiwyg_content", with: "Hello World!!"
       click_button "Post"
 
       expect(page).to have_content "Hello World!!"
@@ -163,7 +166,7 @@ feature "blog" do
   end
   
   context "emails are sent to subscribers" do
-    scenario " when a new article is posted", js: true do
+    scenario " when a new article is posted" do
       allow_run_sidekiq
 
       visit "/"
@@ -189,8 +192,8 @@ feature "blog" do
       sign_up
     end
 
-    scenario "title is empty", js: true do
-      click_button "new_article"
+    scenario "title is empty" do
+      find("label", text: "New Article").click
       fill_in "article_title", with: ""
       choose "article_option_markdown"
       fill_in "article_content", with: "Hello World!!"
@@ -199,7 +202,7 @@ feature "blog" do
       expect(page).to have_content "Title can't be blank"
     end
 
-    scenario "title is already used", js: true do
+    scenario "title is already used" do
       Article.create(title: "Example Title", content: "Hello World!!")
 
       write_article
@@ -213,7 +216,7 @@ feature "blog" do
     end
 
     scenario "in the nav bar" do
-      within(".nav_bar") do
+      within(".o-nav") do
         expect(page).to have_link "Home"
       end
     end
