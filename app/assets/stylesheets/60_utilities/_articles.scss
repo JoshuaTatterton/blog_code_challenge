@@ -1,0 +1,35 @@
+.u-article--thin {
+  display: inline-block;
+  width: 84.6153846; /** 220 / 260 **/
+  margin: 0 1rem 0 0;
+  vertical-align: top;
+  @media only screen and (min-width: 426px) {
+    width: 50%; /** 240 / 480 **/
+    margin-right: 3.846153846154%; /** 20 / 520 **/
+  }
+  @media only screen and (min-width: 560px) {
+    width: 48.148148148148148%; /** 260 / 540 **/
+    margin-right: 3.7037037037037%; /** 20 / 540 **/
+  }
+  @media only screen and (min-width: 780px) {
+    width: 33.76233766234%; /** 260 / 770 **/
+    margin-right: 2.597402597403%; /** 20 / 770 **/
+  }
+  @media only screen and (min-width: 64rem) {
+    width: 99%; 
+    margin-right: 0;
+    margin-bottom: 0.75rem;
+  }
+}
+.u-article--thin:nth-last-child(1) {
+  margin-right: 0.15rem; /** reduce to only account for shadow **/
+}
+.u-article__content--full {
+  margin: 0.5rem 0;
+  max-height: none !important;
+}
+.u-article__title--center {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}

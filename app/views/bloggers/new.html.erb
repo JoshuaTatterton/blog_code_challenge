@@ -1,0 +1,30 @@
+
+<%= form_for @blogger, html: { class: "o-sign_form" } do |f| %>
+
+
+   <%= f.label :username, "Username:", class: "c-sign_form__label" %><!--
+--><div class="c-form__input c-sign_form__input">
+     <%= f.text_field :username, class: "c-form__field" %>
+   </div>
+
+
+   <%= f.label :email, "Email:", class: "c-sign_form__label" %><!--
+--><div class="c-form__input c-sign_form__input">
+     <%= f.text_field :email, class: "c-form__field" %>
+   </div>
+
+
+   <%= f.label :password, "Password:", class: "c-sign_form__label" %><!--
+--><div class="c-form__input c-sign_form__input">
+     <%= f.password_field :password, class: "c-form__field"%>
+   </div>
+
+  <%= f.label :password_confirmation, "Password confirmation:", class: "c-sign_form__label" %><!--
+--><div class="c-form__input c-sign_form__input">
+    <%= f.password_field :password_confirmation, class: "c-form__field" %>
+  </div>
+
+   <%= link_to "Cancel", root_path, class: "c-btn c-form__btn c-form__btn--alt" %><!--
+--><%= f.submit "Sign up", class: "c-btn c-form__btn c-sign_form__btn" %>
+
+<% end %>

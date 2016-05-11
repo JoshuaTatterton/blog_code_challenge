@@ -1,0 +1,121 @@
+.o-nav__sign_in_form {
+  display: none;
+  @media only screen and (min-width: 64rem) {
+    display: inline;
+  }
+}
+
+.o-form {
+  display: inline-block;
+  width: 86.6666666%; /** 260 / 300 **/
+  margin: 0.75rem 6.66666666% 0.5rem 6.66666666%; /** 20 / 300 **/
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  @media only screen and (min-width: 426px) {
+    width: 96.153846153846%; /** 500 / 520 **/
+    margin: 0.75rem 1.923076923077% 0.25rem 1.923076923077%; /** 10 / 520 **/
+  }
+  @media only screen and (min-width: 560px) {
+    width: 93.548387096774%; /** 580 / 620 **/
+    margin: 0.75rem 3.225806451613% 0.25rem 3.225806451613%; /** 20 / 620 **/
+  }
+  @media only screen and (min-width: 780px) {
+    width: 97.590361445783%; /** 810 / 830 **/
+    margin: 0.75rem 1.204819277108% 0.25rem 1.204819277108%; /** 10 / 830 **/
+  }
+  @media only screen and (min-width: 64rem) {
+    width: calc(75% - 0.5rem); /** width - half column gap **/
+    margin: 0.75rem 0 0.25rem 0;
+  }
+}
+
+.o-sign_form {
+  display: inline-block;
+  width: 86.6666666%; /** 260 / 300 **/
+  margin: 0.75rem 6.66666666% 1rem 6.66666666%; /** 20 / 300 **/
+  padding: 1rem 7.692308% 1rem 7.692308%; /** left/right 20 / 260 **/
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  background-color: #fcfcfc;
+  font-size: 1.6rem;
+
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  border-radius: 1rem;
+
+  -webkit-box-shadow: 0.1rem 0.1em 0.1rem lighten(#323232, 30%);
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+  box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+
+  @media only screen and (min-width: 426px) {
+    text-align: right;
+    width: 84.615384615385%; /** 440 / 520 **/
+    margin: 1rem 7.692307692308% 1rem 7.692307692308%; /** 40 / 520 **/
+    padding: 1.5rem 4.545454545% 1rem 4.545454545%; /** 20 / 440 **/ 
+  }
+  @media only screen and (min-width: 560px) {
+    width: 30rem;
+    margin: 1.5rem calc((100% - 30rem)/2) 1rem calc((100% - 30rem)/2); /** (page width - width) / 2 **/
+    padding: 2rem 1.6083125rem 1.5rem 1.6083125rem; /** 4.545454545% of 30rem **/
+  }
+}
+
+.o-article__form {
+  display: none;
+  width: 86.6666666%; /** 260 / 300 **/
+  margin: 0.75rem 6.66666666% 0 6.66666666%; /** 20 / 300 **/
+  padding: 0.75rem 3.8461538% 1rem 3.8461538%; /** 10 / 260 **/
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  background-color: #fcfcfc;
+  color: #323232;
+  text-decoration: none;
+
+  -webkit-border-radius: 0 0 1rem 1rem;
+  -moz-border-radius: 0 0 1rem 1rem;
+  border-radius: 0 0 1rem 1rem;
+
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+  box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+
+  @media only screen and (min-width: 426px) {
+    width: 92.307692307692%; /** 480 / 520 **/
+    margin: 0.75rem 3.846153846154% 0.25rem 3.846153846154%; /** 20 / 520 **/
+    padding: 0.75rem 4.16666666% 1rem 4.16666666%; /** 20 / 480 **/
+  }
+  @media only screen and (min-width: 560px) {
+    width: 87.096774193548%; /** 540 / 640 **/
+    margin: 0.75rem 6.451612903226% 0.25rem 6.451612903226%; /** 40 / 620 **/
+    padding: 0.75rem 3.7037037037% 1rem 3.7037037037%; /** 20 / 540 **/
+  }
+  @media only screen and (min-width: 780px) {
+    width: 75.903614457831%;/** 630 / 830 **/
+    margin: 0.75rem 12.048192771084% 0.25rem 12.048192771084%; /** 100 / 830 **/
+    padding: 0.75rem 2.409638554217% 1rem 2.409638554217%; /** 20 / 830 **/
+  }
+  @media only screen and (min-width: 64rem) {
+    max-width: 38rem;
+    margin: 0.75rem calc((100% - 38rem) / 2);
+  }
+}
+.o-article__form:active {
+  will-change: transform;
+  -webkit-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+  -moz-box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+  box-shadow: 0.1rem 0.1rem 0.1rem lighten(#323232, 30%);
+}
+.o-toggle:checked ~ .o-container > .o-article__form,
+.o-toggle:checked ~ .o-article__form {
+  display: inline-block;
+}
+
+

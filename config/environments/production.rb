@@ -1,15 +1,16 @@
 Rails.application.configure do
   # the "www.yourhost.com" needs changing to the production url
-  config.action_mailer.default_url_options = { :host => "www.yourhost.com" }
+  config.action_mailer.default_url_options = { :host => "https://banana-pudding-29266.herokuapp.com/" }
 
   config.action_mailer.delivery_method = :smtp
   # SMTP settings for gmail
   config.action_mailer.smtp_settings = {
-    :address              => "smtp.gmail.com",
-    :port                 => 587,
+    :address              => "smtp.live.com",
+    :port                 => 25,
+    :domain               => "hotmail.com",
     :user_name            => Rails.application.secrets.active_email,
     :password             => Rails.application.secrets.active_password,
-    :authentication       => "plain",
+    :authentication       => :plain,
     :enable_starttls_auto => true
   }
   # Settings specified here will take precedence over those in config/application.rb.

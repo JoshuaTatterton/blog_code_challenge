@@ -1,47 +1,144 @@
-<div class="container">
-  <div class="article_title" ><%= @article.title %></div>
-  <div id="article_display_<%= @article.id %>">
-    
-    <%= markdown @article.content %>
-    <% if session[:user_signed_in] %>
-      <button class="edit_button btn" id="<%= @article.id %>">
-        Edit Article - <%= @article.title %>
-      </button>
-    <% end %>
-  </div>
+ <%= link_to "< #{@article.blogger.username}", blogger_articles_path(@article.blogger) , class: "c-blogger_username c-blogger_username__article" %><!--
 
-  <div class="article_editor" id="article_editor_<%= @article.id %>">
-    <%= form_for @article do |f| %>
-      <div>
-        <%= f.text_area(:content, size: "48x12") %>
-      </div>
-      <%= f.submit "Edit Article", class: "btn" %>
-      <%= link_to "Delete Article", article_path(@article), method: :delete, class: "btn" %>
-    <% end %>
+--><% if current_user == @blogger %><!--
+  --><input type="checkbox" class="o-toggle" name="edit_toggle" id="edit_toggle"/><!--
+  --><label for="edit_toggle" class="c-btn c-btn--wide c-btn--fit c-btn__article--fit">Edit Article</label>
+   <% end %>
+
+<%= form_tag search_path, class: "o-main__search" do |f| %>
+  <%= check_box :strict, "option", { checked: true, class: "c-search__field--hide" }, true, false %>
+  <%= text_field_tag :blogger, blogger_page, type: "hidden" %>
+  <%= image_submit_tag asset_path("search.png"), class: "c-main__search_image" %><!--
+--><%= text_field_tag :search, previous_search, placeholder: "Search . . .", class: "c-main__search_field" %>
+<% end %>
+<div class="o-container">
+
+  <% if current_user == @blogger %>
     
-  </div>
-</div>
-<button class="btn" id="comment">Comment</button>
-<div class="commenter container">
-  <%= form_for [@article, @comment] do |f| %>
-    <div>
-      <%= f.label :name %>:
-      <%= f.text_field :name %>
+    <div class="o-article__form">
+
+      <div class="c-article__title"><%= @article.title %></div>
+
+      <%= form_for [@blogger, @article] do |f| %>
+
+        <% if @article.wysiwyg? %>
+          <%= f.cktext_area :wysiwyg_content, { ckeditor: { toolbar: "custom" } } %>
+        <% else %>
+          <%= f.text_area(:content, class: "c-form__markdown_editor") %>
+        <% end %>
+
+        <label for="edit_toggle" class="c-btn c-form__btn c-form__btn--alt u-form__btn--three">Cancel</label><!--
+     --><%= f.submit "Edit", class: "c-btn c-form__btn u-form__btn--three" %><!--
+     --><%= link_to "Delete", blogger_article_path(@blogger, @article), class: "c-btn c-form__btn c-form__btn--alt u-form__btn--center u-form__btn--three", method: :delete, data: { confirm: 'Are you sure you wish to delete this post?' } %>
+
+      <% end %>
+
     </div>
-    <div>  
-      <%= f.label :comment %>:
-      <%= f.text_area(:content, size: "48x6") %>
-    </div>
-    <%= f.submit "Post Comment", class: "btn" %>
+
   <% end %>
-</div>
 
-<div>
-  <% @comments.each do |comment| %>
-    <div>
-      <%= comment.name %>: <%= comment.content %>
-      commented on: <%= comment.created_at.strftime("%H:%M on %e/%-m/%y") %>
-      <%= link_to "Delete Comment", article_comment_path(@article, comment), method: :delete, class: "btn" %>
+  <div class="o-whole_article">
+
+    <div class="c-article__title u-article__title--center"><%= @article.title %></div>
+
+    <div class="c-article__content u-article__content--full">
+    
+      <% if @article.wysiwyg? %>
+        <%= @article.wysiwyg_content.html_safe %>
+      <% else %>
+        <%= markdown @article.content %>
+      <% end %>
+
+    </div>
+
+  </div>
+
+  <div class="o-comment_container">
+
+    <input type="checkbox" class="o-toggle" name="comment_toggle" id="comment_toggle"/>
+    <label for="comment_toggle" class="c-btn c-btn--wide">Comment</label>
+
+    <div class="o-article__form">
+      <%= form_for [@blogger, @article, @comment] do |f| %>
+       
+        <%= f.label :name %>:
+        <%= f.text_field :name, class: "c-form__title_field" %>
+
+          <div class="">
+            <div class="">  
+              <%= f.label :content, class: "" %>:
+            </div>
+            <div class=""> 
+              <%= f.text_area :content, class: "c-form__markdown_editor u-form__markdown_editor--short" %>
+            </div>
+          </div>
+
+        <label for="comment_toggle" class="c-btn c-form__btn c-form__btn--alt">Cancel</label><!--
+     --><%= f.submit "Comment", class: "c-btn c-form__btn" %>
+
+      <% end %>
+    </div>
+
+    <% if @comments != [] %>
+      <table class="o-comments">
+        <% @comments.each do |comment| %>
+          <tr>
+            <td class="c-comments__name">
+              <%= comment.name %>:
+            </td>
+            <td class="c-comments__main">
+              <%= comment.content %>
+            </td>
+            <td class="c-comments__time">
+              <%= comment.posted_at(Time.now) %>
+              <% if current_user == @blogger %>
+                <%= link_to "Delete", blogger_article_comment_path(@blogger, @article, comment), method: :delete, class: "c-btn c-form__btn c-form__btn--small", data: { confirm: 'Are you sure you wish to delete this comment?' } %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% else %>
+      <div class="">
+        <div class="c-messages">No Comments.</div>
+      </div>
+    <% end %>
+
+  </div>
+
+</div><!--
+
+--><div class="o-other_container">
+  
+  <div class="c-text c-text--full">
+    More Articles by <%= @blogger.username %>
+  </div>
+
+  <% if @articles != [] %>
+
+    <div class="o-article_container">
+    <% @articles.each do |a| %>
+
+      <%= link_to blogger_article_path(a.blogger, a), class: "o-article u-article--thin", id: "#{a.id}" do %>
+          
+        <div class="c-article__title">
+          <%= a.title %>
+        </div>
+
+        <div class="c-article__content">
+          <% if a.wysiwyg? %>
+            <%= a.wysiwyg_content.html_safe %>
+          <% else %>
+            <%= markdown a.content %>
+          <% end %>
+        </div>
+        
+      <% end %>
+
+    <% end %>
+  <% else %>
+    <div class="c-text c-text--full">
+      . . .
     </div>
   <% end %>
 </div>

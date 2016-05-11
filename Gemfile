@@ -1,9 +1,16 @@
 source 'https://rubygems.org'
 
+gem 'puma'
+
 gem 'redcarpet'
+gem 'ckeditor'
+
 gem 'friendly_id', '~> 5.1.0'
-gem 'resque'
-gem 'resque_mailer'
+
+gem 'sorcery'
+
+gem 'redis'
+gem 'sidekiq'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use postgresql as the database for Active Record
@@ -35,6 +42,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'rails_12factor', group: :production
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -53,7 +62,7 @@ group :test do
   gem 'rspec-wait'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver', '~> 2.53.0'
   gem 'shoulda'
 end
 

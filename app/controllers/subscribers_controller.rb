@@ -1,17 +1,21 @@
 class SubscribersController < ApplicationController
-
+  
   def create
-    session[:return_to] ||= request.referer
-    subscriber = Subscriber.new(subscriber_params)
+    blogger = Blogger.find(params[:blogger_id])
+    subscriber = blogger.subscribers.new(subscriber_params)
+
     flash[:error] = subscriber.errors.full_messages.to_sentence if !subscriber.save
-    redirect_to session.delete(:return_to)
+    
+    redirect_to :back
   end
 
   def destroy
-    sub = Subscriber.find(params[:id])
-    sub.destroy
-    redirect_to articles_path
+    Subscriber.find(params[:id]).destroy
+
+    redirect_to blogger_articles_path(Blogger.find(params[:blogger_id]))
   end
+
+  private
 
   def subscriber_params
     params.require(:subscriber).permit(:email)

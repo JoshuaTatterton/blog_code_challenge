@@ -1,13 +1,17 @@
-require "rails_helper"
-
 describe Subscriber, type: :model do
+  let(:blogger) { Blogger.create(username: "MyUsername", email: "example@email.co.uk", password: "randomletters") }
+  let(:subject) { blogger.subscribers.create(email: "example@email.co.uk") }
 
   it { should validate_presence_of(:email) }
 
-  let(:article) { double :article, title: "Example Title", content: "Hello World!!", slug: "example-title"}
+  it { should belong_to :blogger }
+
+  let(:article) { double :article,  title: "Example Title", 
+                                    content: "Hello World!!", 
+                                    slug: "example-title",
+                                    blogger: 1}
   
   it "sends email to subscribers" do
-    allow(subject).to receive(:email) { "example@email.co.uk" }
     expect { subject.send_email(article) }.to change { ActionMailer::Base.deliveries.count }.by(1)
   end
 

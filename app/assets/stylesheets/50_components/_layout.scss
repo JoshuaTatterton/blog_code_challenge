@@ -1,0 +1,38 @@
+.c-web_title {
+  font-family: 'Lobster', cursive;
+  font-size: 2.5rem;
+  line-height: 3.25rem;
+  text-decoration: none;
+  height: 3.5rem;
+  width: 100%;
+  text-align: center;
+  color: #31abff;
+  background-color: #f0f0f0;
+  position: fixed;
+  left: 0;
+  z-index: 1;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  
+  -webkit-transition: .25s ease-in-out;
+  -moz-transition: .25s ease-in-out;
+  -o-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
+  
+  -webkit-text-size-adjust: none;
+
+  @media only screen and (min-width: 780px) {
+    display: none;
+  }
+}
+
+.o-toggle:checked ~ .c-web_title {
+  left: calc(100% - 3.5rem);
+  @media only screen and (min-width: 426px) {
+    left: 50%;
+    width: 200%;
+  }
+}

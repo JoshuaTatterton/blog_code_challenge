@@ -1,0 +1,22 @@
+
+/**********
+
+  These are the result of rail's error handling on forms
+
+**********/
+.field_with_errors {
+  display: inline-block;
+}
+.c-form__input .field_with_errors {
+  width: 100%;
+}
+
+
+
+
+
+.u-search__margin--correct {
+  @media only screen and (min-width: 64rem) {
+    margin-top: 0 !important;
+  }
+}

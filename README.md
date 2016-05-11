@@ -1,36 +1,34 @@
-#### Challenge Spec
+## This is a Blogger Website code challenge
 
-Expectations
+I had to complete this code challenge for an interview process, and the original specification for the challenge [can be found here](https://github.com/JoshuaTatterton/blog_code_challenge/blob/master/challenge_spec.md) but once I started as an exercise I was asked to add new features and give the (terrible) front end an overhaul. So after two painful front end overhauls the project has been satisfactorily completed and can be found on [heroku here](https://banana-pudding-29266.herokuapp.com)
 
-This challenge should be fairly straight-forward to complete - it is not designed as a pass-fail test but instead is useful for determining your mindset when it comes to software architecture, data modelling, testing etc.
+The general features are as follows: 
 
-Please assume you’d be deploying the application to a production environment on completion and work to what you believe to be best practice in that regard.
+```
+A User can sign up to be a Blogger.
+A Blogger can write Blog Posts.
+Blog Posts can be written and rendered in Markdown and in a WYSIWYG editor (ckeditor).
+Blog Posts can be edited/deleted after initial creation.
+Visiters can Subscribe to receive Emails when a Blogger Posts a new Article.
+Subscribers can Unsubscribe from a link shown in these Email.
+Searches can be performed to find specific Blog Posts.
+```
 
-Your work should be tracked with Git from the start - please publish the full history of commits to a public Git repository upon completion.
+#### Skills Used
 
-Feel free to extend the spec beyond the basic features if you wish to demonstrate any web development skills you might have.
+- The majority of skills used were things that I have used before on previous rails projects such as work with rails, heroku, html, rspec, capybara. So this was a good exercise in these skills.
+- This is by far the best looking website I have built (as of May 2016) and this was a big undertaking of CSS and SCSS and applying ITCSS and BEM principles to the process.
+- I initially used jQuery for handling processes on the front end but this was later refactored out to be completed with CSS check box switches.
 
-Overview
+#### Skills Gained/ Improved
 
-We’re going to build a simple blog which has commenting and email subscription for notifications of new articles.
+- As Stated above the CSS put into the front end was intensive and I spent a lot of time trying to get the designing aspect of web development down. This can be seen in the designs folder where all wireframes and mockups have been stored. Also there was a lot of time spent researching typography, colour theory, UX design and aestetic principles.
+- Another reason the CSS too so long was the implementation of responsive design using media queries (a first for me) at various screen sizes.
+- The implementation of sending emails was a new process for me as any that had been sent from other projects were built into gems, so this was the first time I had implemented them myself with Rails Mailer.
+- During the project it was recomended that the sending of emails be handled by a worker so Sidekiq was introduced as a worker. This lead to many problems with Redis and heroku's implementation of workers in it dyno system. In an attempt to work around these issues Puma was introduced to house both workers and website.
+- Using Sorcery was also a new experience as it is a lot more stripped down than device which I have used previously. This gave me more freedom in the design and control of the usermanagement.
 
-Features
+#### Technologies Used
 
-Articles should be created, modified and deleted via a UI.
-Articles should be accessible via an SEO-friendly URL.
-The article body should be written in and rendered with Markdown
-Visitors can comment on articles.
-Visitors can subscribe to the site with their email address.
-Each time an article is posted, asynchronously, subscribers should be sent a notification containing information about the new post and a link to view it.
-Each email should contain a link to unsubscribe.
-
-Technologies
-
-We expect to see the latest stable versions of Ruby and Rails, but beyond that use technologies as you see fit, our preferences are:
-
-Testing: Rspec
-DB: Postgres
-Views: Semantic, clean HTML5 in Erb
-Assets: CoffeeScript / SASS
-
-There is no time limit for this challenge, but please be honest when reporting how long you spent working on it.
+- Production: Ruby on Rails, Heroku, [Sorcery](https://github.com/NoamB/sorcery), [Sidekiq](https://github.com/mperham/sidekiq), Redis, Postgresql, [Puma](https://github.com/puma/puma), [Redcarpet](https://github.com/vmg/redcarpet), [ckeditor](https://github.com/galetahub/ckeditor), JQuery
+- Testing: RSPEC, Capybara, Database Cleaner, Selenium Webdiver

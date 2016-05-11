@@ -18,5 +18,22 @@ module ApplicationHelper
     }
     Redcarpet::Markdown.new(renderer, extensions).render(text).html_safe
   end
+
+  def new_subscriber
+    Subscriber.new
+  end
+
+  def new_blogger
+    Blogger.new
+  end
+
+  def on_blogger_page?
+    @blogger ||= false
+  end
+
+  def blogger_page
+    return params[:blogger_id] ? 
+      (Blogger.find_by(slug: params[:blogger_id])).username : nil
+  end
   
 end

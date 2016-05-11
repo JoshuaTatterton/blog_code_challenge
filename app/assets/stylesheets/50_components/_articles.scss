@@ -1,0 +1,110 @@
+.c-text {
+  font-family: 'Roboto Slab', serif;
+  margin: 0 10% 0 10%; /** 30 / 300 **/
+  width: 80%; /** 240 / 300 **/
+  @media only screen and (min-width: 426px) {
+    width: 92.307692307692%;  /** 480 / 520 **/
+    margin: 0 3.846153846154%; /** 20 / 520 **/
+  }
+  @media only screen and (min-width: 560px) {
+    width: 90.32258064516%;  /** 560 / 620 **/
+    margin: 0 4.838709677419%; /** 30 / 620 **/
+  }
+  @media only screen and (min-width: 780px) {
+    font-size: 1.4rem;
+    width: 95.180722891566%; /** 790 / 830 **/
+    margin: 0 2.409638554217%; /** 20 / 830 **/
+  }
+  @media only screen and (min-width: 64rem) {
+    width: calc(75% - 1rem); /** width: - gap **/
+    margin: 0.75rem 0 0.5rem calc(3.846154% / 4); /** text margin of 1 column / no. of columns **/
+  }
+}
+.c-text--full {
+  width: 86.6666666666%; /** 260 / 300 **/
+  margin: 0 6.66666666%; /** 20 / 300 **/
+  font-weight: bold;
+  @media only screen and (min-width: 426px) {
+    width: 92.307692307692%;  /** 480 / 520 **/
+    margin: 0 3.846153846154%; /** 20 / 520 **/
+  }
+  @media only screen and (min-width: 560px) {
+    width: 87.096774193548%; /** 540 / 640 **/
+    margin: 0 6.451612903226%; /** 40 / 620 **/
+  }
+  @media only screen and (min-width: 780px) {
+    width: 92.771084337349%; /** 770 / 830 **/
+    margin: 0 3.614457831325%; /** 30 / 830 **/
+  }
+  @media only screen and (min-width: 64rem) {
+    width: 100%; 
+    margin: 0.75rem 0 0 0;
+    vertical-align: top;
+  }
+}
+
+.c-article__title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0 3.846154%; /** 10 / 260 **/
+  white-space: normal;
+}
+.c-article__content {
+  margin: 0.5rem 3.846154%; /** 10 / 260 **/
+  max-height: 6.75rem;
+  overflow: hidden;
+  white-space: normal;
+  @media only screen and (min-width: 426px) {
+    margin: 0.5rem 3.846154%; /** 20 / 520 **/
+  }
+}
+.c-article__username {
+  width: 92.307692%; /** 240 / 260 **/
+  height: auto;
+  text-align: right;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #323232;
+  margin: 0 3.846154%; /** 10 / 260 **/
+}
+
+.c-messages {
+  font-family: 'Roboto Slab', serif;
+  font-size: 1.4rem;
+  font-weight: bold;
+
+  width: 86.6666666666%; /** 260 / 300 **/
+  margin: 0 6.66666666%; /** 20 / 300 **/
+  @media only screen and (min-width: 426px) {
+    width: 92.307692307692%;  /** 480 / 520 **/
+    margin: 0 3.846153846154%; /** 20 / 520 **/
+  }
+  @media only screen and (min-width: 560px) {
+    width: 87.096774193548%; /** 540 / 640 **/
+    margin: 0 6.451612903226%; /** 40 / 620 **/
+  }
+  @media only screen and (min-width: 780px) {
+    width: 92.771084337349%; /** 770 / 830 **/
+    margin: 0 3.614457831325%; /** 30 / 830 **/
+  }
+  @media only screen and (min-width: 64rem) {
+    width: 100%;
+    margin: 0;
+  }
+}
+
+.c-article_edit {
+  display: none;
+}
+.o-toggle:checked ~ .c-article_edit {
+  transformation-delay: 0.1s;
+  display: inline-block;
+}
+
+
+
+
+
